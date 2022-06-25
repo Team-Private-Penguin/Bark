@@ -6,30 +6,31 @@ import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Bark</title>
-        <link
-          rel="icon"
-          href="https://cdn-icons-png.flaticon.com/512/616/616408.png"
-        />
-      </Head>
+    <div className="">
       <main className="min-h-screen w-screen p-5">
-        <Group position="apart" spacing="xl">
+        <Group>
           <Stack style={{ flexGrow: "1" }}>
-            <div className="border-2 border-black h-[33vh]">User Info</div>
+            <div className="border-2 border-black h-[33vh] ">
+              <h2 className="title-text">User Info</h2>
+            </div>
             <div className="border-2 border-black h-[60vh]">
-              <Link  href="/groups" passHref>
-                <span>Groups</span>
+              <Link href="/groups" passHref>
+                <h2 className="title-text">Groups</h2>
               </Link>
             </div>
           </Stack>
           <Stack style={{ flexGrow: "2" }}>
-            <div className="border-2 border-black h-[95vh]">Feed</div>
+            <div className="border-2 border-black h-[95vh]">
+              <h2 className="title-text">Events</h2>
+            </div>
           </Stack>
           <Stack style={{ flexGrow: "1" }}>
-            <div className="border-2 border-black h-[33vh]">Friends</div>
-            <div className="border-2 border-black h-[60vh]">Map</div>
+            <div className="border-2 border-black h-[33vh]">
+              <h2 className="title-text">Friends</h2>
+            </div>
+            <div className="border-2 border-black h-[60vh]">
+              <h2 className="title-text">Map</h2>
+            </div>
           </Stack>
         </Group>
       </main>
