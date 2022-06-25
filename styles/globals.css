@@ -8,9 +8,25 @@
   --light-blue: #95d9f1;
   --blue: #92b4ec;
   --yellow: #faf2a1;
+  --offwhite: #e3e1e1;
 }
 
 div {
   border-radius: 10px;
+  border-color: var(--offwhite);
   text-align: center;
+  background-color: var(--white);
+}
+
+h2 {
+  padding: 7px;
+  /* text-transform: uppercase; */
+  background-color: var(--light-blue);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.shadows {
+  border-radius: 10px;
+  box-shadow: 0 0 10px lightgrey;
 }
