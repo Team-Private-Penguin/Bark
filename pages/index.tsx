@@ -29,7 +29,9 @@ const Home: NextPage = () => {
               <h2>Friends</h2>
             </div>
             <div className="border-2 border-black h-[60vh]">
-              <h2>Map</h2>
+              <Link  href="/map" passHref>
+                <h2>Map</h2>
+              </Link>
             </div>
           </Stack>
         </Group>
