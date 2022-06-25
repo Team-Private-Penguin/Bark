@@ -1,11 +1,10 @@
-import React from 'react'
+import { useUser } from "@auth0/nextjs-auth0";
+import React from "react";
 
 function UserInfo() {
-  return (
-    <div>
-      UserInfo
-    </div>
-  )
+  const { user, error, isLoading } = useUser();
+  console.log(useUser);
+  return <div>UserInfo</div>;
 }
 
-export default UserInfo
+export default UserInfo;
