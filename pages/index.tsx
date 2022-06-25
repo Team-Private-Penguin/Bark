@@ -12,7 +12,7 @@ const Home: NextPage = () => {
           <div className="border h-[33vh] shadows">
             <h2>🐶 User Info</h2>
           </div>
-          <div className="border h-[60vh] shadows">
+          <div className="border h-[60vh] shadows cursor-pointer">
             <Link href="/groups" passHref>
               <h2>🐶 Groups</h2>
             </Link>
@@ -27,7 +27,7 @@ const Home: NextPage = () => {
           <div className="border h-[33vh] shadows">
             <h2>🐶 Friends</h2>
           </div>
-          <div className="border h-[60vh] shadows">
+          <div className="border h-[60vh] shadows cursor-pointer">
             <Link href="/map" passHref>
               <h2>🐶 Map</h2>
             </Link>

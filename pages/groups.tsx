@@ -25,7 +25,7 @@ const Groups = () => {
           <div className="border h-[33vh]">
             <h2>🐶 Group Members</h2>
           </div>
-          <div className="border h-[60vh]">
+          <div className="border h-[60vh] cursor-pointer">
             <Link href="/map" passHref>
               <h2>🐶 Map</h2>
             </Link>
