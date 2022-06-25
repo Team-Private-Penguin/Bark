@@ -8,28 +8,28 @@ const Home: NextPage = () => {
   return (
     <div className="">
       <main className="min-h-screen w-screen p-5">
-        <Group>
-          <Stack style={{ flexGrow: "1" }}>
+        <Group position="apart">
+          <Stack style={{ width: "20%" }}>
             <div className="border-2 border-black h-[33vh] ">
-              <h2 className="title-text">User Info</h2>
+              <h2>User Info</h2>
             </div>
             <div className="border-2 border-black h-[60vh]">
               <Link href="/groups" passHref>
-                <h2 className="title-text">Groups</h2>
+                <h2>Groups</h2>
               </Link>
             </div>
           </Stack>
-          <Stack style={{ flexGrow: "2" }}>
+          <Stack style={{ flexGrow: "1" }}>
             <div className="border-2 border-black h-[95vh]">
-              <h2 className="title-text">Events</h2>
+              <h2>Events</h2>
             </div>
           </Stack>
-          <Stack style={{ flexGrow: "1" }}>
+          <Stack style={{ width: "20%" }}>
             <div className="border-2 border-black h-[33vh]">
-              <h2 className="title-text">Friends</h2>
+              <h2>Friends</h2>
             </div>
             <div className="border-2 border-black h-[60vh]">
-              <h2 className="title-text">Map</h2>
+              <h2>Map</h2>
             </div>
           </Stack>
         </Group>
