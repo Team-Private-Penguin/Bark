@@ -1,23 +1,8 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import Post from "../components/Post";
-import {
-  Button,
-  Checkbox,
-  Group,
-  Modal,
-  Select,
-  Stack,
-  Textarea,
-  TextInput,
-} from "@mantine/core";
-import { DatePicker } from "@mantine/dates";
+import React from "react";
 import Link from "next/link";
-import { useState } from "react";
-import { stateData } from "../components/statedata.js";
-import { useForm } from "@mantine/form";
-import AddPost from "../components/AddPost";
+import EventCard from "../components/EventCard";
+import { Group, Stack } from "@mantine/core";
+import AddEvent from "../components/AddEvent";
 import GroupsComp from "../components/Groups";
 
 const Groups = () => {
@@ -36,9 +21,10 @@ const Groups = () => {
         <Stack style={{ flexGrow: "1" }}>
           <div className="border flex-column h-[95vh]">
             <h2>🐶 Feed</h2>
-            <AddPost />
-            <Post image={true} />
-            <Post image={false} />
+            <AddEvent />
+            {/* .map of Events */}
+            <EventCard image={true} />
+            <EventCard image={false} />
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
