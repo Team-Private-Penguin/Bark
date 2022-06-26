@@ -2,20 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --white: #f5f5f5;
   --black: #0a0f0d;
   --light-blue: #95d9f1;
   --blue: #92b4ec;
   --yellow: #faf2a1;
-  --offwhite: #e3e1e1;
+  --off-white: #e3e1e1;
+  --green-bud: #79b473;
+  --queen-blue: #41658a;
+  --dark-blue: #41658a;
+  --english-violet: #41658a;
 }
 
 div {
   border-radius: 10px;
-  border-color: var(--offwhite);
+  border-color: var(--off-white);
   text-align: center;
   background-color: var(--white);
+  /* margin: 0.2rem; */
 }
 
 h2 {
@@ -24,6 +33,39 @@ h2 {
   background-color: var(--light-blue);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+
+.main {
+  font-family: Arial;
+}
+
+.navbar {
+  height: 60px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--blue);
+}
+
+.navbar-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 15px;
+  line-height: 1.5;
+}
+
+.navbar-title {
+  margin-left: 12px;
+  font-size: 30px;
+}
+
+.fa-paw {
+  height: 25px;
+  width: 25px;
 }
 
 .shadows {

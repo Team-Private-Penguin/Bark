@@ -1,5 +1,4 @@
 import { useUser } from "@auth0/nextjs-auth0";
-import { Button } from "@mantine/core";
 import React from "react";
 
 function UserInfo() {
@@ -21,9 +20,9 @@ function UserInfo() {
           <span className="username">{user.name}</span>
         </div>
         <a href="/api/auth/logout">
-          <Button color="cyan" variant="outline">
+          <button className="bg-transparent hover:bg-accent text-accent font-semibold hover:text-white py-2 px-4 border border-accent hover:border-transparent rounded">
             Logout
-          </Button>
+          </button>
         </a>
       </>
     );
@@ -32,9 +31,9 @@ function UserInfo() {
   return (
     <div className="user-header">
       <a href="/api/auth/login">
-        <Button color="cyan" variant="outline">
+        <button className="bg-transparent hover:bg-emerald-500 text-emerald-700 font-semibold hover:text-white py-2 px-4 border border-emerald-500 hover:border-transparent rounded">
           Login
-        </Button>
+        </button>
       </a>
     </div>
   );

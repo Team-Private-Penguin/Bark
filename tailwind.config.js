@@ -10,7 +10,7 @@ module.exports = {
         white: "var(--white)",
         black: "var(--black)",
         main: "var(--light-blue)",
-        accent: "var(--blue)",
+        accent: "var(--dark-blue)",
         secondary: "var(--yellow)",
       },
     },
