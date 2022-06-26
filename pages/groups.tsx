@@ -78,7 +78,6 @@ const Groups = () => {
               onClose={() => setOpened(false)}
               title="Create New Event!"
             >
-              {/* Modal content */}
               <form onSubmit={form.onSubmit((values) => submitEvent(values))}>
                 <TextInput
                   placeholder="Event Name"
@@ -144,8 +143,8 @@ const Groups = () => {
 
             <Group position="center">
               <Button
-                variant="gradient"
-                gradient={{ from: "indigo", to: "cyan" }}
+                variant="white"
+                className="text-black w-auto p-2"
                 onClick={() => setOpened(true)}
               >
                 Open Modal

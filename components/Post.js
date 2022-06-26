@@ -57,5 +57,3 @@ function Post() {
 }
 
 export default Post;
-
-//style={{ marginBottom: 5, marginTop: theme.spacing.sm }}

@@ -28,15 +28,13 @@ function PostDetail() {
             <Text color="var(--black)" align="center">
               Event Location TEMP
             </Text>
+            <Text color="var(--black)" align="left" p=".5rem">
+              Event Description
+            </Text>
           </div>
           <div className="w-[65%]">
             <Image radius="10px" fit="contain" src={defaultPhoto} />
           </div>
-        </Card.Section>
-        <Card.Section className="bg-main p-2">
-          <Text color="var(--black)" align="left" p=".5rem">
-            Event Description
-          </Text>
         </Card.Section>
         <Card.Section className="p-2 bg-main space-y-1">
           <Textarea
