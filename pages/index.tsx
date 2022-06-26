@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Group, Stack } from "@mantine/core";
 import Link from "next/link";
 import Friends from '../components/Friends'
+import Groups from "../components/Groups";
 
 const Home: NextPage = () => {
   return (
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
             <Link href="/groups" passHref>
               <h2>🐶 Groups</h2>
             </Link>
+            <Groups />
           </div>
         </Stack>
         <Stack style={{ flexGrow: "1" }}>
