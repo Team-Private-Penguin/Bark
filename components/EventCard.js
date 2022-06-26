@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PostDetail from "./PostDetail";
+import EventDetail from "./EventDetail";
 import { Modal, Card, Text } from "@mantine/core";
 
 const defaultPhoto =
@@ -7,7 +7,7 @@ const defaultPhoto =
 const defaultPhoto1 =
   "https://images.unsplash.com/photo-1598875706250-21faaf804361?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OXx8fGVufDB8fHx8&w=1000&q=80";
 
-function Post({ image }) {
+function EventCard({ image }) {
   image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
   return (
@@ -51,10 +51,10 @@ function Post({ image }) {
         size="65%"
         overflow="outside"
       >
-        <PostDetail />
+        <EventDetail />
       </Modal>
     </div>
   );
 }
 
-export default Post;
+export default EventCard;

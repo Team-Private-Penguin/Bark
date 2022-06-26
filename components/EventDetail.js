@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import { Textarea, Card, Image, Text, Button, Group } from "@mantine/core";
+import AddComment from "./AddComment";
+import CommentFeed from "./CommentFeed";
+import React from "react";
+import { Card, Image, Text } from "@mantine/core";
 
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
 
-function PostDetail() {
-  const [comment, setComment] = useState("");
-  function handleClick() {
-    //Post Comment
-  }
+function EventDetail() {
   return (
     <Card className="space-y-1" radius="10px" shadow="sm">
       <Card.Section className="bg-main p-2">
@@ -36,35 +34,13 @@ function PostDetail() {
         </div>
       </Card.Section>
       <Card.Section>
-        <Textarea
-          variant="filled"
-          autosize
-          radius="lg"
-          placeholder="Add a comment..."
-          minRows={2}
-          value={comment}
-          onChange={(e) => setComment(e.currentTarget.value)}
-        />
-        <Button disabled={!comment.length} onClick={handleClick}>
-          Post
-        </Button>
+        <AddComment />
       </Card.Section>
       <Card.Section className="p-2 bg-main">
-        <Group className="bg-main" p=".5rem">
-          <icon>UserIcon</icon>
-          <Text className="bg-main" color="var(--black)" align="left">
-            UserName
-          </Text>
-          <Text className="bg-main" color="var(--black)" align="left">
-            Date and Time
-          </Text>
-        </Group>
-        <Text className="bg-white p-2" color="var(--black)" align="left">
-          Comment
-        </Text>
+        <CommentFeed />
       </Card.Section>
     </Card>
   );
 }
 
-export default PostDetail;
+export default EventDetail;

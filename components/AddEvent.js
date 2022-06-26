@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Post from "../components/Post";
+import Post from "./EventCard";
 import axios from "axios";
 import {
   Button,
@@ -7,7 +7,6 @@ import {
   Group,
   Modal,
   Select,
-  Stack,
   Textarea,
   TextInput,
 } from "@mantine/core";
@@ -17,7 +16,7 @@ import React, { useState } from "react";
 import { stateData } from "./statedata.js";
 import { useForm } from "@mantine/form";
 
-function AddPost() {
+function AddEvent() {
   const [opened, setOpened] = useState(false);
   const form = useForm({
     initialValues: {
@@ -124,7 +123,7 @@ function AddPost() {
   );
 }
 
-export default AddPost;
+export default AddEvent;
 
 // eventName: string,
 //     address_1: string,
