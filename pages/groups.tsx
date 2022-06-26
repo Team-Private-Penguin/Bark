@@ -58,7 +58,7 @@ const Groups = () => {
       description: values.description,
       prospective: values.prospective,
     };
-    axios.post("/?group_id=1", submission);
+    axios.post("./api/d/?group_id=1", submission);
     console.log("big moves", submission);
   };
   return (
