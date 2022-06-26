@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Group, Stack } from "@mantine/core";
 import Link from "next/link";
+import Post from '../components/Post'
 
 const Groups = () => {
   return (
@@ -19,6 +20,7 @@ const Groups = () => {
         <Stack style={{ flexGrow: "1" }}>
           <div className="border h-[95vh]">
             <h2>🐶 Feed</h2>
+            <Post />
           </div>
         </Stack>
         <Stack style={{ width: "20%" }}>
