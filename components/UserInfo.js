@@ -31,7 +31,7 @@ function UserInfo() {
   return (
     <div className="user-header">
       <a href="/api/auth/login">
-        <button className="bg-transparent hover:bg-emerald-500 text-emerald-700 font-semibold hover:text-white py-2 px-4 border border-emerald-500 hover:border-transparent rounded">
+        <button className="bg-transparent hover:bg-accent text-accent font-semibold hover:text-white py-2 px-4 border border-accent hover:border-transparent rounded">
           Login
         </button>
       </a>
