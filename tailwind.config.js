@@ -12,6 +12,7 @@ module.exports = {
         main: "var(--light-blue)",
         accent: "var(--blue)",
         secondary: "var(--yellow)",
+        offwhite: "var(--offwhite)"
       },
     },
   },
