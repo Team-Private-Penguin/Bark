@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Group, Stack } from "@mantine/core";
 import Link from "next/link";
+import UserInfo from "../components/UserInfo";
 
 const Home: NextPage = () => {
   return (
@@ -11,6 +12,7 @@ const Home: NextPage = () => {
         <Stack style={{ width: "20%" }}>
           <div className="border h-[33vh] shadows">
             <h2>🐶 User Info</h2>
+            <UserInfo />
           </div>
           <div className="border h-[60vh] shadows cursor-pointer">
             <Link href="/groups" passHref>
