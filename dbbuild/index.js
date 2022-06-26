@@ -25,7 +25,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     group_id BIGSERIAL,
     description VARCHAR,
     name INTEGER,
-    admin VARCHAR
+    admin_id BIGSERIAL
     )`
     )
   )

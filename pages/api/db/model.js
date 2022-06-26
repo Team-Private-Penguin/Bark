@@ -1,5 +1,3 @@
-import db from "./";
-
 module.exports = {
   postEvent: `INSERT INTO Events (
     name,
@@ -13,4 +11,18 @@ module.exports = {
   `,
 
   getEventsGroup: `SELECT * FROM Events WHERE group_id = $1`,
+
+  postGroup: `INSERT INTO Groups (
+    name,
+    description,
+    admin_id
+  )
+  VALUES ($1, $2, $3)
+  `,
+
+  getGroupsUser: `SELECT * User_Groups
+    WHERE user_id = $1
+    JOIN Groups USING (group_id)
+    WHERE Groups.group_id = User_Groups.group_id
+  `,
 };
