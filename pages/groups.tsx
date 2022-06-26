@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import EventCard from "../components/EventCard";
+import EventFeed from "../components/EventFeed";
 import { Group, Stack } from "@mantine/core";
-import AddEvent from "../components/AddEvent";
 import GroupsComp from "../components/Groups";
 
 const Groups = () => {
@@ -21,10 +20,7 @@ const Groups = () => {
         <Stack style={{ flexGrow: "1" }}>
           <div className="border flex-column h-[95vh]">
             <h2>🐶 Feed</h2>
-            <AddEvent />
-            {/* .map of Events */}
-            <EventCard image={true} />
-            <EventCard image={false} />
+            <EventFeed />
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
