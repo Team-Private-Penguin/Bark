@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Post from "../components/Post";
+import axios from "axios";
 import {
   Button,
   Checkbox,
@@ -57,6 +58,7 @@ const Groups = () => {
       description: values.description,
       prospective: values.prospective,
     };
+    axios.post("/?group_id=1", submission);
     console.log("big moves", submission);
   };
   return (
