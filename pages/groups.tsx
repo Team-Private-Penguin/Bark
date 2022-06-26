@@ -48,6 +48,7 @@ const Groups = () => {
     img_url: string;
   }) => {
     const submission = {
+      group_id: 1,
       eventName: values.eventName,
       address: `${values.address_1}${
         values.address_2 ? values.address_2 : ""
