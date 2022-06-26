@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import EventFeed from "../components/EventFeed";
+import AddEvent from "../components/AddEvent";
 import { Group, Stack } from "@mantine/core";
 import GroupsComp from "../components/Groups";
 
@@ -20,6 +21,7 @@ const Groups = () => {
         <Stack style={{ flexGrow: "1" }}>
           <div className="border flex-column h-[95vh]">
             <h2>🐶 Feed</h2>
+            <AddEvent />
             <EventFeed />
           </div>
         </Stack>
