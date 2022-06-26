@@ -9,7 +9,7 @@ const Groups = () => {
   return (
     <main className="min-h-screen w-screen p-5">
       <Group className="Group" position="apart">
-        <Stack className="hidden sm:flex" style={{ width: "20%" }}>
+        <Stack className="hidden lg:flex" style={{ width: "20%" }}>
           <div className="border h-[33vh] ">
             <h2>🐶 User Info</h2>
           </div>
@@ -23,7 +23,7 @@ const Groups = () => {
             <Post />
           </div>
         </Stack>
-        <Stack className="hidden lg:flex" style={{ width: "20%" }}>
+        <Stack className="hidden xl:flex" style={{ width: "20%" }}>
           <div className="border h-[95vh]">
             <h2>🐶 Group Members</h2>
           </div>
