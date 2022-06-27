@@ -3,9 +3,9 @@ import Head from "next/head";
 import Image from "next/image";
 import { Group, Stack } from "@mantine/core";
 import Link from "next/link";
-import UserInfo from "../components/UserInfo";
+import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
-import Chats from '../components/Chats/Chat.js'
+import Chats from "../components/Chats/Chat.js";
 
 const Home: NextPage = () => {
   return (
@@ -15,30 +15,30 @@ const Home: NextPage = () => {
         <Group className="group">
           <Stack justify="flex-start" style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
-              <h2>🐶 User Info</h2>
+              <h2 className="section-title">🐶 User Info</h2>
               <UserInfo />
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <Link href="/groups" passHref>
-                <h2>🐶 Groups</h2>
+                <h2 className="section-title">🐶 Groups</h2>
               </Link>
             </div>
           </Stack>
 
           <Stack style={{ flexGrow: 1 }}>
             <div className="border h-[90vh] shadows homeBox">
-              <h2>🐶 Events</h2>
+              <h2 className="section-title">🐶 Events</h2>
             </div>
           </Stack>
 
           <Stack style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
-              <h2>🐶 Friends</h2>
-              <Chats/>
+              <h2 className="section-title">🐶 Friends</h2>
+              <Chats />
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <Link href="/map" passHref>
-                <h2>🐶 Map</h2>
+                <h2 className="section-title">🐶 Map</h2>
               </Link>
             </div>
           </Stack>
