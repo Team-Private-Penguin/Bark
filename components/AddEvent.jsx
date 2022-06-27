@@ -35,7 +35,7 @@ function AddEvent() {
   const submitEvent = (values) => {
     const submission = {
       group_id: 1,
-      eventName: values.eventName,
+      name: values.eventName,
       address: `${values.address_1}${
         values.address_2 ? values.address_2 : ""
       }, ${values.city}, ${values.state} ${values.zipcode}`,
@@ -43,8 +43,8 @@ function AddEvent() {
       description: values.description,
       prospective: values.prospective,
     };
-    axios.post("/?group_id=1", submission);
-    console.log("big moves", submission);
+    axios.post("/api/events", submission);
+    console.log("not so big moves", submission);
   };
   return (
     <div>
