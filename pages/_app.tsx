@@ -2,12 +2,13 @@ import "../styles/globals.css";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
+import { UserProvider } from "@auth0/nextjs-auth0";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
   return (
-    <>
+    <UserProvider>
       <Head>
         <title>Bark</title>
         <link
@@ -26,6 +27,6 @@ export default function App(props: AppProps) {
       >
         <Component {...pageProps} />
       </MantineProvider>
-    </>
+    </UserProvider>
   );
 }
