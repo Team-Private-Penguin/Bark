@@ -14,6 +14,7 @@ function AddComment() {
         radius="lg"
         placeholder="Add a comment..."
         minRows={2}
+        maxRows={5}
         value={comment}
         onChange={(e) => setComment(e.currentTarget.value)}
       />

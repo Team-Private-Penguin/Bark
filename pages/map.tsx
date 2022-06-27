@@ -12,7 +12,7 @@ const Map = () => {
             <h2>🐶 Nearby events</h2>
           </div>
         </Stack>
-        <Stack style={{ flexGrow: "1", height: "100%" }}>
+        <Stack style={{ flexGrow: 1, height: "100%" }}>
           <div className="border h-[100%] ">
             <h2>🐶 Map</h2>
           </div>
