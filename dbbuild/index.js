@@ -24,7 +24,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
       `CREATE TABLE barkschema.Groups (
     group_id BIGSERIAL,
     description VARCHAR,
-    name INTEGER,
+    name VARCHAR,
     admin_id BIGSERIAL
     )`
     )
