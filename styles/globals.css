@@ -20,7 +20,7 @@
   --english-violet: #41658a;
 }
 
-div {
+.homeBox {
   border-radius: 10px;
   border-color: var(--off-white);
   text-align: center;
