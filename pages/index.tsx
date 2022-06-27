@@ -6,6 +6,7 @@ import Link from "next/link";
 import UserInfo from "../components/UserInfo";
 import Navbar from "../components/Navbar";
 import Chats from '../components/Chats/Chat.js'
+import Groups from '../components/Groups';
 
 const Home: NextPage = () => {
   return (
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
       <main className="min-h-screen w-screen ">
         <Navbar />
         <Group className="group">
+
           <Stack justify="flex-start" style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
               <h2>🐶 User Info</h2>
@@ -22,6 +24,7 @@ const Home: NextPage = () => {
               <Link href="/groups" passHref>
                 <h2>🐶 Groups</h2>
               </Link>
+              <Groups />
             </div>
           </Stack>
 
