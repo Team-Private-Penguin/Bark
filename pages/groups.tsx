@@ -12,13 +12,8 @@ const Groups = () => {
     <main className="min-h-screen w-screen">
       <Navbar />
       <Group className="group">
-<<<<<<< HEAD
         <Stack className="hidden lg:flex" style={{ width: "20%" }}>
           <div className="border h-[28vh] space shadows ">
-=======
-        <Stack justify="flex-start" style={{ width: "20%" }}>
-          <div className="border h-[28vh] space shadows homeBox">
->>>>>>> main
             <h2>🐶 User Info</h2>
             <UserInfo />
           </div>
@@ -28,7 +23,6 @@ const Groups = () => {
           </div>
         </Stack>
         <Stack style={{ flexGrow: 1 }}>
-<<<<<<< HEAD
           <div className="border h-[90vh] shadows overflow-auto">
             <div className="sticky top-0 z-50">
               <h2>🐶 Feed</h2>
@@ -39,16 +33,6 @@ const Groups = () => {
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
           <div className="border h-[90vh] space shadows cursor-pointer">
-=======
-          <div className="border h-[90vh] shadows homeBox">
-            <h2>🐶 Feed</h2>
-            <AddEvent />
-            <EventFeed />
-          </div>
-        </Stack>
-        <Stack style={{ width: "20%" }}>
-          <div className="border h-[90vh] space shadows cursor-pointer homeBox">
->>>>>>> main
             <h2>🐶 Group Members</h2>
           </div>
         </Stack>
