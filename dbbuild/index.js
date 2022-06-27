@@ -105,7 +105,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() =>
     db.queryAsync(`
       CREATE TABLE barkschema.Messages (
-      user_id BIGSERIAL,
+      user_id INTEGER,
       friend_id INTEGER,
       text VARCHAR,
       time TIMESTAMPTZ,
@@ -113,12 +113,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
       )
     `)
   )
-  .then(() =>
-    db.queryAsync(`
-    ALTER TABLE barkschema.Messages ADD CONSTRAINT
-      Messages_pkey PRIMARY KEY (user_id)
-  `)
-  )
+
   .then(() =>
     db.queryAsync(`
     ALTER TABLE barkschema.Messages ADD CONSTRAINT

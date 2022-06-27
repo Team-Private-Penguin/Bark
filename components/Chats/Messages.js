@@ -1,25 +1,35 @@
-import { Stack, Group, Avatar } from "@mantine/core";
-import React from "react";
+import { Stack, Group, Avatar, Box, ScrollArea } from "@mantine/core";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 export default function messagesList(list, user = "Isaac", friend = "Doggo") {
-  const mappedMessages = list.map((message) => (
-    <Stack align="flex-start"  className="gap-1" >
-      <Group>
-        <Avatar radius="xl" component="span" size={35} className="ml-1" />
-        <span className="font-bold">{message.sent ? user : friend}</span>
-        <span className="text-xs ">
-          {message.time.toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </span>
-      </Group>
-      <span className="text-left">{message.text}</span>
-    </Stack>
-  ));
+  const mappedMessages = list?.map((message, i) => {
+    const timeStamp =  new Date(message.time)
+    return (
+      <Stack key={i} align="flex-start" className="gap-1 border-b-2 w-full">
+        <Group className="mb-1 pl-5 align-bottom">
+          <Avatar src={message.photo} radius="xl" component="span" size={30} className="ml-" />
+          <span className="font-bold">{message.name}</span>
+          <span className="text-[0.65rem] ">
+            {timeStamp.toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </span>
+        </Group>
+        <span className="text-left text-sm mb-1 pl-5">{message.text}</span>
+      </Stack>
+    )
+  });
   return (
-    <Stack align="flex-start" justify="flex-end" className="ml-5 h-[65%]">
-      {mappedMessages}
-    </Stack>
+    <ScrollArea
+      className=" h-[70%] bg-white"
+      offsetScrollbars
+      scrollbarSize={8}
+    >
+      <Stack align="flex-start" justify="flex-end" className="">
+        {mappedMessages}
+      </Stack>
+    </ScrollArea>
   );
 }
