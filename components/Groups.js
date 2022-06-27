@@ -81,8 +81,8 @@ const Groups = () => {
             }
           })}
         >
-          Create group or whatever
-        </Button>
+        Placeholder button
+      </Button>
       </Group>
     </div>
   );
