@@ -4,6 +4,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: "Nunito Sans", Arial, Helvetica, sans-serif;
 }
 
 :root {
@@ -42,7 +43,7 @@ h2 {
 }
 
 .main {
-  font-family: Arial;
+  font-family: roboto;
 }
 
 .navbar {
