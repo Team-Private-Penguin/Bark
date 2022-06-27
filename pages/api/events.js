@@ -2,9 +2,7 @@ import db from "./db";
 import { postEvent, getEventsGroup } from "./db/model";
 
 export default function handler(req, res) {
-  console.log("start");
   if (req.method === "POST") {
-    console.log("post");
     let { name, description, address, group_id, date, prospective } = req.body;
     const query = {
       text: postEvent,
