@@ -1,28 +1,37 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import { Group, Stack } from "@mantine/core";
+import React from "react";
 import Link from "next/link";
+import EventFeed from "../components/EventFeed";
+import AddEvent from "../components/AddEvent";
+import { Group, Stack } from "@mantine/core";
+import GroupsComp from "../components/Groups";
+import UserInfo from "../components/UserInfo";
+import Navbar from "../components/Navbar";
 
 const Groups = () => {
   return (
-    <main className="min-h-screen w-screen p-5">
-      <Group className="Group" position="apart">
-        <Stack style={{ width: "20%" }}>
-          <div className="border h-[33vh] ">
+    <main className="min-h-screen w-screen">
+      <Navbar />
+      <Group className="group">
+        <Stack justify="flex-start" style={{ width: "20%" }}>
+          <div className="border h-[28vh] space shadows ">
             <h2>🐶 User Info</h2>
+            <UserInfo />
           </div>
-          <div className="border h-[60vh]">
+          <div className="border h-[60vh] space shadows cursor-pointer">
             <h2>🐶 Groups</h2>
+            <GroupsComp />
           </div>
         </Stack>
-        <Stack style={{ flexGrow: "1" }}>
-          <div className="border h-[95vh]">
+
+        <Stack style={{ flexGrow: 1 }}>
+          <div className="border h-[90vh] shadows">
             <h2>🐶 Feed</h2>
+            <AddEvent />
+            <EventFeed />
           </div>
         </Stack>
         <Stack style={{ width: "20%" }}>
-          <div className="border h-[95vh]">
+          <div className="border h-[90vh] space shadows cursor-pointer">
             <h2>🐶 Group Members</h2>
           </div>
         </Stack>
