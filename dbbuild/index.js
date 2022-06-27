@@ -25,7 +25,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     group_id BIGSERIAL,
     description VARCHAR,
     name INTEGER,
-    admin VARCHAR
+    admin_id BIGSERIAL
     )`
     )
   )
@@ -38,11 +38,14 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     db.queryAsync(`
     CREATE TABLE barkschema.Events (
       event_id BIGSERIAL,
+      group_id BIGSERIAL NOT NULL,
       name INTEGER,
+      date DATE NOT NULL,
       description VARCHAR,
       lat FLOAT8,
       lng FLOAT8,
-      address VARCHAR
+      address VARCHAR,
+      prospective BOOLEAN
     )`)
   )
   .then(() =>
@@ -167,5 +170,10 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() =>
     db.queryAsync(`
     ALTER TABLE barkschema.Users_Events ADD CONSTRAINT Users_Events_event_id_fkey FOREIGN KEY (event_id) REFERENCES barkschema.Events(event_id)
+  `)
+  )
+  .then(() =>
+    db.queryAsync(`
+    ALTER TABLE barkschema.Events ADD CONSTRAINT Events_group_id_fkey FOREIGN KEY (group_id) REFERENCES barkschema.Groups(group_id)
   `)
   );
