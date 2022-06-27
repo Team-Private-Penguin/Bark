@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Group, Stack } from "@mantine/core";
 import Link from "next/link";
-import Friends from '../components/Friends'
+import Chat from '../components/Chats/Chat'
 import Groups from "../components/Groups";
 
 const Home: NextPage = () => {
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
         <Stack style={{ width: "20%" }}>
           <div className="border h-[95vh] shadows">
             <h2>🐶 Friends</h2>
-            <Friends></Friends>
+            <Chat/>
           </div>
         </Stack>
       </Group>
