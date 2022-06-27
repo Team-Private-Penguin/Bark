@@ -15,6 +15,10 @@ export default function App(props: AppProps) {
           rel="icon"
           href="https://cdn-icons-png.flaticon.com/512/616/616408.png"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
 
       <MantineProvider

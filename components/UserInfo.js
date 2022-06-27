@@ -4,6 +4,8 @@ import React from "react";
 function UserInfo() {
   const { user, error, isLoading } = useUser();
 
+  console.log(user);
+
   if (isLoading) {
     return <div>...loading</div>;
   }
