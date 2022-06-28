@@ -15,6 +15,7 @@ const Groups = () => {
     query: { id },
   } = useRouter();
   const [currentGroups, setCurrentGroups] = useState([]);
+
   function joinGroup() {
     let values = { user_id: TempUserId, group_id: id };
     axios
