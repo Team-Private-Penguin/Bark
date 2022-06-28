@@ -6,7 +6,7 @@ import { Group, Stack } from "@mantine/core";
 import Link from "next/link";
 import UserInfo from "../components/UserInfo";
 import Navbar from "../components/Navbar";
-import Chats from "../components/Chats/Chat.js";
+import Friends from '../components/Friends/Friends'
 import AddGroup from "../components/AddGroup";
 import GroupList from "../components/GroupList";
 
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
           <Stack style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
               <h2>🐶 Friends</h2>
-              <Chats />
+              <Friends/>
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <Link href="/map" passHref>

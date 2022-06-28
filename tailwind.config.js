@@ -8,12 +8,11 @@ module.exports = {
     extend: {
       colors: {
         white: "var(--white)",
-        offwhite: "var(--offwhite)",
+        offwhite: "var(--off-white)",
         black: "var(--black)",
         main: "var(--light-blue)",
         accent: "var(--dark-blue)",
         secondary: "var(--yellow)",
-        offwhite: "var(--offwhite)"
       },
     },
   },
