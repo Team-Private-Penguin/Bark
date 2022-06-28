@@ -93,12 +93,8 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() =>
     db.queryAsync(`
     CREATE TABLE barkschema.Users_Events (
-<<<<<<< HEAD
-    user_id VARCHAR,
-=======
     id SERIAL PRIMARY KEY,
-      user_id BIGSERIAL,
->>>>>>> 05d9866862c3e5dd21026f696cb63818e7dcb5db
+    user_id VARCHAR,
     event_id INTEGER
     )
   `)
