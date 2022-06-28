@@ -12,13 +12,14 @@ const ExploreGroups = () => {
       axios
         .get("/api/groups")
         .then((res) => {
-          setAllGroups(res.data.rows);
+          setAllGroups(res.data[0].rows);
         })
+        .then(() => console.log(allGroups))
         .catch((err) => {
           console.log(err);
         });
     }
-  }, []);
+  }, [opened]);
 
   return (
     <div>
