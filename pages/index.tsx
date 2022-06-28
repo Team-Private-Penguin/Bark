@@ -35,12 +35,8 @@ const Home: NextPage = () => {
 
           <Stack style={{ flexGrow: 1 }}>
             <div className="border h-[90vh] shadows homeBox">
-<<<<<<< HEAD
-              <h2 className="section-title">🐶 Events</h2>
-=======
               <h2 className="sticky top-0 z-50">🐶 Events</h2>
               <EventFeed />
->>>>>>> 05d9866862c3e5dd21026f696cb63818e7dcb5db
             </div>
           </Stack>
 
