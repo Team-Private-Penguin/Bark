@@ -1,7 +1,7 @@
 import AddComment from "./AddComment";
 import CommentFeed from "./CommentFeed";
 import React from "react";
-import { Card, Image, Text, Button, Stack, CardSection } from "@mantine/core";
+import { Card, Image, Text, Button, Stack } from "@mantine/core";
 
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
