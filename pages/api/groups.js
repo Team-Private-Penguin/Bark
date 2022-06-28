@@ -5,17 +5,19 @@ export default function handler(req, res) {
   if (req.method === "POST") {
     let { name, description, admin_id } = req.body;
     const query = {
-      text: postEvent,
+      text: postGroup,
       values: [name, description, admin_id],
     };
-    db.queryAsync(query)
-      .then(() => res.sendStatus(201))
+    return db
+      .queryAsync(query)
+      .then(() => {
+        res.status(201).json({ message: "ok" });
+      })
       .catch((err) => {
         console.log(err);
         res.status(404).send(err);
       });
-
   } else {
-    res.sendStatus(404);
+    res.status(404).send();
   }
 }
