@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         m.time,
         m.user_id
       FROM barkschema.messages m
-      WHERE user_id = ${user} OR friend_id=${user}
+      WHERE (user_id = ${friend} AND friend_id = ${user}) OR (user_id = ${user} AND friend_id = ${friend})
       ORDER BY m.time;
       `
       )

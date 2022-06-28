@@ -1,3 +1,4 @@
+import { fromJson } from "@auth0/nextjs-auth0/dist/session";
 import {
   Button,
   Dialog,
@@ -15,7 +16,7 @@ import { useState, useEffect } from "react";
 import fakeMessages from '../../utils/messages/fakemessages'
 import messagesList from './Messages'
 
-function Chat({opened, setOpened}) {
+function Chat({opened, setOpened, clicked}) {
   const form = useForm({
     initialValues: {
       message: "",
@@ -24,29 +25,22 @@ function Chat({opened, setOpened}) {
   const [messages, setMessages] = useState(null)
   useEffect(() => {
     axios
-      .get("/api/messages/1/2")
+      .get(`/api/messages/1/${clicked.user_id}`)
       .then((res) => setMessages(res.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [clicked]);
 
   const formSubmit = (msgString) => {
-    axios.post(`/api/messages/1/2`, {message: msgString}).then(() => {
-      axios.get(`/api/messages/1/2`) .then((res) => {
+    axios.post(`/api/messages/1/${clicked.user_id}`, {message: msgString}).then(() => {
+      axios.get(`/api/messages/1/${clicked.user_id}`) .then((res) => {
         setMessages(res.data)
       })
     })
   }
-
   const mappedMessages = messagesList(messages)
 
   return (
     <>
-      {/* <Button
-        onClick={() => setOpened((o) => !o)}
-        className="bg-slate-800 text-black"
-      >
-        Open Chat
-      </Button> */}
       <Dialog
         position={{ bottom: 0, right: 100 }}
         opened={opened}
@@ -60,13 +54,16 @@ function Chat({opened, setOpened}) {
           className="h-[50vh] border-0 rounded-none gap-0"
         >
           <Group className="border-b-2 rounded-none w-full bg-offwhite h-[10%]">
-            <Avatar radius="xl" component="span" size={35} className="ml-1" />
-            <span>Bark User</span>
+            <Avatar src={clicked.photo} radius="xl" component="span" size={35} className="ml-1" />
+            <span>{clicked.name}</span>
           </Group>
           {mappedMessages}
           <Box>
             <form
-              onSubmit={form.onSubmit((values) => formSubmit(values.message))}
+              onSubmit={form.onSubmit((values) => {
+                formSubmit(values.message)
+                form.reset()
+              })}
             >
               <Group className="w-[100%] gap-0 bg-offwhite">
                 <Textarea

@@ -9,6 +9,10 @@ function Friends() {
   const [friendList, setFriendList] = useState([]);
   const [clicked, setClicked] = useState({});
 
+  const handleChat = (friend) => {
+    setOpened(true)
+  }
+
   useEffect(() => {
     axios
       .get("/api/friends/1")
@@ -20,8 +24,12 @@ function Friends() {
 
   return (
     <>
-      {friendList.length > 0 ? <FriendList friendList={friendList} setClicked={setClicked}/> : <span>Add some friends</span>}
-      <Chat opened={opened} setOpened={setOpened} />
+      {friendList.length > 0 ? (
+        <FriendList friendList={friendList} handleChat={handleChat} setClicked={setClicked} />
+      ) : (
+        <span>Add some friends</span>
+      )}
+      <Chat opened={opened} setOpened={setOpened} clicked={clicked}/>
     </>
   );
 }
