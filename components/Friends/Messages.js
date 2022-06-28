@@ -11,9 +11,11 @@ export default function messagesList(list, user = "Isaac", friend = "Doggo") {
           <Avatar src={message.photo} radius="xl" component="span" size={30} className="ml-" />
           <span className="font-bold">{message.name}</span>
           <span className="text-[0.65rem] ">
-            {timeStamp.toLocaleTimeString("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
+            {timeStamp.toLocaleString([], {
+              dateStyle: 'short',
+              timeStyle: 'short'
+              // hour: "2-digit",
+              // minute: "2-digit",
             })}
           </span>
         </Group>

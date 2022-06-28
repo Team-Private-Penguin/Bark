@@ -14,8 +14,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import fakeMessages from '../../utils/messages/fakemessages'
 import messagesList from './Messages'
-function Chat() {
-  const [opened, setOpened] = useState(false);
+
+function Chat({opened, setOpened}) {
   const form = useForm({
     initialValues: {
       message: "",
@@ -41,12 +41,12 @@ function Chat() {
 
   return (
     <>
-      <Button
+      {/* <Button
         onClick={() => setOpened((o) => !o)}
         className="bg-slate-800 text-black"
       >
         Open Chat
-      </Button>
+      </Button> */}
       <Dialog
         position={{ bottom: 0, right: 100 }}
         opened={opened}

@@ -11,7 +11,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     f_people INTEGER,
     f_dogs INTEGER,
     photo VARCHAR,
-    name INTEGER
+    name VARCHAR
    )`)
   )
   .then(() =>
