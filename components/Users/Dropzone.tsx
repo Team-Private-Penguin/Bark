@@ -58,19 +58,22 @@ interface Props {
   setImage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function uploadImages(event: any): void {
-  const bodyFormData = new FormData();
-  bodyFormData.append("file", files[0]);
-  bodyFormData.append("upload_preset", "nvtzqoul");
-  // console.log(bodyFormData, "this is my body");
-  axios
-    .post("/upload", bodyFormData)
-    .then((response) => setImage(response.data.url))
-    .catch((error) => console.error(error));
-}
-
 const ImageDropzone: React.FC<Props> = ({ setImage }) => {
   const theme = useMantineTheme();
+
+  const uploadImages = (files: any): void => {
+    const bodyFormData = new FormData();
+    bodyFormData.append("file", files[0]);
+    bodyFormData.append("upload_preset", "mjm5khfu");
+    axios
+      .post(
+        "https://api.cloudinary.com/v1_1/dppbuevux/image/upload",
+        bodyFormData
+      )
+      .then((response) => setImage(response.data.url))
+      .catch((error) => console.error(error));
+  };
+
   return (
     <Dropzone
       onDrop={(files) => uploadImages(files)}

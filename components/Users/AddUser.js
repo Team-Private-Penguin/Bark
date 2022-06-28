@@ -31,7 +31,7 @@ function AddUser() {
       energy: values.energy,
       f_people: values.f_people,
       f_dogs: values.f_dogs,
-      photo: "",
+      photo: image,
       zipcode: values.zipcode,
     };
     console.log(submission, "form values");
@@ -45,8 +45,8 @@ function AddUser() {
         transition="skew-up"
         timingFunction="ease"
       >
+        <UserInfo />
         <form onSubmit={form.onSubmit((values) => submitUser(values))}>
-          <UserInfo />
           <TextInput
             required
             label="Name"
