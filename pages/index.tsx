@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -10,6 +10,7 @@ import Friends from "../components/Friends/Friends";
 import AddGroup from "../components/AddGroup";
 import GroupList from "../components/GroupList";
 import ExploreGroups from "../components/ExploreGroups";
+import EventFeed from "../components/EventFeed";
 
 const Home: NextPage = () => {
   return (
@@ -34,7 +35,12 @@ const Home: NextPage = () => {
 
           <Stack style={{ flexGrow: 1 }}>
             <div className="border h-[90vh] shadows homeBox">
+<<<<<<< HEAD
               <h2 className="section-title">🐶 Events</h2>
+=======
+              <h2 className="sticky top-0 z-50">🐶 Events</h2>
+              <EventFeed />
+>>>>>>> 05d9866862c3e5dd21026f696cb63818e7dcb5db
             </div>
           </Stack>
 
