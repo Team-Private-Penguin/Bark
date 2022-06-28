@@ -2,7 +2,7 @@ const Promise = require("bluebird");
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  user: "michaelzaki",
+  user: process.env.PGUSERNAME || "jasonmatta",
   host: "127.0.0.1",
   database: "bark",
   password: process.env.PGPASS || "",
