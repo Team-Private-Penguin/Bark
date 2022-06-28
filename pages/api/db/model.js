@@ -34,4 +34,20 @@ module.exports = {
     JOIN barkschema.groups USING (group_id)
     WHERE user_id = $1
     `,
+
+
+  getAdmin: `SELECT admin_id FROM barkschema.Groups`,
+
+  deleteEvent: `DELETE FROM barkschema.Events
+  WHERE event_id = $1`,
+
+  updateEvent: `UPDATE barkschema.Events
+  SET group_id = $1,
+  name = $2,
+  date = $3,
+  description = $4,
+  lat = $5,
+  lng = $6,
+  address = $7,
+  prospective = $8 `,
 };
