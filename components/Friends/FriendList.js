@@ -41,13 +41,9 @@ function FriendList({ friendList, setClicked, handleChat }) {
     <ScrollArea
       offsetScrollbars
       scrollbarSize={8}
-      className="h-[85%] sm:h-[72%] mt-2"
+      className="mt-2"
     >
       {mappedFriends}
-      <div>asd </div>
-      <div>asd </div>
-      <div>asd </div>
-      <div>asd </div>
     </ScrollArea>
   );
 }

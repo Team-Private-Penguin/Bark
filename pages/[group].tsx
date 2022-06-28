@@ -8,6 +8,7 @@ import GroupsComp from "../components/AddGroup";
 import UserInfo from "../components/UserInfo";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import Friends from "../components/Friends/Friends";
 
 const Groups = () => {
   const TempUserId = 1;
@@ -71,9 +72,10 @@ const Groups = () => {
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
-          <div className="border h-[84vh] space shadows cursor-pointer">
+          <Stack className="border h-[84vh] space shadows cursor-pointer gap-0">
             <h2>🐶 Group Members</h2>
-          </div>
+            <Friends groupId={id} listType={'groups'}/>
+          </Stack>
         </Stack>
       </Group>
     </main>

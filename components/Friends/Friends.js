@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ScrollArea } from "@mantine/core";
 
-function Friends() {
+function Friends({groupId, listType}) {
+  console.log(groupId, listType)
   const [opened, setOpened] = useState(false);
   const [friendList, setFriendList] = useState([]);
   const [clicked, setClicked] = useState({});
@@ -14,13 +15,22 @@ function Friends() {
   }
 
   useEffect(() => {
-    axios
-      .get("/api/friends/1")
+    if (listType === 'friends') {
+      axios
+        .get("/api/friends/1")
+        .then((res) => {
+          setFriendList(res.data);
+        })
+        .catch((err) => console.log(err));
+    } else if (listType === 'groups') {
+      axios
+      .get(`/api/members/${groupId}`)
       .then((res) => {
         setFriendList(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+    }
+  }, [listType, groupId]);
 
   return (
     <>
