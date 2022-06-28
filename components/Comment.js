@@ -1,22 +1,22 @@
 import React from "react";
-import { Group, Text } from "@mantine/core";
+import { Group, Text, Card } from "@mantine/core";
 
 function Comment() {
   return (
-    <>
-      <Group className="bg-main" p=".5rem">
-        <icon>UserIcon</icon>
-        <Text className="bg-main" color="var(--black)" align="left">
-          UserName
-        </Text>
-        <Text className="bg-main" color="var(--black)" align="left">
-          Date and Time
-        </Text>
-      </Group>
-      <Text className="bg-white p-2" color="var(--black)" align="left">
-        Comment
-      </Text>
-    </>
+    <Card className="border rounded-xl">
+      <Card.Section className="bg-main" p=".5rem">
+        <Group>
+          <icon>UserIcon</icon>
+          <Text className="" color="var(--black)" align="left">
+            UserName
+          </Text>
+          <Text className="" color="var(--black)" align="left">
+            Date and Time
+          </Text>
+        </Group>
+      </Card.Section>
+      <Card.Section p=".5rem">Comment</Card.Section>
+    </Card>
   );
 }
 

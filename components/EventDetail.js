@@ -1,7 +1,7 @@
 import AddComment from "./AddComment";
 import CommentFeed from "./CommentFeed";
 import React from "react";
-import { Card, Image, Text, Button } from "@mantine/core";
+import { Card, Image, Text, Button, Stack, CardSection } from "@mantine/core";
 
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
@@ -15,12 +15,10 @@ function EventDetail() {
         shadow="sm"
       >
         <Card.Section className="bg-main p-2">
-          <h3 className="text-left font-bold color-accent">
-            Group Name and Icon
-          </h3>
+          <h3 className="text-left font-bold">Group Name and Icon</h3>
         </Card.Section>
-        <Card.Section className="flex items-center justify-top space-x-4">
-          <div className="w-[35%] flex-column space-y-4 mb-10">
+        <Card.Section className="flex items-center justify-center space-x-4">
+          <Stack className="w-[35%] flex-column">
             <h3 className="text-center font-bold color-accent">
               Event Name TEMP
             </h3>
@@ -30,21 +28,19 @@ function EventDetail() {
             <Text color="var(--black)" align="center">
               Event Location TEMP
             </Text>
-            <Text color="var(--black)" align="left" p=".5rem">
-              Event Description
-            </Text>
-          </div>
-          <div className="w-[40%]">
-            <Image radius="10px" fit="contain" src={defaultPhoto} />
-          </div>
-          <div className="">
+          </Stack>
+          <Stack className="">
             <Button>RSVP!</Button>
-          </div>
+          </Stack>
+          <Stack className="w-[40%]">
+            <Image radius="10px" fit="contain" src={defaultPhoto} />
+          </Stack>
         </Card.Section>
-        <Card.Section className="">
+        <Card.Section p=".5rem">Event Description</Card.Section>
+        <Card.Section>
           <AddComment />
         </Card.Section>
-        <Card.Section className="p-2 bg-main h-[37vh] overflow-auto">
+        <Card.Section className="p-2 h-[37vh] overflow-auto">
           <CommentFeed />
         </Card.Section>
       </Card>

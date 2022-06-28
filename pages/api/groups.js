@@ -1,21 +1,32 @@
 import db from "./db";
-import { postGroup } from "./db/model";
+import { postGroup, getAllGroups } from "./db/model";
 
 export default function handler(req, res) {
   if (req.method === "POST") {
     let { name, description, admin_id } = req.body;
     const query = {
-      text: postEvent,
+      text: postGroup,
       values: [name, description, admin_id],
     };
-    db.queryAsync(query)
-      .then(() => res.sendStatus(201))
+    return db
+      .queryAsync(query)
+      .then(() => {
+        res.status(201).json({ message: "ok" });
+      })
       .catch((err) => {
         console.log(err);
         res.status(404).send(err);
       });
-
+  } else if (req.method === "GET") {
+    return db
+      .query(getAllGroups)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   } else {
-    res.sendStatus(404);
+    res.status(404).send();
   }
 }

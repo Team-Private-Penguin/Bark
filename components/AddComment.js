@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Textarea, Button } from "@mantine/core";
+import { Textarea, Button, Group, Stack } from "@mantine/core";
 
 function AddComment() {
   const [comment, setComment] = useState("");
@@ -7,21 +7,24 @@ function AddComment() {
     //Post Comment
   }
   return (
-    <div>
-      <Textarea
-        variant="filled"
-        autosize
-        radius="lg"
-        placeholder="Add a comment..."
-        minRows={2}
-        maxRows={5}
-        value={comment}
-        onChange={(e) => setComment(e.currentTarget.value)}
-      />
-      <Button disabled={!comment.length} onClick={handleClick}>
-        Post Comment
-      </Button>
-    </div>
+    <Group p=".5rem">
+      <Stack style={{ flexGrow: 1 }}>
+        <Textarea
+          autosize
+          radius="lg"
+          placeholder="Add a comment..."
+          minRows={2}
+          maxRows={5}
+          value={comment}
+          onChange={(e) => setComment(e.currentTarget.value)}
+        />
+      </Stack>
+      <Stack>
+        <Button size="md" disabled={!comment.length} onClick={handleClick}>
+          Post
+        </Button>
+      </Stack>
+    </Group>
   );
 }
 

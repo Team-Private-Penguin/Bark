@@ -11,26 +11,24 @@ import {
 import React, { useState } from "react";
 import { useForm } from "@mantine/form";
 
-const Groups = () => {
-
+const AddGroup = () => {
   const [opened, setOpened] = useState(false);
   const form = useForm({
     initialValues: {
       name: "",
       description: "",
-      admin_id: 1
-    }
-  })
-
+      admin_id: 1,
+    },
+  });
 
   const handleSubmit = (values) => {
     axios.post("/api/groups", values);
-  }
+  };
 
   return (
     <div>
       <Group position="center">
-        <Button onClick={() => setOpened(true)}>Add an Event!</Button>
+        <Button onClick={() => setOpened(true)}>Add a Group!</Button>
       </Group>
       <Modal
         opened={opened}
@@ -38,7 +36,6 @@ const Groups = () => {
         title="Create New Group!"
       >
         <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-
           <TextInput
             placeholder="Name"
             label="Name"
@@ -60,9 +57,8 @@ const Groups = () => {
           </Group>
         </form>
       </Modal>
-
     </div>
   );
-}
+};
 
-export default Groups
+export default AddGroup;
