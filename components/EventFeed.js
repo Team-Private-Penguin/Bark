@@ -1,13 +1,14 @@
 import React from "react";
 import EventCard from "../components/EventCard";
+import { Stack } from "@mantine/core";
 
 function EventFeed() {
   return (
-    <div>
+    <Stack className="h-[74vh] overflow-auto">
       {/* .map of Events */}
       <EventCard image={true} />
       <EventCard image={false} />
-    </div>
+    </Stack>
   );
 }
 

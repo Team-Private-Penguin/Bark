@@ -11,7 +11,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     f_people INTEGER,
     f_dogs INTEGER,
     photo VARCHAR,
-    name INTEGER
+    name VARCHAR
    )`)
   )
   .then(() =>
@@ -24,7 +24,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
       `CREATE TABLE barkschema.Groups (
     group_id BIGSERIAL,
     description VARCHAR,
-    name INTEGER,
+    name VARCHAR,
     admin_id BIGSERIAL
     )`
     )
@@ -39,7 +39,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     CREATE TABLE barkschema.Events (
       event_id BIGSERIAL,
       group_id BIGSERIAL NOT NULL,
-      name INTEGER,
+      name VARCHAR,
       date DATE NOT NULL,
       description VARCHAR,
       lat FLOAT8,
@@ -84,14 +84,10 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() =>
     db.queryAsync(`
     CREATE TABLE barkschema.Users_Groups (
+    id SERIAL PRIMARY KEY,
     user_id BIGSERIAL,
-    group_id INTEGER
+    group_id BIGSERIAL
     )
-  `)
-  )
-  .then(() =>
-    db.queryAsync(`
-    ALTER TABLE barkschema.Users_Groups ADD CONSTRAINT Users_Groups_pkey PRIMARY KEY (user_id)
   `)
   )
   .then(() =>
@@ -105,7 +101,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() =>
     db.queryAsync(`
       CREATE TABLE barkschema.Messages (
-      user_id BIGSERIAL,
+      user_id INTEGER,
       friend_id INTEGER,
       text VARCHAR,
       time TIMESTAMPTZ,
@@ -113,12 +109,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
       )
     `)
   )
-  .then(() =>
-    db.queryAsync(`
-    ALTER TABLE barkschema.Messages ADD CONSTRAINT
-      Messages_pkey PRIMARY KEY (user_id)
-  `)
-  )
+
   .then(() =>
     db.queryAsync(`
     ALTER TABLE barkschema.Messages ADD CONSTRAINT
