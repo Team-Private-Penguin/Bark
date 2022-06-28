@@ -1,13 +1,17 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import EventFeed from "../components/EventFeed";
 import AddEvent from "../components/AddEvent";
 import { Group, Stack } from "@mantine/core";
-import GroupsComp from "../components/Groups";
+import GroupsComp from "../components/AddGroup";
 import UserInfo from "../components/UserInfo";
 import Navbar from "../components/Navbar";
 
 const Groups = () => {
+  const {
+    query: { id },
+  } = useRouter();
   return (
     <main className="min-h-screen w-screen">
       <Navbar />
@@ -23,9 +27,9 @@ const Groups = () => {
           </div>
         </Stack>
         <Stack style={{ flexGrow: 1 }}>
-          <div className="border h-[90vh] shadows overflow-auto">
+          <div className="border h-[90vh] shadows">
             <div className="sticky top-0 z-50">
-              <h2>🐶 Feed</h2>
+              <h2>🐶 Group {id} Events</h2>
               <AddEvent />
             </div>
             <EventFeed />
