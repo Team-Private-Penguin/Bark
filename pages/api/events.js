@@ -17,6 +17,15 @@ export default function handler(req, res) {
         console.log(err);
         res.status(404).send(err);
       });
+  } else if (req.method === 'GET' && req.query.body === 'admin') { //for getting admin id.
+
+    return db
+    .queryAsync(getAdmin)
+    .then(() => res.status(200).send("OK"))
+    .catch((err) => {
+      res.status(404).send(err);
+    })
+
   } else if (req.method === "GET") {
     let { group_id } = req.body;
     const query = {

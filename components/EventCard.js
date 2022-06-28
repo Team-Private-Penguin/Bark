@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EventDetail from "./EventDetail";
 import { Modal, Card, Text, Group } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { createStyles, Button } from '@mantine/core';
+const axios = require('axios').default;
 
 
 const defaultPhoto =
@@ -15,6 +16,24 @@ function EventCard({ image }) {
   image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
   const [isAdmin, setIsAdmin] = useState(true);
+
+  useEffect(() => { //get admin id of this group, if it matches id here, conditionally render the buttons
+
+    axios({
+      method: 'get',
+      url:  '/api/events',
+      params: {
+        body: 'admin'
+      }
+    })
+    .then((response) => {
+      setIsAdmin(response.data); //edit this later.
+    })
+
+  }, isAdmin);
+
+
+
 
   const handleEdit = (event) => {
     console.log('edit');
