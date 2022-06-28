@@ -14,6 +14,15 @@ const defaultPhoto1 =
 function EventCard({ image }) {
   image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
+
+  const handleEdit = (event) => {
+    console.log('edit');
+  }
+  const handleDelete = (event) => {
+    console.log('delete');
+  }
+
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
@@ -29,14 +38,15 @@ function EventCard({ image }) {
               Event Location(Short)
             </Text>
 
-            <Group grow spacing={0}>
-              <Button variant="default" >
+            { isAdmin ? <Group grow spacing={0} >
+              <Button onClick={handleEdit} variant="default" >
                 EDIT
               </Button>
-              <Button variant="default" >
+              <Button onClick={handleDelete} variant="default" >
                 DELETE
               </Button>
-            </Group>
+            </Group> : <p>need admin privileges for button</p>}
+
 
 
           </Card.Section>
