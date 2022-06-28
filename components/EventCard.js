@@ -15,13 +15,7 @@ function EventCard({ image }) {
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
-        <Card
-          className="bg-transparent"
-          radius="10px"
-          shadow="sm"
-          p="sm"
-          onClick={() => setOpened(true)}
-        >
+        <Card radius="10px" shadow="sm" p="sm" onClick={() => setOpened(true)}>
           <Card.Section className="p-2">
             <Group>
               <Text className=""> Event Name TEMP</Text>
