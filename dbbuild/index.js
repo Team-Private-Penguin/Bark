@@ -84,14 +84,10 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() =>
     db.queryAsync(`
     CREATE TABLE barkschema.Users_Groups (
+    id SERIAL PRIMARY KEY,
     user_id BIGSERIAL,
-    group_id INTEGER
+    group_id BIGSERIAL
     )
-  `)
-  )
-  .then(() =>
-    db.queryAsync(`
-    ALTER TABLE barkschema.Users_Groups ADD CONSTRAINT Users_Groups_pkey PRIMARY KEY (user_id)
   `)
   )
   .then(() =>
