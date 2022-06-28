@@ -7,7 +7,7 @@ import { faMessage, faUserCircle } from "@fortawesome/free-regular-svg-icons";
 function FriendList({ friendList, setClicked, handleChat }) {
   const mappedFriends = friendList.map((friend, index) => {
     return (
-      <Group className="border-b-2 pb-1 pt-50 mb-3">
+      <Group key={index} className="border-b-2 pb-1 pt-50 mb-3">
         <Group className=" w-[50%]">
           <Avatar
             src={friend.photo}

@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       )
       .then((result) => res.status(200).send(result.rows))
       .catch((err) => {
-        console.log(err)
+        console.log(err, 'message get err', friend, user)
         res.status(400).end();
       });
   }
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       `
     ).then(() => res.status(200).end())
     .catch((err) => {
-      console.log(err)
+      console.log(err, 'message post err')
       res.status(400).end()
     })
   }

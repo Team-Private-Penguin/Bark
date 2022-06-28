@@ -24,10 +24,12 @@ function Chat({opened, setOpened, clicked}) {
   });
   const [messages, setMessages] = useState(null)
   useEffect(() => {
-    axios
-      .get(`/api/messages/1/${clicked.user_id}`)
-      .then((res) => setMessages(res.data))
-      .catch((err) => console.log(err));
+    if (clicked.user_id) {
+      axios
+        .get(`/api/messages/1/${clicked.user_id}`)
+        .then((res) => setMessages(res.data))
+        .catch((err) => console.log(err));
+    }
   }, [clicked]);
 
   const formSubmit = (msgString) => {

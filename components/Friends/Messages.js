@@ -3,7 +3,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 export default function messagesList(list) {
-  console.log(list)
   const mappedMessages = list?.map((message, i) => {
     const timeStamp =  new Date(message.time)
     return (
