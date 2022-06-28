@@ -44,7 +44,6 @@ function AddEvent() {
       prospective: values.prospective,
     };
     axios.post("/api/events", submission);
-    console.log("not so big moves", submission);
   };
   return (
     <div>

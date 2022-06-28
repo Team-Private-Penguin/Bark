@@ -2,9 +2,7 @@ import db from "./db";
 import { postEvent, getEventsGroup } from "./db/model";
 
 export default function handler(req, res) {
-  console.log("start");
   if (req.method === "POST") {
-    console.log("post");
     let { name, description, address, group_id, date, prospective } = req.body;
     const query = {
       text: postEvent,
@@ -12,8 +10,9 @@ export default function handler(req, res) {
     };
     let values = [name, description, address, group_id, date, prospective];
     console.log(query);
-    db.queryAsync(postEvent, values)
-      .then(() => res.sendStatus(201))
+    return db
+      .queryAsync(postEvent, values)
+      .then(() => res.status(201).send("Ok"))
       .catch((err) => {
         console.log(err);
         res.status(404).send(err);
@@ -24,7 +23,8 @@ export default function handler(req, res) {
       text: getEventsGroup,
       values: [group_id],
     };
-    db.queryAsync(query)
+    return db
+      .queryAsync(query)
       .then((results) => res.status(200).send(results))
       .catch((err) => res.status(404).send(err));
   } else {

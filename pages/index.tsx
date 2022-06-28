@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -6,6 +7,8 @@ import Link from "next/link";
 import UserInfo from "../components/UserInfo";
 import Navbar from "../components/Navbar";
 import Friends from '../components/Friends/Friends'
+import AddGroup from "../components/AddGroup";
+import GroupList from "../components/GroupList";
 
 const Home: NextPage = () => {
   return (
@@ -19,9 +22,11 @@ const Home: NextPage = () => {
               <UserInfo />
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
-              <Link href="/groups" passHref>
-                <h2>🐶 Groups</h2>
-              </Link>
+              <h2>🐶 Groups</h2>
+              <Stack>
+                <AddGroup />
+                <GroupList />
+              </Stack>
             </div>
           </Stack>
 
