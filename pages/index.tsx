@@ -9,6 +9,7 @@ import Navbar from "../components/Navbar";
 import Chats from "../components/Chats/Chat.js";
 import AddGroup from "../components/AddGroup";
 import GroupList from "../components/GroupList";
+import ExploreGroups from "../components/ExploreGroups";
 
 const Home: NextPage = () => {
   return (
@@ -24,6 +25,7 @@ const Home: NextPage = () => {
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <h2>🐶 Groups</h2>
               <Stack>
+                <ExploreGroups />
                 <AddGroup />
                 <GroupList />
               </Stack>

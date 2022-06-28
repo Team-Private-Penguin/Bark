@@ -25,4 +25,5 @@ module.exports = {
     JOIN Groups USING (group_id)
     WHERE Groups.group_id = User_Groups.group_id
   `,
+  getAllGroups: `SELECT * from barkschema.groups`,
 };

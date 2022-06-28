@@ -12,7 +12,7 @@ function GroupList() {
     <Stack>
       {UserGroups.map(({ group_id, name }) => {
         return (
-          <Link href={`/group?id=${group_id}`} passHref>
+          <Link key={group_id} href={`/group?id=${group_id}`} passHref>
             <Group>
               {name}
               {group_id}
