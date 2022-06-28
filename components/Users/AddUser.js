@@ -9,6 +9,7 @@ import Dropzone from "./Dropzone.tsx";
 function AddUser() {
   const [opened, setOpened] = useState(false);
   const { user } = useUser();
+  const [image, setImage] = useState("");
   const form = useForm({
     initialValues: {
       user_id: "",
@@ -101,7 +102,7 @@ function AddUser() {
             {...form.getInputProps("zipcode")}
           />
           <br />
-          <Dropzone />
+          <Dropzone setImage={setImage} />
 
           <Group position="center" mt="md">
             <Button color="dark" variant="outline" type="submit">

@@ -24,7 +24,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
       `CREATE TABLE barkschema.Groups (
     group_id BIGSERIAL,
     description VARCHAR,
-    name INTEGER,
+    name VARCHAR,
     admin_id BIGSERIAL
     )`
     )
@@ -39,7 +39,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     CREATE TABLE barkschema.Events (
       event_id BIGSERIAL,
       group_id BIGSERIAL NOT NULL,
-      name INTEGER,
+      name VARCHAR,
       date DATE NOT NULL,
       description VARCHAR,
       lat FLOAT8,

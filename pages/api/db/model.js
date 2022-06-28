@@ -1,5 +1,5 @@
 module.exports = {
-  postEvent: `INSERT INTO Events (
+  postEvent: `INSERT INTO barkschema.Events (
     name,
     description,
     address,
@@ -10,7 +10,7 @@ module.exports = {
   VALUES ($1, $2, $3, $4, $5, $6)
   `,
 
-  getEventsGroup: `SELECT * FROM Events WHERE group_id = $1`,
+  getEventsGroup: `SELECT * FROM barkschema.Events WHERE group_id = $1`,
 
   postGroup: `INSERT INTO Groups (
     name,

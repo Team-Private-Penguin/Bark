@@ -6,6 +6,7 @@ import Link from "next/link";
 import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
 import Chats from "../components/Chats/Chat.js";
+import Groups from "../components/Groups";
 
 const Home: NextPage = () => {
   return (
@@ -22,6 +23,7 @@ const Home: NextPage = () => {
               <Link href="/groups" passHref>
                 <h2 className="section-title">🐶 Groups</h2>
               </Link>
+              <Groups />
             </div>
           </Stack>
 
