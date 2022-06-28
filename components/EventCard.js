@@ -3,6 +3,8 @@ import EventDetail from "./EventDetail";
 import { Modal, Card, Text, Group } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { createStyles, Button } from '@mantine/core';
+
 
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
@@ -26,6 +28,17 @@ function EventCard({ image }) {
             <Text color="var(--black)" align="left">
               Event Location(Short)
             </Text>
+
+            <Group grow spacing={0}>
+              <Button variant="default" >
+                EDIT
+              </Button>
+              <Button variant="default" >
+                DELETE
+              </Button>
+            </Group>
+
+
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
             <img className="rounded-[10px] max-h-[400px]" src={image} />
