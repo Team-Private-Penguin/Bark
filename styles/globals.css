@@ -108,3 +108,16 @@ h2 {
   font-size: 20px;
   margin: 0px 10px;
 }
+
+.mapDrawerCard {
+  padding-bottom: 10px;
+}
+
+.mapCardButton {
+  width: 20px;
+  height: 20px;
+}
+
+.pointer {
+  cursor: pointer;
+}

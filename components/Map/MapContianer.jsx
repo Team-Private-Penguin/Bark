@@ -1,20 +1,38 @@
-import React, { useState, useContext, createContext, useRef} from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import React, { useState, useEffect, useContext, createContext } from 'react';
+import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import Map from './Map.jsx';
+import { Drawer, Button, LoadingOverlay } from '@mantine/core';
+import { eventData1, eventData2 } from './mapDrawerData.js';
+import MapDrawerCard from './MapDrawerCard.jsx';
 
+export const MapContainerState = createContext();
 
 export default function MapContainer() {
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDMC1W3SHcAZGQEivecuyHQOCmeahkwlA4",
-  });
+  let [opened, setOpened] = useState(false);
+  let [title, setTitle] = useState('Map');
+  let [searchValue, setSearchValue] = useState('');
+  let [markers, setMarkers] = useState([]);
+  let [drawerCards, setDrawerCards] = useState([eventData1, eventData2]);
+  let [center, setCenter] = useState({ lat: 43.4955876, lng: -116.486516 });
+  let [rsvp, setRSVP] = useState(true);
 
-  const mapStyle = {
-    height: "94%",
-    width: "100%"
-  };
 
-  if (!isLoaded) return <div>Loading...</div>;
-  return <Map />;
+
+
+  return (
+    <MapContainerState.Provider value={{ opened, setOpened, rsvp, setRSVP, center, setCenter, searchValue, markers, setMarkers, drawerCards, setDrawerCards }}>
+      <Drawer key='MapDrawerLeft' size="lg" withOverlay={false} closeOnEscape="true" closeOnClickOutside={true} padding="xl" opened={opened} onClose={() => { setOpened(false); }} title={title}>
+        {
+          drawerCards.map((card) => {
+            return (
+              <MapDrawerCard card={card} key={card.lat} />
+            )
+          })
+        }
+      </Drawer>
+      <Map />
+    </MapContainerState.Provider>
+  )
 
 }
