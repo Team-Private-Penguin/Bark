@@ -34,7 +34,12 @@ function AddUser() {
       photo: image,
       zipcode: values.zipcode,
     };
-    console.log(submission, "form values");
+    axios
+      .post("/api/users/users", submission)
+      .then(() => {
+        console.log("saved to Postgres");
+      })
+      .catch((err) => console.error(err));
   };
   return (
     <div>
