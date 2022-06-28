@@ -19,7 +19,7 @@ export default function handler(req, res) {
       });
   } else if (req.method === "GET") {
     return db
-      .query(getAllGroups)
+      .queryAsync(getAllGroups)
       .then((data) => {
         res.send(data);
       })
