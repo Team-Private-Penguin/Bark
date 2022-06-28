@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Group, Stack } from "@mantine/core";
 import Link from "next/link";
-import UserInfo from "../components/UserInfo";
+import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
 import Friends from "../components/Friends/Friends";
 import AddGroup from "../components/AddGroup";
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         <Group className="group">
           <Stack justify="flex-start" style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
-              <h2>🐶 User Info</h2>
+              <h2 className="section-title">🐶 User Info</h2>
               <UserInfo />
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <Link href="/map" passHref>
-                <h2>🐶 Map</h2>
+                <h2 className="section-title">🐶 Map</h2>
               </Link>
             </div>
           </Stack>

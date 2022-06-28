@@ -15,17 +15,19 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@googlemaps/react-wrapper": "^1.1.35",
-    "@mantine/core": "^4.2.10",
+    "@mantine/core": "^4.2.11",
     "@mantine/dates": "^4.2.10",
+    "@mantine/dropzone": "^4.2.11",
     "@mantine/form": "^4.2.10",
-    "@mantine/hooks": "^4.2.10",
+    "@mantine/hooks": "^4.2.11",
     "@mantine/next": "^4.2.10",
     "axios": "^0.27.2",
     "bluebird": "^3.7.2",
     "next": "latest",
     "pg": "^8.7.3",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "tabler-icons-react": "^1.51.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
