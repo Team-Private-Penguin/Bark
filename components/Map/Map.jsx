@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
-import { Drawer, Button, Group, Stack, TextInput } from '@mantine/core';
+import { Drawer, Button, Group, Stack, TextInput, Alert } from '@mantine/core';
 import { MapContainerState } from './MapContianer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faOctagonExclamation } from '@fortawesome/free-solid-svg-icons';
 
 export default function Map() {
 
@@ -24,6 +24,8 @@ export default function Map() {
     if (searchResults.length > 0) {
       setDrawerCards(searchResults);
       setOpened(true);
+    } else {
+      alert('No results found');
     }
   }
 
@@ -51,7 +53,7 @@ export default function Map() {
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
         <GoogleMap
         mapContainerStyle={{ height: "100%", width: "100%"}}
-        zoom={11} center={center}
+        zoom={14} center={center}
         >
         <TextInput
         id="searchValue"
@@ -59,7 +61,7 @@ export default function Map() {
         placeholder={`Search Events`}
         radius="md"
         >
-        </TextInput><FontAwesomeIcon className="z-10" icon={faMagnifyingGlass} />
+        </TextInput>
           {
             markers.map((marker) => {
               return <Marker position={marker}/>
