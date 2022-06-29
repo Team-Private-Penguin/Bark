@@ -57,9 +57,10 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     db.queryAsync(`
     CREATE TABLE barkschema.Comments (
     comment_id BIGSERIAL,
-    comment INTEGER,
-    event_id INTEGER,
-    user_id VARCHAR
+    comment VARCHAR,
+    event_id BIGSERIAL,
+    user_id VARCHAR,
+    date DATE
     )
   `)
   )
@@ -95,7 +96,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     CREATE TABLE barkschema.Users_Events (
     id SERIAL PRIMARY KEY,
     user_id VARCHAR,
-    event_id INTEGER
+    event_id BIGSERIAL
     )
   `)
   )

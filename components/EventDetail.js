@@ -1,12 +1,16 @@
 import AddComment from "./AddComment";
 import CommentFeed from "./CommentFeed";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Image, Text, Button, Stack } from "@mantine/core";
+import axios from "axios";
+import { useUser } from "@auth0/nextjs-auth0";
 
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
 
 function EventDetail({ image, event }) {
+  const { user } = useUser();
+  let userId = user?.sub.split("google-oauth2|")[1];
   const {
     name,
     address,
@@ -15,7 +19,15 @@ function EventDetail({ image, event }) {
     description,
     group_name,
     admin_id,
+    event_id,
   } = event;
+  const [comments, setComments] = useState([{}]);
+  useEffect(() => {
+    axios
+      .get(`/api/event/comment?id=${event_id}`)
+      .then((data) => setComments(data.data[0].rows))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
       <Card
@@ -45,10 +57,14 @@ function EventDetail({ image, event }) {
         </Card.Section>
         <Card.Section p=".5rem">{description}</Card.Section>
         <Card.Section>
-          <AddComment />
+          <AddComment
+            user_id={userId}
+            event={event}
+            setComments={setComments}
+          />
         </Card.Section>
         <Card.Section className="p-2 h-[37vh] overflow-auto">
-          <CommentFeed />
+          <CommentFeed comments={comments} />
         </Card.Section>
       </Card>
       <Card className="space-y-1 w-[24%] h-[85vh]" radius="10px" shadow="sm">
