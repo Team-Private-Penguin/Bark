@@ -18,6 +18,7 @@ function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
     admin_id,
     event_id,
   } = event;
+  const timeStamp = new Date(date);
   const [comments, setComments] = useState([{}]);
   const [attendees, setAttendees] = useState([{}]);
   useEffect(() => {
@@ -63,7 +64,9 @@ function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
           <Stack className="w-[35%] flex-column">
             <h3 className="text-center font-bold color-accent">{name}</h3>
             <Text color="var(--light-blue)" align="center" size="sm">
-              {date}
+              {timeStamp.toLocaleString([], {
+                dateStyle: "short",
+              })}
             </Text>
             <Text color="var(--black)" align="center">
               {address}
