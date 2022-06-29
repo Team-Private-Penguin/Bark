@@ -38,14 +38,14 @@ const Home: NextPage = () => {
           <Stack style={{ flexGrow: 1 }}>
             <div className="border h-[90vh] shadows homeBox">
               <h2 className="sticky top-0 z-50">🐶 Events</h2>
-              <EventFeed />
+              <EventFeed userFeed={true} />
             </div>
           </Stack>
 
           <Stack style={{ width: "20%" }}>
             <Stack className="border h-[28vh] space shadows homeBox gap-0">
               <h2>🐶 Friends</h2>
-              <Friends listType={'friends'}/>
+              <Friends listType={"friends"} />
             </Stack>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <Link href="/map" passHref>

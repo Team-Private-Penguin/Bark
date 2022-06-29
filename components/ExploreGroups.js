@@ -14,7 +14,6 @@ const ExploreGroups = () => {
         .then((res) => {
           setAllGroups(res.data[0].rows);
         })
-        .then(() => console.log(allGroups))
         .catch((err) => {
           console.log(err);
         });

@@ -6,7 +6,16 @@ import { Card, Image, Text, Button, Stack } from "@mantine/core";
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
 
-function EventDetail() {
+function EventDetail({ image, event }) {
+  const {
+    name,
+    address,
+    date,
+    prospective,
+    description,
+    group_name,
+    admin_id,
+  } = event;
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
       <Card
@@ -15,18 +24,16 @@ function EventDetail() {
         shadow="sm"
       >
         <Card.Section className="bg-main p-2">
-          <h3 className="text-left font-bold">Group Name and Icon</h3>
+          <h3 className="text-left font-bold">{group_name}</h3>
         </Card.Section>
         <Card.Section className="flex items-center justify-center space-x-4">
           <Stack className="w-[35%] flex-column">
-            <h3 className="text-center font-bold color-accent">
-              Event Name TEMP
-            </h3>
+            <h3 className="text-center font-bold color-accent">{name}</h3>
             <Text color="var(--light-blue)" align="center" size="sm">
-              Date and Time TEMP
+              {date}
             </Text>
             <Text color="var(--black)" align="center">
-              Event Location TEMP
+              {address}
             </Text>
           </Stack>
           <Stack className="">
@@ -36,7 +43,7 @@ function EventDetail() {
             <Image radius="10px" fit="contain" src={defaultPhoto} />
           </Stack>
         </Card.Section>
-        <Card.Section p=".5rem">Event Description</Card.Section>
+        <Card.Section p=".5rem">{description}</Card.Section>
         <Card.Section>
           <AddComment />
         </Card.Section>
@@ -49,10 +56,6 @@ function EventDetail() {
           <h3 className="text-left font-bold color-accent">Attendees</h3>
         </Card.Section>
         <Card.Section className="h-[95%] overflow-auto space-y-72">
-          <div>UserName</div>
-          <div>UserName</div>
-          <div>UserName</div>
-          <div>UserName</div>
           <div>UserName</div>
         </Card.Section>
       </Card>

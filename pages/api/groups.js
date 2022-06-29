@@ -1,5 +1,5 @@
 import db from "./db";
-import { postGroup, getAllGroups } from "./db/model";
+import { postGroup, getAllGroups, getGroup } from "./db/model";
 
 export default function handler(req, res) {
   if (req.method === "POST") {
@@ -16,6 +16,15 @@ export default function handler(req, res) {
       .catch((err) => {
         console.log(err);
         res.status(404).send(err);
+      });
+  } else if (req.method === "GET" && req.query.id) {
+    return db
+      .queryAsync(getGroup, [req.query.id])
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   } else if (req.method === "GET") {
     return db
