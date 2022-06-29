@@ -17,18 +17,23 @@ function EventCard({ image }) {
   const [opened, setOpened] = useState(false);
   const [isAdmin, setIsAdmin] = useState(true);
 
-  useEffect(() => { //get admin id of this group, if it matches id here, conditionally render the buttons
-    axios({
-      method: 'get',
-      url:  '/api/events',
-      params: {
-        body: 'admin'
-      }
-    })
-    .then((response) => {
-      console.log(response);
-      setIsAdmin(response.data); //edit this in accordance with the response.
-    })
+ //get admin id of this group, if it matches id here, conditionally render the buttons
+  useEffect(() => {
+    // axios({
+    //   method: 'get',
+    //   url:  '/api/events',
+    //   params: {
+    //     body: 'admin'
+    //   }
+    // })
+    // .then((response) => {
+    //   console.log(response);
+    //   setIsAdmin(response.data); //edit this in accordance with the response.
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // })
+    setIsAdmin(true);
 
   }, isAdmin);
 
@@ -36,10 +41,25 @@ function EventCard({ image }) {
 
 
   const handleEdit = (event) => {
+    event.preventDefault();
     console.log('edit');
+
   }
   const handleDelete = (event) => {
-    console.log('delete');
+    event.preventDefault();
+    axios({
+      method: 'DELETE',
+      url: '/api/events',
+      params: {
+        body: 1 //id of the event to delete.
+      }
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   return (

@@ -1,5 +1,5 @@
 import db from "./db";
-import { postEvent, getEventsGroup } from "./db/model";
+import { postEvent, getEventsGroup, getAdmin, deleteEvent } from "./db/model";
 
 export default function handler(req, res) {
   if (req.method === "POST") {
@@ -36,6 +36,15 @@ export default function handler(req, res) {
       .queryAsync(query)
       .then((results) => res.status(200).send(results))
       .catch((err) => res.status(404).send(err));
+  } else if (req.method === "DELETE") {
+    return db
+    .queryAsync(deleteEvent, req.query.body)
+    .then(() => {
+      res.status(200).send("Deleted!");
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
   } else {
     res.sendStatus(404);
   }
