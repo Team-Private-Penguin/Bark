@@ -9,18 +9,19 @@ const defaultPhoto =
 const defaultPhoto1 =
   "https://images.unsplash.com/photo-1598875706250-21faaf804361?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OXx8fGVufDB8fHx8&w=1000&q=80";
 
-function EventCard({ image }) {
+function EventCard({ image, event }) {
   image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
+  const { name, description, date } = event;
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
         <Card radius="10px" shadow="sm" p="sm" onClick={() => setOpened(true)}>
           <Card.Section className="p-2">
             <Group>
-              <Text className=""> Event Name TEMP</Text>
+              <Text className="">{name}</Text>
               <Text color="var(--light-blue)" align="left" size="sm">
-                Date and Time TEMP
+                {date}
               </Text>
             </Group>
             <Text color="var(--black)" align="left">

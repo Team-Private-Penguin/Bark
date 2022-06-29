@@ -38,6 +38,7 @@ module.exports = {
   getUserEvents: `SELECT *
     FROM barkschema.users_events
     JOIN barkschema.events USING (event_id)
+    JOIN barkschema.groups USING (group_id)
     WHERE user_id = $1
   `,
 };
