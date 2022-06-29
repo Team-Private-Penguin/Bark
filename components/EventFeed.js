@@ -48,7 +48,7 @@ function EventFeed({ userFeed }) {
   }, []);
 
   return (
-    <Stack className="h-[74vh] overflow-auto">
+    <Stack className="h-[84vh] overflow-auto">
       {currentEvents.map((event, index) => {
         return (
           <EventCard

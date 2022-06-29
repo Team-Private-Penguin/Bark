@@ -100,6 +100,14 @@ h2 {
   transform: rotate(0.1turn);
 }
 
+.fa-paw-icons {
+  height: 25px;
+  width: 25px;
+  filter: invert(0);
+  transform: rotate(0turn);
+  color: var(--blue);
+}
+
 .section-title {
   text-transform: uppercase;
   font-weight: 600;
@@ -141,6 +149,7 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .user-header {
@@ -184,9 +193,10 @@ h2 {
 }
 
 .dog-prop {
-  /* text-transform: uppercase; */
+  text-transform: uppercase;
   font-size: 9px;
   text-align: start;
+  letter-spacing: 2px;
 }
 
 .prop-list {
@@ -251,3 +261,5 @@ h2 {
   width: 20px;
   color: var(--queen-blue);
 }
+
+
