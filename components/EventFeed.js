@@ -45,7 +45,7 @@ function EventFeed({ userFeed }) {
       getGroupEvents();
       getUserRsvps();
     }
-  }, []);
+  }, [user_id]);
 
   return (
     <Stack className="h-[84vh] overflow-auto">

@@ -8,6 +8,12 @@ import {
   updateEvent,
 } from "./db/model";
 
+const getGroupEvents = `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id
+FROM barkschema.events e
+JOIN barkschema.groups g USING (group_id)
+WHERE group_id = $1
+`;
+
 export default function handler(req, res) {
   if (req.method === "POST") {
     let { name, description, address, group_id, date, prospective } = req.body;
@@ -36,7 +42,7 @@ export default function handler(req, res) {
   } else if (req.method === "GET") {
     let { group_id } = req.query;
     const query = {
-      text: getEventsGroup,
+      text: getGroupEvents,
       values: [group_id],
     };
     return db

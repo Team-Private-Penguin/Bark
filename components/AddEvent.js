@@ -9,6 +9,7 @@ import {
   Select,
   Textarea,
   TextInput,
+  Input,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import Link from "next/link";
@@ -49,6 +50,7 @@ function AddEvent() {
       prospective: values.prospective,
     };
     axios.post("/api/events", submission).then(() => {
+      å;
       setOpened(false);
     });
   };
@@ -110,6 +112,7 @@ function AddEvent() {
             required
             {...form.getInputProps("date")}
           />
+
           <Checkbox
             label="Prospective?"
             {...form.getInputProps("prospective")}

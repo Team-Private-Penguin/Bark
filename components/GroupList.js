@@ -13,7 +13,7 @@ function GroupList() {
       console.log("groups list", data.data[0].rows);
       setUserGroups(data.data[0].rows);
     });
-  }, []);
+  }, [user_id]);
 
   return (
     <Stack className="h-[35vh] overflow-auto">
