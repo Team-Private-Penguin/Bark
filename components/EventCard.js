@@ -4,6 +4,7 @@ import { Modal, Card, Text, Group } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { createStyles, Button } from "@mantine/core";
+import eventId from "./EventFeed";
 const axios = require("axios").default;
 
 const defaultPhoto =
@@ -23,24 +24,23 @@ function EventCard({ image, event }) {
     group_name,
     admin_id,
   } = event;
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   useEffect(() => {
-    // axios({
-    //   method: 'get',
-    //   url:  '/api/events',
-    //   params: {
-    //     body: 'admin'
-    //   }
-    // })
-    // .then((response) => {
-    //   console.log(response);
-    //   setIsAdmin(response.data); //edit this in accordance with the response.
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // })
-    setIsAdmin(false);
+    axios({
+      method: 'get',
+      url:  '/api/events',
+      params: {
+        body: 'admin'
+      }
+    })
+    .then((response) => {
+      console.log(response);
+      setIsAdmin(response.data); //edit this in accordance with the response.
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }, [isAdmin]);
 
   const handleEdit = (event) => {
@@ -62,19 +62,19 @@ function EventCard({ image, event }) {
 
   const handleDelete = (event) => {
     event.preventDefault();
-    // axios({
-    //   method: "DELETE",
-    //   url: "/api/events",
-    //   params: {
-    //     body: 1, //id of the event to delete.
-    //   },
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios({
+      method: "DELETE",
+      url: "/api/events",
+      params: {
+        body: eventId, //id of the event to delete.
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

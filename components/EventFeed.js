@@ -23,6 +23,7 @@ function EventFeed({ userFeed }) {
     axios
       .get(`/api/events?group_id=${id}`)
       .then((data) => {
+        console.log('SUPER TEST', data);
         setCurrentEvents(data.data[0].rows);
       })
       .catch((err) => console.log(err));
@@ -39,7 +40,7 @@ function EventFeed({ userFeed }) {
   return (
     <Stack className="h-[74vh] overflow-auto">
       {currentEvents.map((event, index) => {
-        return <EventCard key={index} image={true} event={event} />;
+        return <EventCard key={index} image={true} event={event} eventId={index}/>;
       })}
     </Stack>
   );
