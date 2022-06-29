@@ -5,8 +5,9 @@ import EventFeed from "../components/EventFeed";
 import AddEvent from "../components/AddEvent";
 import { Button, Group, Stack } from "@mantine/core";
 import GroupsComp from "../components/AddGroup";
-import UserInfo from "../components/UserInfo";
+import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
+import AddUser from "../components/Users/AddUser";
 import axios from "axios";
 
 const Groups = () => {
@@ -15,6 +16,7 @@ const Groups = () => {
     query: { id },
   } = useRouter();
   const [currentGroups, setCurrentGroups] = useState([]);
+
   function joinGroup() {
     let values = { user_id: TempUserId, group_id: id };
     axios
@@ -34,8 +36,9 @@ const Groups = () => {
       <Group className="group">
         <Stack className="hidden lg:flex" style={{ width: "20%" }}>
           <div className="border h-[28vh] space shadows ">
-            <h2>🐶 User Info</h2>
+            <h2 className="section-title">🐶 User Info</h2>
             <UserInfo />
+            <AddUser />
           </div>
           <div className="border h-[54vh] space shadows cursor-pointer homeBox">
             <h2>🐶 Groups</h2>

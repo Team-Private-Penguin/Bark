@@ -32,8 +32,8 @@ const ExploreGroups = () => {
         title="Find New Groups!"
       >
         {allGroups.map((group, index) => (
-          <Link href={`/group?id=${group.group_id}`} passHref>
-            <Group key={index}>
+          <Link key={index} href={`/group?id=${group.group_id}`} passHref>
+            <Group>
               {" "}
               {group.name} {group.description}{" "}
             </Group>

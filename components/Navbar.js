@@ -10,7 +10,7 @@ function Navbar() {
       <Link href="/" passHref>
         <span className="navbar-header">
           <FontAwesomeIcon icon={faPaw} className="fa-paw" />
-          <h1 className="navbar-title">Bark</h1>
+          <h1 className="navbar-title">BARK</h1>
         </span>
       </Link>
     </nav>
