@@ -11,7 +11,7 @@ import GroupList from "../components/GroupList";
 import ExploreGroups from "../components/ExploreGroups";
 import EventFeed from "../components/EventFeed";
 import User from "../components/Users/User";
-import { useUser } from "@auth0/nextjs-auth0";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 const Home: NextPage = () => {
   const { user } = useUser();
@@ -63,3 +63,5 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps = withPageAuthRequired();
