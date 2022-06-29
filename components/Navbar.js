@@ -61,7 +61,7 @@ function Navbar({setUpdateFriends}) {
           }
           position="bottom"
           withCloseButton
-          width={260}
+          width={270}
           title='Friend Requests'
         >
           <Requests userId={userId} setUpdateList={setUpdateList} requests={requests} setUpdateFriends={setUpdateFriends}/>
