@@ -35,7 +35,6 @@ module.exports = {
     WHERE user_id = $1
     `,
 
-
   getAdmin: `SELECT admin_id FROM barkschema.Groups`,
 
   deleteEvent: `DELETE FROM barkschema.Events
@@ -67,4 +66,13 @@ module.exports = {
   ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
   `,
   getUser: `SELECT * FROM barkschema.Users WHERE user_id = $1`,
+  editUser: `UPDATE barkschema.Users
+  SET zipcode = $2,
+  size = $3,
+  energy = $4,
+  f_people = $5,
+  f_dogs = $6,
+  photo = $7,
+  name = $8
+  WHERE user_id = $1`,
 };

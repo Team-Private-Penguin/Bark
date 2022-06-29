@@ -7,7 +7,7 @@ import { useUser } from "@auth0/nextjs-auth0";
 import Dropzone from "./Dropzone.tsx";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw, faUserPen } from "@fortawesome/free-solid-svg-icons";
+import { faUserPen } from "@fortawesome/free-solid-svg-icons";
 
 function EditUser() {
   const [opened, setOpened] = useState(false);
@@ -41,7 +41,7 @@ function EditUser() {
       zipcode: values.zipcode,
     };
     axios
-      .post("/api/users/users", submission)
+      .put("/api/users/users", submission)
       .then(() => {
         console.log("modified Postgres entry");
       })
@@ -117,7 +117,7 @@ function EditUser() {
 
           <Group position="center" mt="md">
             <Button color="dark" variant="outline" type="submit">
-              Submit
+              Resubmit Information
             </Button>
           </Group>
         </form>

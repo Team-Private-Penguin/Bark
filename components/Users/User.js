@@ -24,10 +24,11 @@ function User() {
     user?.sub.split("google-oauth2|")[1] || user?.sub.split("auth0|")[1];
 
   function getUserData() {
-    axios
-      .get(`api/users/users?user_id=${userId}`)
-      .then((result) => setUserProfile(result.data[0], "result"))
-      .catch((err) => console.error(err));
+    axios.get(`api/users/users?user_id=${userId}`).then((result) => {
+      setUserProfile(result.data[0], "result");
+      console.log(result, "full result");
+      console.log(result.data, "data result");
+    });
   }
 
   useEffect(() => {
