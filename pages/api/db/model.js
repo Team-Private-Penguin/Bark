@@ -77,7 +77,7 @@ module.exports = {
   `,
   getUser: `SELECT * FROM barkschema.Users WHERE user_id = $1`,
 
-  getUserGroupsEvents: `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id, e.event_id
+  getUserGroupsEvents: `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id, e.event_id, g.group_id
     FROM barkschema.users_groups ug
     JOIN barkschema.groups g USING (group_id)
     JOIN barkschema.events e USING (group_id)

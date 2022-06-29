@@ -19,7 +19,7 @@ const getUserRsvps = `SELECT *
   WHERE user_id = $1
 `;
 
-const deleteUserRsvp = `DELETE FROM barkschema.users_events WHERE user_id = $1`;
+const deleteUserRsvp = `DELETE FROM barkschema.users_events WHERE user_id = $1 AND event_id = $2`;
 
 export default function handler(req, res) {
   if (req.method === "POST") {
@@ -62,10 +62,10 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "DELETE") {
-    let { user_id } = req.body;
+    let { user_id, event_id } = req.body;
     const query = {
       text: deleteUserRsvp,
-      values: [user_id],
+      values: [user_id, event_id],
     };
     return db
       .queryAsync(query)
