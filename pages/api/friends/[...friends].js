@@ -2,7 +2,6 @@ import db from "../db";
 
 export default async function handler(req, res) {
   const [user] = req.query.friends;
-  console.log(user)
   if (req.method === "GET") {
     await db
       .query(
@@ -17,7 +16,7 @@ export default async function handler(req, res) {
       )
       .then((result) => res.status(200).send(result.rows))
       .catch((err) => {
-        console.log(err)
+        console.log(err, 'friend get err')
         res.status(400).end();
       });
   }

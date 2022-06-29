@@ -9,22 +9,29 @@ import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
 import AddUser from "../components/Users/AddUser";
 import axios from "axios";
+import Friends from "../components/Friends/Friends";
+import { useUser } from "@auth0/nextjs-auth0";
 
 const Groups = () => {
-  const TempUserId = 1;
+  const { user } = useUser();
+  let userId = user?.sub.split("google-oauth2|")[1];
+  if (!userId) {
+    userId = user?.sub.split("auth0|")[1];
+  }
+  // const TempUserId = 1;
   const {
     query: { id },
   } = useRouter();
   const [currentGroups, setCurrentGroups] = useState([]);
 
   function joinGroup() {
-    let values = { user_id: TempUserId, group_id: id };
+    let values = { user_id: userId, group_id: id };
     axios
       .post("/api/usergroup", values)
       .then(() => {
-        let values = { user_id: TempUserId };
+        let values = { user_id: userId };
         return axios
-          .get(`/api/usergroup?user_id=${TempUserId}`)
+          .get(`/api/usergroup?user_id=${userId}`)
           .then((data) => setCurrentGroups(data.data[0].rows));
       })
       .catch((err) => console.log(err));
@@ -73,9 +80,10 @@ const Groups = () => {
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
-          <div className="border h-[84vh] space shadows cursor-pointer">
+          <Stack className="border h-[84vh] space shadows gap-0">
             <h2>🐶 Group Members</h2>
-          </div>
+            <Friends groupId={id} listType={'groups'}/>
+          </Stack>
         </Stack>
       </Group>
     </main>
