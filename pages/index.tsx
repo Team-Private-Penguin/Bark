@@ -52,7 +52,7 @@ const Home: NextPage = () => {
               <Friends updateFriends={updateFriends} listType={"friends"} />
             </Stack>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
-              <Link href="/map" passHref>
+              <Link href="/map_page" passHref>
                 <h2 className="section-title">🐶 Map</h2>
               </Link>
             </div>
