@@ -15,10 +15,11 @@ import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 const Home: NextPage = () => {
   const { user } = useUser();
+  const [updateFriends, setUpdateFriends] = useState(false)
   return (
     <>
       <main className="min-h-screen w-screen ">
-        <Navbar />
+        <Navbar setUpdateFriends={setUpdateFriends}/>
         <Group className="group">
           <Stack justify="flex-start" style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
@@ -28,7 +29,7 @@ const Home: NextPage = () => {
                 <div className="centered">Please add your pet above!</div>
               )}
             </div>
-            <div className="border h-[60vh] space shadows cursor-pointer homeBox">
+            <div className="border h-[60vh] space shadows homeBox">
               <h2>🐶 Groups</h2>
               <Stack>
                 <ExploreGroups />
@@ -48,7 +49,7 @@ const Home: NextPage = () => {
           <Stack style={{ width: "20%" }}>
             <Stack className="border h-[28vh] space shadows homeBox gap-0">
               <h2>🐶 Friends</h2>
-              <Friends listType={"friends"} />
+              <Friends updateFriends={updateFriends} listType={"friends"} />
             </Stack>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <Link href="/map" passHref>

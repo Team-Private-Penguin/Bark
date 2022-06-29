@@ -1,21 +1,26 @@
 import React from "react";
-import { Group, Text, Card } from "@mantine/core";
+import { Group, Text, Card, Avatar } from "@mantine/core";
 
-function Comment() {
+function Comment({ commentObj }) {
+  const { comment, date, name, photo } = commentObj;
+  const timeStamp = new Date(date);
   return (
     <Card className="border rounded-xl">
       <Card.Section className="bg-main" p=".5rem">
         <Group>
-          <div>UserIcon</div>
+          <Avatar src={photo} radius="xl" component="span" size={30} />
           <Text className="" color="var(--black)" align="left">
-            UserName
+            {name}
           </Text>
           <Text className="" color="var(--black)" align="left">
-            Date and Time
+            {timeStamp.toLocaleString([], {
+              dateStyle: "short",
+              timeStyle: "short",
+            })}
           </Text>
         </Group>
       </Card.Section>
-      <Card.Section p=".5rem">Comment</Card.Section>
+      <Card.Section p=".5rem">{comment}</Card.Section>
     </Card>
   );
 }

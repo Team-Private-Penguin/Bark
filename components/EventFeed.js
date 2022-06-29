@@ -12,6 +12,15 @@ function EventFeed({ userFeed }) {
   const { user } = useUser();
   const user_id = user?.sub.split("google-oauth2|")[1];
   const [currentEvents, setCurrentEvents] = useState([{}]);
+  const [userRsvps, setUserRsvps] = useState([{}]);
+
+  function getUserRsvps() {
+    axios
+      .get(`/api/event/rsvp?user_id=${user_id}`)
+      .then((data) => setUserRsvps(data.data[0].rows))
+      .catch((err) => console.log(err));
+  }
+
   function getUserEvents() {
     axios
       .get(`/api/userevents?user_id=${user_id}`)
@@ -31,15 +40,31 @@ function EventFeed({ userFeed }) {
   useEffect(() => {
     if (userFeed) {
       getUserEvents();
+      getUserRsvps();
     } else {
       getGroupEvents();
+      getUserRsvps();
     }
   }, []);
 
   return (
-    <Stack className="h-[74vh] overflow-auto">
+    <Stack className="h-[84vh] overflow-auto">
       {currentEvents.map((event, index) => {
-        return <EventCard key={index} image={true} event={event} eventId1={index}/>;
+        return (
+          <EventCard
+            rsvp={
+              !!userRsvps.filter((rsvp) => {
+                return rsvp.event_id === event.event_id;
+              }).length
+            }
+            getUserRsvps={getUserRsvps}
+            key={index}
+            image={true}
+            event={event}
+            user_id={user_id}
+            event_id={event.event_id}
+          />
+        );
       })}
     </Stack>
   );

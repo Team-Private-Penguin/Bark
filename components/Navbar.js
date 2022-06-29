@@ -4,10 +4,12 @@ import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { faPaw, faBell } from "@fortawesome/free-solid-svg-icons";
 import AddUser from "./Users/AddUser";
-
-function Navbar() {
+import { ActionIcon, Popover } from "@mantine/core";
+import Requests from './Friends/Requests'
+import Input from './Autocomplete'
+function Navbar({setUpdateFriends}) {
   const { user } = useUser();
   const [userProfile, setUserProfile] = useState({
     energy: "",
@@ -19,6 +21,9 @@ function Navbar() {
     user_id: "",
     zipcode: "",
   });
+  const [opened, setOpened] = useState(false);
+  const [requests, setRequests] = useState([]);
+  const [updateList, setUpdateList] = useState(0);
 
   const userId =
     user?.sub.split("google-oauth2|")[1] || user?.sub.split("auth0|")[1];
@@ -32,8 +37,10 @@ function Navbar() {
 
   useEffect(() => {
     getUserData();
-  }, []);
-
+    if (userId) {
+      axios.get(`/api/requests/${userId}`).then((res) => setRequests(res.data))
+    }
+  }, [userId, updateList]);
   return (
     <nav className="navbar">
       <Link href="/" passHref>
@@ -43,7 +50,23 @@ function Navbar() {
         </span>
       </Link>
       <section className="add-user-section">
-        <AddUser />
+      <Input userId={userId}/>
+        <Popover
+          opened={opened}
+          onClose={() => setOpened(false)}
+          target={
+            <ActionIcon onClick={() => setOpened((o) => !o)}>
+              <FontAwesomeIcon icon={faBell} className="w-[75%]" />
+            </ActionIcon>
+          }
+          position="bottom"
+          withCloseButton
+          width={260}
+          title='Friend Requests'
+        >
+          <Requests userId={userId} setUpdateList={setUpdateList} requests={requests} setUpdateFriends={setUpdateFriends}/>
+        </Popover>
+        {!userProfile && <AddUser />}
         {userProfile && (
           <>
             <span className="nav-name">{userProfile.name}</span>

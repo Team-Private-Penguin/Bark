@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import EventDetail from "./EventDetail";
 import { Modal, Card, Text, Group } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { createStyles, Button } from "@mantine/core";
-// import eventId from "./EventFeed";
+//import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { Switch, Button } from "@mantine/core";
 const axios = require("axios").default;
 
 const defaultPhoto =
@@ -12,7 +11,7 @@ const defaultPhoto =
 const defaultPhoto1 =
   "https://images.unsplash.com/photo-1598875706250-21faaf804361?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OXx8fGVufDB8fHx8&w=1000&q=80";
 
-function EventCard({ image, event, eventId1 }) {
+function EventCard({ image, event, rsvp, getUserRsvps, user_id, eventId1 }) {
   image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
   const {
@@ -23,18 +22,39 @@ function EventCard({ image, event, eventId1 }) {
     description,
     group_name,
     admin_id,
+    event_id,
   } = event;
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const timeStamp = new Date(date);
+  const [groupId, setGroupId] = useState(0);
+
+  function handleRsvp() {
+    if (rsvp) {
+      axios({
+        method: "DELETE",
+        url: "/api/event/rsvp",
+        data: {
+          user_id,
+        },
+      })
+        .then(() => getUserRsvps())
+        .catch((err) => console.log(err));
+    } else {
+      const submission = { user_id, event_id };
+      axios
+        .post(`/api/event/rsvp`, submission)
+        .then(() => getUserRsvps())
+        .catch((err) => console.log(err));
+    }
+  }
 
   useEffect(() => {
     axios({
       method: 'get',
       url:  '/api/events',
-      headers: {
-        key: "getEvent"
-      },
       params: {
-        body: eventId1
+        type: "getGroupId",
+        event_id: 1
       }
     })
     .then((response) => {
@@ -42,25 +62,25 @@ function EventCard({ image, event, eventId1 }) {
     })
     .catch((err) => {
       console.log('didnt get id correctly');
-      console.log(err);
     })
-  }, [isAdmin]);
+  }, [isAdmin]);  //gets group id, use group id to get admin id, then compare with user id...
 
   const handleEdit = (event) => {
     event.preventDefault();
-    // axios({
-    //   method: "PUT",
-    //   url: "/api/events",
-    //   params: {
-    //     everything: "",
-    //   },
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios({
+      method: "PUT",
+      url: "/api/admin",
+      params: {
+        body: "asdfasdf",
+        event_id: eventId1
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleDelete = (event) => {
@@ -83,12 +103,14 @@ function EventCard({ image, event, eventId1 }) {
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
-        <Card radius="10px" shadow="sm" p="sm" onClick={() => setOpened(true)}>
-          <Card.Section className="p-2">
+        <Card radius="10px" shadow="sm" p="sm">
+          <Card.Section className="p-2" onClick={() => setOpened(true)}>
             <Group>
               <Text className="">{name}</Text>
               <Text color="var(--light-blue)" align="left" size="sm">
-                {date}
+                {timeStamp.toLocaleString([], {
+                  dateStyle: "short",
+                })}
               </Text>
             </Group>
             <Text color="var(--black)" align="left">
@@ -109,12 +131,20 @@ function EventCard({ image, event, eventId1 }) {
             )}
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
-            <img className="rounded-[10px] max-h-[400px]" src={image} />
+            <img
+              className="rounded-[10px] max-h-[400px]"
+              src={image}
+              onClick={() => setOpened(true)}
+            />
           </Card.Section>
           <Card.Section className="p-2">
             <Group className="group">
               <Text className="">{group_name}</Text>
-              <FontAwesomeIcon icon={faPaw} />
+              <Switch
+                checked={rsvp}
+                onChange={handleRsvp}
+                label="RSVP"
+              ></Switch>
             </Group>
           </Card.Section>
         </Card>
@@ -129,7 +159,13 @@ function EventCard({ image, event, eventId1 }) {
         size="65%"
         overflow="outside"
       >
-        <EventDetail image={image} event={event} />
+        <EventDetail
+          image={image}
+          event={event}
+          rsvp={rsvp}
+          user_id={user_id}
+          handleRsvp={handleRsvp}
+        />
       </Modal>
     </div>
   );

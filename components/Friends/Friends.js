@@ -2,13 +2,14 @@ import Chat from "./Chat.js";
 import FriendList from "./FriendList";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ScrollArea } from "@mantine/core";
+import { ScrollArea, Modal } from "@mantine/core";
 import { useUser } from "@auth0/nextjs-auth0";
-
-function Friends({groupId, listType}) {
+import UserModal from './UserModal'
+function Friends({groupId, listType, updateFriends}) {
   const [opened, setOpened] = useState(false);
   const [friendList, setFriendList] = useState([]);
   const [clicked, setClicked] = useState({});
+  const [modal, setModal] = useState(false);
   const { user } = useUser();
 
   const handleChat = (friend) => {
@@ -35,16 +36,22 @@ function Friends({groupId, listType}) {
       })
       .catch((err) => console.log(err));
     }
-  }, [listType, groupId]);
+  }, [listType, groupId, userId, updateFriends]);
 
   return (
     <>
       {friendList.length > 0 ? (
-        <FriendList friendList={friendList} handleChat={handleChat} setClicked={setClicked} />
+        <FriendList friendList={friendList} handleChat={handleChat} setClicked={setClicked} setModal={setModal}/>
       ) : (
         <span>Join groups to find friends!</span>
       )}
       <Chat opened={opened} setOpened={setOpened} clicked={clicked} userId={userId}/>
+      <Modal opened={modal}
+        onClose={() => setModal(false)}
+        size='xl'
+        >
+          <UserModal userId={userId} clicked={clicked}/>
+      </Modal>
     </>
   );
 }
