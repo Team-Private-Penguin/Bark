@@ -37,7 +37,6 @@ const Groups = () => {
         <Stack className="hidden lg:flex" style={{ width: "20%" }}>
           <div className="border h-[28vh] space shadows ">
             <h2 className="section-title">🐶 User Info</h2>
-            <UserInfo />
             <AddUser />
           </div>
           <div className="border h-[54vh] space shadows cursor-pointer homeBox">

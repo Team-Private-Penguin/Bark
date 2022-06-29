@@ -11,6 +11,7 @@ import AddGroup from "../components/AddGroup";
 import GroupList from "../components/GroupList";
 import ExploreGroups from "../components/ExploreGroups";
 import EventFeed from "../components/EventFeed";
+import User from "../components/Users/User";
 
 const Home: NextPage = () => {
   return (
@@ -21,7 +22,8 @@ const Home: NextPage = () => {
           <Stack justify="flex-start" style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
               <h2 className="section-title">🐶 User Info</h2>
-              <UserInfo />
+              <h1>Please log in!</h1>
+              <User />
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <h2>🐶 Groups</h2>

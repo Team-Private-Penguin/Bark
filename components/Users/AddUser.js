@@ -118,9 +118,7 @@ function AddUser() {
       </Modal>
 
       <Group position="center">
-        <Button variant="outline" onClick={() => setOpened(true)}>
-          Create a pet account
-        </Button>
+        <Button onClick={() => setOpened(true)}>ADD YOUR PET</Button>
       </Group>
     </div>
   );
