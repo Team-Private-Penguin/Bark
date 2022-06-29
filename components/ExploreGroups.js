@@ -23,7 +23,9 @@ const ExploreGroups = () => {
   return (
     <div>
       <Group position="center">
-        <Button onClick={() => setOpened(true)}>Find new groups!</Button>
+        <Button onClick={() => setOpened(true)} className="bg-slate-800">
+          Find new groups!
+        </Button>
       </Group>
       <Modal
         opened={opened}
