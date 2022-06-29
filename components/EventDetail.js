@@ -1,7 +1,16 @@
 import AddComment from "./AddComment";
 import CommentFeed from "./CommentFeed";
 import React, { useEffect, useState } from "react";
-import { Card, Image, Text, Button, Stack, Group, Avatar } from "@mantine/core";
+import {
+  Card,
+  Image,
+  Text,
+  Button,
+  Stack,
+  Group,
+  Avatar,
+  Badge,
+} from "@mantine/core";
 import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
 
@@ -26,7 +35,7 @@ function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
       .get(`/api/event/comment?id=${event_id}`)
       .then((data) => setComments(data.data[0].rows))
       .catch((err) => console.log(err));
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     axios
@@ -60,6 +69,9 @@ function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
         <Card.Section className="bg-main p-2">
           <h3 className="text-left font-bold">{group_name}</h3>
         </Card.Section>
+        <Stack>
+          {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
+        </Stack>
         <Card.Section className="flex items-center justify-center space-x-4">
           <Stack className="w-[35%] flex-column">
             <h3 className="text-center font-bold color-accent">{name}</h3>
