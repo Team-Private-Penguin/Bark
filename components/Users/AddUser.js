@@ -23,7 +23,10 @@ function AddUser() {
     },
   });
   const submitUser = (values) => {
-    const userId = user.sub.split("google-oauth2|")[1];
+    let userId = user.sub.split("google-oauth2|")[1];
+    if (!userId) {
+      userId = user.sub.split("auth0|")[1];
+    }
     const submission = {
       user_id: userId,
       name: values.name,
@@ -118,9 +121,7 @@ function AddUser() {
       </Modal>
 
       <Group position="center">
-        <Button variant="outline" onClick={() => setOpened(true)}>
-          Create a pet account
-        </Button>
+        <Button onClick={() => setOpened(true)}>ADD YOUR PET</Button>
       </Group>
     </div>
   );
