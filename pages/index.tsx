@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { Group, Stack } from "@mantine/core";
 import Link from "next/link";
-import UserInfo from "../components/UserInfo";
+import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
-import Friends from '../components/Friends/Friends'
+import Friends from "../components/Friends/Friends";
 import AddGroup from "../components/AddGroup";
 import GroupList from "../components/GroupList";
 import ExploreGroups from "../components/ExploreGroups";
+import EventFeed from "../components/EventFeed";
 
 const Home: NextPage = () => {
   return (
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
         <Group className="group">
           <Stack justify="flex-start" style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
-              <h2>🐶 User Info</h2>
+              <h2 className="section-title">🐶 User Info</h2>
               <UserInfo />
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
@@ -34,18 +35,19 @@ const Home: NextPage = () => {
 
           <Stack style={{ flexGrow: 1 }}>
             <div className="border h-[90vh] shadows homeBox">
-              <h2>🐶 Events</h2>
+              <h2 className="sticky top-0 z-50">🐶 Events</h2>
+              <EventFeed />
             </div>
           </Stack>
 
           <Stack style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
               <h2>🐶 Friends</h2>
-              <Friends/>
+              <Friends />
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <Link href="/map" passHref>
-                <h2>🐶 Map</h2>
+                <h2 className="section-title">🐶 Map</h2>
               </Link>
             </div>
           </Stack>

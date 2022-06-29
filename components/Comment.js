@@ -6,7 +6,7 @@ function Comment() {
     <Card className="border rounded-xl">
       <Card.Section className="bg-main" p=".5rem">
         <Group>
-          <icon>UserIcon</icon>
+          <div>UserIcon</div>
           <Text className="" color="var(--black)" align="left">
             UserName
           </Text>
