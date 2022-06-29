@@ -34,46 +34,44 @@ function User() {
   useEffect(() => {
     getUserData();
   }, [userId]);
-  // return (
-  //   <section className="user-container">
-  //     <h1 className="dog-name">
-  //       <span className="dog-name-text">{userProfile.name}</span>
-  //       <span>
-  //         <EditUser />
-  //       </span>
-  //     </h1>
-  //     {userProfile.photo && (
-  //       <img
-  //         src={userProfile.photo}
-  //         alt="puppy-photo"
-  //         className="puppy-photo"
-  //       />
-  //     )}
-  //     <Spoiler maxHeight={0} showLabel="Show more" hideLabel="Hide">
-  //       <ul className="prop-list">
-  //         <li className="dog-prop">
-  //           <FontAwesomeIcon icon={faPaw} className="fa-paw inline-paw" />
-  //           Size: {userProfile.size}
-  //         </li>
-  //         <li className="dog-prop">
-  //           <FontAwesomeIcon icon={faPaw} className="fa-paw inline-paw" />
-  //           Energy Level: {userProfile.energy}
-  //         </li>
-  //         <li className="dog-prop">
-  //           <FontAwesomeIcon icon={faPaw} className="fa-paw inline-paw" />
-  //           Friendly to people: {userProfile.f_people}
-  //         </li>
-  //         <li className="dog-prop">
-  //           <FontAwesomeIcon icon={faPaw} className="fa-paw inline-paw" />
-  //           Friendly to dogs: {userProfile.f_dogs}
-  //         </li>
-  //       </ul>
-  //     </Spoiler>
-  //   </section>
-  // );
   return (
-    <p>asdf</p>
-  )
+    <section className="user-container">
+      <h1 className="dog-name">
+        <span className="dog-name-text">{userProfile.name}</span>
+        <span>
+          <EditUser />
+        </span>
+      </h1>
+      {userProfile.photo && (
+        <img
+          src={userProfile.photo}
+          alt="puppy-photo"
+          className="puppy-photo"
+        />
+      )}
+      <Spoiler maxHeight={0} showLabel="Show more" hideLabel="Hide">
+        <ul className="prop-list">
+          <li className="dog-prop">
+            <FontAwesomeIcon icon={faPaw} className="fa-paw inline-paw" />
+            Size: {userProfile.size}
+          </li>
+          <li className="dog-prop">
+            <FontAwesomeIcon icon={faPaw} className="fa-paw inline-paw" />
+            Energy Level: {userProfile.energy}
+          </li>
+          <li className="dog-prop">
+            <FontAwesomeIcon icon={faPaw} className="fa-paw inline-paw" />
+            Friendly to people: {userProfile.f_people}
+          </li>
+          <li className="dog-prop">
+            <FontAwesomeIcon icon={faPaw} className="fa-paw inline-paw" />
+            Friendly to dogs: {userProfile.f_dogs}
+          </li>
+        </ul>
+      </Spoiler>
+    </section>
+  );
+
 }
 
 export default User;
