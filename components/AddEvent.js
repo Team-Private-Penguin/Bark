@@ -9,6 +9,7 @@ import {
   Select,
   Textarea,
   TextInput,
+  Input,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import Link from "next/link";
@@ -110,6 +111,7 @@ function AddEvent() {
             required
             {...form.getInputProps("date")}
           />
+
           <Checkbox
             label="Prospective?"
             {...form.getInputProps("prospective")}

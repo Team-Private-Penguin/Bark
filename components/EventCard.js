@@ -108,6 +108,10 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
               <Text color="var(--light-blue)" align="left" size="sm">
                 {date}
               </Text>
+
+              {prospective ? (
+                <Text color="purple"> *PLANNING EVENT*</Text>
+              ) : null}
             </Group>
             <Text color="var(--black)" align="left">
               {address}

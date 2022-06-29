@@ -45,7 +45,8 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
       lat FLOAT8,
       lng FLOAT8,
       address VARCHAR,
-      prospective BOOLEAN
+      prospective BOOLEAN,
+      img_url VARCHAR
     )`)
   )
   .then(() =>
