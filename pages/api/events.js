@@ -46,8 +46,9 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "DELETE") {
+    console.log('TEST999', req.query.body);
     return db
-      .queryAsync(deleteEvent, req.query.body)
+      .queryAsync(deleteEvent, [req.query.body])
       .then(() => {
         res.status(200).send("Deleted!");
       })

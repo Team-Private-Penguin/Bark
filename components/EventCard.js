@@ -4,7 +4,7 @@ import { Modal, Card, Text, Group } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { createStyles, Button } from "@mantine/core";
-import eventId from "./EventFeed";
+// import eventId from "./EventFeed";
 const axios = require("axios").default;
 
 const defaultPhoto =
@@ -12,7 +12,7 @@ const defaultPhoto =
 const defaultPhoto1 =
   "https://images.unsplash.com/photo-1598875706250-21faaf804361?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OXx8fGVufDB8fHx8&w=1000&q=80";
 
-function EventCard({ image, event }) {
+function EventCard({ image, event, eventId1 }) {
   image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
   const {
@@ -66,7 +66,7 @@ function EventCard({ image, event }) {
       method: "DELETE",
       url: "/api/events",
       params: {
-        body: eventId, //id of the event to delete.
+        body: eventId1, //id of the event to delete.
       },
     })
       .then((response) => {
