@@ -42,7 +42,7 @@ function Friends({groupId, listType}) {
       {friendList.length > 0 ? (
         <FriendList friendList={friendList} handleChat={handleChat} setClicked={setClicked} />
       ) : (
-        <span>Add some friends</span>
+        <span>Join groups to find friends!</span>
       )}
       <Chat opened={opened} setOpened={setOpened} clicked={clicked} userId={userId}/>
     </>

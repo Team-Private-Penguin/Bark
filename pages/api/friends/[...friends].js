@@ -11,8 +11,8 @@ export default async function handler(req, res) {
         (select photo from barkschema.users where user_id = f.friend_id),
         (select user_id from barkschema.users where user_id = f.friend_id)
       FROM barkschema.friends f
-      WHERE user_id = ${user}
-      `
+      WHERE user_id = $1
+      `, [user]
       )
       .then((result) => res.status(200).send(result.rows))
       .catch((err) => {
