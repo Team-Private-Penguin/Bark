@@ -23,7 +23,6 @@ export default function handler(req, res) {
         res.status(500).send(err);
       });
   } else if (req.method === "GET") {
-    console.log(req.query);
     return db
       .queryAsync(getUser, [req.query.user_id])
       .then((result) => res.status(200).send(result[0].rows))

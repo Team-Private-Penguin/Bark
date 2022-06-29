@@ -35,7 +35,6 @@ module.exports = {
     WHERE user_id = $1
     `,
 
-
   getAdmin: `SELECT admin_id FROM barkschema.Groups`,
 
   deleteEvent: `DELETE FROM barkschema.Events
@@ -51,11 +50,12 @@ module.exports = {
   address = $7,
   prospective = $8 `,
   getUserEvents: `SELECT *
-      FROM barkschema.users_events
-      JOIN barkschema.events USING (event_id)
-      WHERE user_id = $1
+    FROM barkschema.users_events
+    JOIN barkschema.events USING (event_id)
+    JOIN barkschema.groups USING (group_id)
+    WHERE user_id = $1
     `,
-  postUser: `INSERT INTO barkschema.Users (
+  postUser: `INSERT INTO barkschema.users (
     user_id,
     zipcode,
     size,

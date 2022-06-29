@@ -76,13 +76,13 @@ const Groups = () => {
               </h2>
               <AddEvent />
             </div>
-            <EventFeed />
+            <EventFeed userFeed={false} />
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
           <Stack className="border h-[84vh] space shadows gap-0">
             <h2>🐶 Group Members</h2>
-            <Friends groupId={id} listType={'groups'}/>
+            <Friends groupId={id} listType={"groups"} />
           </Stack>
         </Stack>
       </Group>
