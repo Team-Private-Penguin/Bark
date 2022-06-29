@@ -4,7 +4,7 @@ import { useUser } from "@auth0/nextjs-auth0";
 import { Spoiler } from "@mantine/core";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw, faUserPen } from "@fortawesome/free-solid-svg-icons";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import EditUser from "./EditUser";
 
 function User() {
@@ -33,7 +33,7 @@ function User() {
 
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [userId]);
   return (
     <section className="user-container">
       <h1 className="dog-name">
