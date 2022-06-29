@@ -15,9 +15,14 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { stateData } from "./statedata.js";
 import { useForm } from "@mantine/form";
+import { useRouter } from "next/router";
+import { faBullseye } from "@fortawesome/free-solid-svg-icons";
 
 function AddEvent() {
   const [opened, setOpened] = useState(false);
+  const {
+    query: { id },
+  } = useRouter();
   const form = useForm({
     initialValues: {
       eventName: "",
@@ -34,7 +39,7 @@ function AddEvent() {
   });
   const submitEvent = (values) => {
     const submission = {
-      group_id: 1,
+      group_id: id,
       name: values.eventName,
       address: `${values.address_1}${
         values.address_2 ? values.address_2 : ""
@@ -43,7 +48,9 @@ function AddEvent() {
       description: values.description,
       prospective: values.prospective,
     };
-    axios.post("/api/events", submission);
+    axios.post("/api/events", submission).then(() => {
+      setOpened(false);
+    });
   };
   return (
     <div>

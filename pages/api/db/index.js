@@ -1,8 +1,9 @@
 const Promise = require("bluebird");
 const { Pool } = require("pg");
+const { FileWatcherEventKind } = require("typescript");
 
 const pool = new Pool({
-  user: process.env.PGUSERNAME || "postgres",
+  user: process.env.PGUSERNAME || "michaelzaki",
   host: "127.0.0.1",
   database: "bark",
   password: process.env.PGPASS || "password",
