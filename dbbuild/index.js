@@ -61,7 +61,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     comment VARCHAR,
     event_id BIGSERIAL,
     user_id VARCHAR,
-    date DATE
+    date TIMESTAMPTZ
     )
   `)
   )

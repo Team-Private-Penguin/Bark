@@ -3,6 +3,7 @@ import { Group, Text, Card, Avatar } from "@mantine/core";
 
 function Comment({ commentObj }) {
   const { comment, date, name, photo } = commentObj;
+  const timeStamp = new Date(date);
   return (
     <Card className="border rounded-xl">
       <Card.Section className="bg-main" p=".5rem">
@@ -12,7 +13,10 @@ function Comment({ commentObj }) {
             {name}
           </Text>
           <Text className="" color="var(--black)" align="left">
-            {date}
+            {timeStamp.toLocaleString([], {
+              dateStyle: "short",
+              timeStyle: "short",
+            })}
           </Text>
         </Group>
       </Card.Section>

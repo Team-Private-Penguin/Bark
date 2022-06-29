@@ -25,6 +25,7 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
     event_id,
   } = event;
   const [isAdmin, setIsAdmin] = useState(false);
+  const timeStamp = new Date(date);
 
   function handleRsvp() {
     if (rsvp) {
@@ -106,7 +107,9 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
             <Group>
               <Text className="">{name}</Text>
               <Text color="var(--light-blue)" align="left" size="sm">
-                {date}
+                {timeStamp.toLocaleString([], {
+                  dateStyle: "short",
+                })}
               </Text>
 
               {prospective ? (
