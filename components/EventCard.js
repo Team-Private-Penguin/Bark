@@ -18,7 +18,6 @@ function EventCard({ image }) {
   const [isAdmin, setIsAdmin] = useState(true);
 
   useEffect(() => { //get admin id of this group, if it matches id here, conditionally render the buttons
-
     axios({
       method: 'get',
       url:  '/api/events',
@@ -27,7 +26,8 @@ function EventCard({ image }) {
       }
     })
     .then((response) => {
-      setIsAdmin(response.data); //edit this later.
+      console.log(response);
+      setIsAdmin(response.data); //edit this in accordance with the response.
     })
 
   }, isAdmin);

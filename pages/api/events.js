@@ -21,7 +21,7 @@ export default function handler(req, res) {
 
     return db
     .queryAsync(getAdmin)
-    .then(() => res.status(200).send("OK"))
+    .then(() => res.status(200).send("OK")) //this need to change to send the admin id back.
     .catch((err) => {
       res.status(404).send(err);
     })
