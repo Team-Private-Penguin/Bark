@@ -32,7 +32,7 @@ function Navbar() {
 
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [userId, userProfile]);
 
   return (
     <nav className="navbar">
@@ -43,7 +43,7 @@ function Navbar() {
         </span>
       </Link>
       <section className="add-user-section">
-        <AddUser />
+        {!userProfile && <AddUser />}
         {userProfile && (
           <>
             <span className="nav-name">{userProfile.name}</span>
