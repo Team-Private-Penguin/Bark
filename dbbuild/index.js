@@ -71,7 +71,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() =>
     db.queryAsync(`
     CREATE TABLE barkschema.Friends (
-    friend_id BIGSERIAL,
+    friend_id VARCHAR,
     user_id VARCHAR
     )
   `)
@@ -102,7 +102,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     db.queryAsync(`
       CREATE TABLE barkschema.Messages (
       user_id VARCHAR,
-      friend_id INTEGER,
+      friend_id VARCHAR,
       text VARCHAR,
       time TIMESTAMPTZ,
       sent BOOLEAN
@@ -120,7 +120,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() =>
     db.queryAsync(`
     ALTER TABLE barkschema.Messages ADD CONSTRAINT Messages_friend_id_fkey FOREIGN KEY (friend_id)
-    REFERENCES barkschema.Friends(friend_id)
+    REFERENCES barkschema.Users(user_id)
   `)
   )
   .then(() =>
