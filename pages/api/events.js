@@ -15,7 +15,6 @@ export default function handler(req, res) {
       values: [name, description, address, group_id, date, prospective],
     };
     let values = [name, description, address, group_id, date, prospective];
-    console.log(query);
     return db
       .queryAsync(postEvent, values)
       .then(() => res.status(201).send("Ok"))
@@ -39,7 +38,6 @@ export default function handler(req, res) {
       text: getEventsGroup,
       values: [group_id],
     };
-    console.log(query);
     return db
       .queryAsync(query)
       .then((results) => res.status(200).send(results))

@@ -14,9 +14,16 @@ const defaultPhoto1 =
 function EventCard({ image, event }) {
   image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
-  const { name, description, date } = event;
+  const {
+    name,
+    address,
+    date,
+    prospective,
+    description,
+    group_name,
+    admin_id,
+  } = event;
   const [isAdmin, setIsAdmin] = useState(true);
-
   //get admin id of this group, if it matches id here, conditionally render the buttons
   useEffect(() => {
     // axios({
@@ -34,7 +41,7 @@ function EventCard({ image, event }) {
     //   console.log(err);
     // })
     setIsAdmin(true);
-  }, isAdmin);
+  }, [isAdmin]);
 
   const handleEdit = (event) => {
     event.preventDefault();
@@ -82,7 +89,7 @@ function EventCard({ image, event }) {
               </Text>
             </Group>
             <Text color="var(--black)" align="left">
-              Event Location(Short)
+              {address}
             </Text>
 
             {isAdmin ? (
@@ -103,7 +110,7 @@ function EventCard({ image, event }) {
           </Card.Section>
           <Card.Section className="p-2">
             <Group className="group">
-              <Text className="">Group Name TEMP</Text>
+              <Text className="">{group_name}</Text>
               <FontAwesomeIcon icon={faPaw} />
             </Group>
           </Card.Section>
@@ -119,7 +126,7 @@ function EventCard({ image, event }) {
         size="65%"
         overflow="outside"
       >
-        <EventDetail />
+        <EventDetail image={image} event={event} />
       </Modal>
     </div>
   );
