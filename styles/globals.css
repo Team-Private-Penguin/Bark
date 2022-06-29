@@ -124,6 +124,16 @@ h2 {
   height: 45px;
 }
 
+.puppy-photo {
+  border-radius: 5rem;
+  object-fit: cover;
+  width: 75px;
+  height: 75px;
+  align-self: center;
+  border: 2.5px solid var(--green-bud);
+  margin-bottom: 10px;
+}
+
 .user-container {
   display: flex;
   flex-direction: column;
@@ -151,4 +161,49 @@ h2 {
   align-self: center;
   margin-left: auto;
   margin-right: 20px;
+}
+
+.dog-name {
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  font-weight: 700;
+  align-self: center;
+}
+
+.dog-prop {
+  /* text-transform: uppercase; */
+  font-size: 9px;
+  text-align: start;
+}
+
+.prop-list {
+  color: rgb(59, 59, 59);
+  text-transform: uppercase;
+  align-self: center;
+}
+
+.inline-paw {
+  display: inline;
+  height: 10px;
+  width: 10px;
+  margin: 0 3px;
+}
+
+.centered {
+  margin: auto;
+  /* border: 3px solid green; */
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  text-transform: uppercase;
+  font-size: 12px;
+  transition: all 800ms ease-in-out;
+}
+
+.centered:hover {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--green-bud);
 }
