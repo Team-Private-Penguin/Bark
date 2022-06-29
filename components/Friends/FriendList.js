@@ -4,7 +4,7 @@ import { Group, Avatar, Stack, ScrollArea } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage, faUserCircle } from "@fortawesome/free-regular-svg-icons";
 
-function FriendList({ friendList, setClicked, handleChat }) {
+function FriendList({ friendList, setClicked, handleChat, setModal }) {
   const mappedFriends = friendList.map((friend, index) => {
     return (
       <Group key={index} className="border-b-2 pb-1 pt-50 mb-3">
@@ -30,7 +30,10 @@ function FriendList({ friendList, setClicked, handleChat }) {
           >
             <FontAwesomeIcon icon={faMessage} className="w-[55%] " />
           </Avatar>
-          <Avatar radius="xl" size={25} className="cursor-pointer shadow">
+          <Avatar radius="xl" size={25} className="cursor-pointer shadow" onClick={() => {
+              setClicked(friend)
+              setModal(true)
+            }}>
             <FontAwesomeIcon icon={faUserCircle} className="w-[55%] " />
           </Avatar>
         </Group>
