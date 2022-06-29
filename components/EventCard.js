@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from "react";
 import EventDetail from "./EventDetail";
-import { Modal, Card, Text, Group } from "@mantine/core";
+import {
+  Modal,
+  Card,
+  Text,
+  Group,
+  Switch,
+  Button,
+  Badge,
+  Stack,
+  Title,
+} from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { Switch, Button } from "@mantine/core";
 const axios = require("axios").default;
+import Link from "next/link";
 
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
@@ -23,6 +33,7 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
     group_name,
     admin_id,
     event_id,
+    group_id,
   } = event;
   const [isAdmin, setIsAdmin] = useState(false);
   const timeStamp = new Date(date);
@@ -34,6 +45,7 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
         url: "/api/event/rsvp",
         data: {
           user_id,
+          event_id,
         },
       })
         .then(() => getUserRsvps())
@@ -104,22 +116,19 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
       <div className="w-[550px]">
         <Card radius="10px" shadow="sm" p="sm">
           <Card.Section className="p-2" onClick={() => setOpened(true)}>
-            <Group>
-              <Text className="">{name}</Text>
-              <Text color="var(--light-blue)" align="left" size="sm">
+            <Stack>
+              {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
+            </Stack>
+            <Group position="apart">
+              <Title order={3} className="">
+                {name}
+              </Title>
+              <Title order={5}>
                 {timeStamp.toLocaleString([], {
                   dateStyle: "short",
                 })}
-              </Text>
-
-              {prospective ? (
-                <Text color="purple"> *PLANNING EVENT*</Text>
-              ) : null}
+              </Title>
             </Group>
-            <Text color="var(--black)" align="left">
-              {address}
-            </Text>
-
             {isAdmin ? (
               <Group grow spacing={0}>
                 <Button onClick={handleEdit} variant="default">
@@ -129,9 +138,7 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
                   DELETE
                 </Button>
               </Group>
-            ) : (
-              <p>need admin privileges to change</p>
-            )}
+            ) : null}
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
             <img
@@ -142,11 +149,13 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
           </Card.Section>
           <Card.Section className="p-2">
             <Group className="group">
-              <Text className="">{group_name}</Text>
+              <Link href={`/group?id=${group_id}`} passHref>
+                <Badge className="">{group_name}</Badge>
+              </Link>
               <Switch
                 checked={rsvp}
                 onChange={handleRsvp}
-                label="RSVP"
+                label={prospective ? "Interested?" : "RSVP"}
               ></Switch>
             </Group>
           </Card.Section>
