@@ -55,7 +55,7 @@ module.exports = {
     JOIN barkschema.groups USING (group_id)
     WHERE user_id = $1
     `,
-  postUser: `INSERT INTO barkschema.Users (
+  postUser: `INSERT INTO barkschema.users (
     user_id,
     zipcode,
     size,
