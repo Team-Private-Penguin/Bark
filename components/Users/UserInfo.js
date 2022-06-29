@@ -1,10 +1,11 @@
 import { useUser } from "@auth0/nextjs-auth0";
+import { Stack } from "@mantine/core";
 import React from "react";
 
 function UserInfo() {
   const { user, error, isLoading } = useUser();
 
-  console.log(user);
+  // console.log(user);
 
   if (isLoading) {
     return <div>...loading</div>;
@@ -16,7 +17,7 @@ function UserInfo() {
 
   if (user) {
     return (
-      <>
+      <Stack align="center">
         <div className="user-header">
           <img src={user.picture} alt={user.name} className="profile-picture" />
           <span className="username">{user.name}</span>
@@ -26,7 +27,7 @@ function UserInfo() {
             Logout
           </button>
         </a>
-      </>
+      </Stack>
     );
   }
 

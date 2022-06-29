@@ -4,12 +4,12 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() => db.queryAsync(`CREATE SCHEMA barkschema`))
   .then(() =>
     db.queryAsync(`CREATE TABLE barkschema.Users (
-    user_id BIGSERIAL,
-    zipcode INTEGER,
+    user_id VARCHAR,
+    zipcode VARCHAR,
     size VARCHAR,
-    energy INTEGER,
-    f_people INTEGER,
-    f_dogs INTEGER,
+    energy VARCHAR,
+    f_people VARCHAR,
+    f_dogs VARCHAR,
     photo VARCHAR,
     name VARCHAR
    )`)
@@ -59,7 +59,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     comment_id BIGSERIAL,
     comment INTEGER,
     event_id INTEGER,
-    user_id INTEGER
+    user_id VARCHAR
     )
   `)
   )
@@ -72,7 +72,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     db.queryAsync(`
     CREATE TABLE barkschema.Friends (
     friend_id BIGSERIAL,
-    user_id INTEGER
+    user_id VARCHAR
     )
   `)
   )
@@ -85,7 +85,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     db.queryAsync(`
     CREATE TABLE barkschema.Users_Groups (
     id SERIAL PRIMARY KEY,
-    user_id BIGSERIAL,
+    user_id VARCHAR,
     group_id BIGSERIAL
     )
   `)
@@ -93,7 +93,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() =>
     db.queryAsync(`
     CREATE TABLE barkschema.Users_Events (
-    user_id BIGSERIAL,
+    user_id VARCHAR,
     event_id INTEGER
     )
   `)
@@ -101,7 +101,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() =>
     db.queryAsync(`
       CREATE TABLE barkschema.Messages (
-      user_id INTEGER,
+      user_id VARCHAR,
       friend_id INTEGER,
       text VARCHAR,
       time TIMESTAMPTZ,
@@ -121,11 +121,6 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     db.queryAsync(`
     ALTER TABLE barkschema.Messages ADD CONSTRAINT Messages_friend_id_fkey FOREIGN KEY (friend_id)
     REFERENCES barkschema.Friends(friend_id)
-  `)
-  )
-  .then(() =>
-    db.queryAsync(`
-    ALTER TABLE barkschema.Users_Events ADD CONSTRAINT Users_Events_pkey PRIMARY KEY (user_id)
   `)
   )
   .then(() =>
@@ -167,4 +162,5 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     db.queryAsync(`
     ALTER TABLE barkschema.Events ADD CONSTRAINT Events_group_id_fkey FOREIGN KEY (group_id) REFERENCES barkschema.Groups(group_id)
   `)
-  );
+  )
+  .then(() => console.log("congrats! you are a champion"));

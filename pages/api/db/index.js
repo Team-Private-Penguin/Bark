@@ -2,10 +2,10 @@ const Promise = require("bluebird");
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  user: process.env.PGUSERNAME || "jasonmatta",
+  user: process.env.PGUSERNAME || "isaac",
   host: "127.0.0.1",
   database: "bark",
-  password: process.env.PGPASS || "",
+  password: process.env.PGPASS || "sdc",
   port: process.env.PGPORT || 5432,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
