@@ -86,7 +86,6 @@ function EventCard({ image }) {
               Event Location(Short)
             </Text>
 
-
             { isAdmin ? <Group grow spacing={0} >
               <Button onClick={handleEdit} variant="default" >
                 EDIT
@@ -95,8 +94,6 @@ function EventCard({ image }) {
                 DELETE
               </Button>
             </Group> : <p>need admin privileges for button</p>}
-
-
 
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
