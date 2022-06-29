@@ -1,11 +1,12 @@
 const Promise = require("bluebird");
 const { Pool } = require("pg");
+const { FileWatcherEventKind } = require("typescript");
 
 const pool = new Pool({
-  user: process.env.PGUSERNAME || "isaac",
+  user: process.env.PGUSERNAME || "",
   host: "127.0.0.1",
   database: "bark",
-  password: process.env.PGPASS || "sdc",
+  password: process.env.PGPASS || "",
   port: process.env.PGPORT || 5432,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
