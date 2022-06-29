@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import EventDetail from "./EventDetail";
 import { Modal, Card, Text, Group } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { createStyles, Button } from "@mantine/core";
+//import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { Switch, Button } from "@mantine/core";
 const axios = require("axios").default;
 
 const defaultPhoto =
@@ -11,7 +11,7 @@ const defaultPhoto =
 const defaultPhoto1 =
   "https://images.unsplash.com/photo-1598875706250-21faaf804361?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OXx8fGVufDB8fHx8&w=1000&q=80";
 
-function EventCard({ image, event }) {
+function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
   image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
   const {
@@ -22,8 +22,29 @@ function EventCard({ image, event }) {
     description,
     group_name,
     admin_id,
+    event_id,
   } = event;
   const [isAdmin, setIsAdmin] = useState(false);
+
+  function handleRsvp() {
+    if (rsvp) {
+      axios({
+        method: "DELETE",
+        url: "/api/event/rsvp",
+        data: {
+          user_id,
+        },
+      })
+        .then(() => getUserRsvps())
+        .catch((err) => console.log(err));
+    } else {
+      const submission = { user_id, event_id };
+      axios
+        .post(`/api/event/rsvp`, submission)
+        .then(() => getUserRsvps())
+        .catch((err) => console.log(err));
+    }
+  }
 
   useEffect(() => {
     // axios({
@@ -80,8 +101,8 @@ function EventCard({ image, event }) {
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
-        <Card radius="10px" shadow="sm" p="sm" onClick={() => setOpened(true)}>
-          <Card.Section className="p-2">
+        <Card radius="10px" shadow="sm" p="sm">
+          <Card.Section className="p-2" onClick={() => setOpened(true)}>
             <Group>
               <Text className="">{name}</Text>
               <Text color="var(--light-blue)" align="left" size="sm">
@@ -106,12 +127,20 @@ function EventCard({ image, event }) {
             )}
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
-            <img className="rounded-[10px] max-h-[400px]" src={image} />
+            <img
+              className="rounded-[10px] max-h-[400px]"
+              src={image}
+              onClick={() => setOpened(true)}
+            />
           </Card.Section>
           <Card.Section className="p-2">
             <Group className="group">
               <Text className="">{group_name}</Text>
-              <FontAwesomeIcon icon={faPaw} />
+              <Switch
+                checked={rsvp}
+                onChange={handleRsvp}
+                label="RSVP"
+              ></Switch>
             </Group>
           </Card.Section>
         </Card>
@@ -126,7 +155,13 @@ function EventCard({ image, event }) {
         size="65%"
         overflow="outside"
       >
-        <EventDetail image={image} event={event} />
+        <EventDetail
+          image={image}
+          event={event}
+          rsvp={rsvp}
+          user_id={user_id}
+          handleRsvp={handleRsvp}
+        />
       </Modal>
     </div>
   );

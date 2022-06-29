@@ -77,11 +77,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     )
   `)
   )
-  .then(() =>
-    db.queryAsync(`
-    ALTER TABLE barkschema.Friends ADD CONSTRAINT Friends_pkey PRIMARY KEY (friend_id)
-  `)
-  )
+
   .then(() =>
     db.queryAsync(`
     CREATE TABLE barkschema.Users_Groups (
