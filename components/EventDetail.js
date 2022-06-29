@@ -37,16 +37,14 @@ function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
   const attendeeList = attendees.map((attendee, index) => {
     return (
       <Group key={index} className="border-b-2 pb-1 pt-50 mb-3">
-        <Group className=" w-[50%]">
-          <Avatar
-            src={attendee.photo}
-            radius="xl"
-            component="span"
-            size={30}
-            className="ml-5"
-          />
-          <span className="ml-2">{attendee.name}</span>
-        </Group>
+        <Avatar
+          src={attendee.photo}
+          radius="xl"
+          component="span"
+          size={30}
+          className="ml-5"
+        />
+        <Text className="ml-1">{attendee.name}</Text>
       </Group>
     );
   });
