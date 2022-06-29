@@ -15,7 +15,10 @@ function EventFeed({ userFeed }) {
   function getUserEvents() {
     axios
       .get(`/api/userevents?user_id=${user_id}`)
-      .then((data) => setCurrentEvents[data.data[0].rows])
+      .then((data) => setCurrentEvents(data.data[0].rows))
+      .then(() => {
+        console.log("post get require", currentEvents);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -23,7 +26,12 @@ function EventFeed({ userFeed }) {
     axios
       .get(`/api/events?group_id=${id}`)
       .then((data) => {
-        setCurrentEvents[data.data[0].rows];
+        console.log(data.data[0].rows.slice());
+        let events = data.data[0].rows.slice();
+        setCurrentEvents(events);
+      })
+      .then(() => {
+        console.log("post get require", currentEvents);
       })
       .catch((err) => console.log(err));
   }
