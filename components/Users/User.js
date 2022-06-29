@@ -11,8 +11,8 @@ function User() {
     console.log(userId);
     function getUserData() {
       axios
-        .get(`api/users/users?=${userId}`)
-        .then((result) => console.log(result))
+        .get(`api/users/users?user_id=${userId}`)
+        .then((result) => console.log(result.data[0], "result"))
         .catch((err) => console.error(err));
     }
     useEffect(() => {
