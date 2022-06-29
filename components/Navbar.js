@@ -8,7 +8,7 @@ import { faPaw, faBell } from "@fortawesome/free-solid-svg-icons";
 import AddUser from "./Users/AddUser";
 import { ActionIcon, Popover } from "@mantine/core";
 import Requests from './Friends/Requests'
-
+import Input from './Autocomplete'
 function Navbar({setUpdateFriends}) {
   const { user } = useUser();
   const [userProfile, setUserProfile] = useState({
@@ -40,8 +40,7 @@ function Navbar({setUpdateFriends}) {
     if (userId) {
       axios.get(`/api/requests/${userId}`).then((res) => setRequests(res.data))
     }
-  }, [userId, updateList, userProfile]);
-
+  }, [userId, updateList]);
   return (
     <nav className="navbar">
       <Link href="/" passHref>
@@ -51,6 +50,7 @@ function Navbar({setUpdateFriends}) {
         </span>
       </Link>
       <section className="add-user-section">
+      <Input userId={userId}/>
         <Popover
           opened={opened}
           onClose={() => setOpened(false)}

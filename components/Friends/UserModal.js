@@ -37,7 +37,6 @@ function UserModal({ clicked, userId }) {
       .post("/api/friend/1", { user: userId, friend: clicked.user_id })
       .then(() => setCurrStatus("request"));
   };
-  console.log(currStatus);
   return (
     <>
       <Stack>
