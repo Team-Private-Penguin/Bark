@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faBell } from "@fortawesome/free-solid-svg-icons";
 import AddUser from "./Users/AddUser";
 import { ActionIcon, Popover } from "@mantine/core";
-import Requests from './Friends/Requests'
-import Input from './Autocomplete'
-function Navbar({setUpdateFriends}) {
+import Requests from "./Friends/Requests";
+import Input from "./Autocomplete";
+function Navbar({ setUpdateFriends }) {
   const { user } = useUser();
   const [userProfile, setUserProfile] = useState({
     energy: "",
@@ -38,7 +38,7 @@ function Navbar({setUpdateFriends}) {
   useEffect(() => {
     getUserData();
     if (userId) {
-      axios.get(`/api/requests/${userId}`).then((res) => setRequests(res.data))
+      axios.get(`/api/requests/${userId}`).then((res) => setRequests(res.data));
     }
   }, [userId, updateList]);
   return (
@@ -50,7 +50,10 @@ function Navbar({setUpdateFriends}) {
         </span>
       </Link>
       <section className="add-user-section">
-      <Input userId={userId}/>
+        <Input userId={userId} />
+        <Link href="/map" passHref>
+          <h2>🐶 Map</h2>
+        </Link>
         <Popover
           opened={opened}
           onClose={() => setOpened(false)}
@@ -62,9 +65,14 @@ function Navbar({setUpdateFriends}) {
           position="bottom"
           withCloseButton
           width={260}
-          title='Friend Requests'
+          title="Friend Requests"
         >
-          <Requests userId={userId} setUpdateList={setUpdateList} requests={requests} setUpdateFriends={setUpdateFriends}/>
+          <Requests
+            userId={userId}
+            setUpdateList={setUpdateList}
+            requests={requests}
+            setUpdateFriends={setUpdateFriends}
+          />
         </Popover>
         {!userProfile && <AddUser />}
         {userProfile && (

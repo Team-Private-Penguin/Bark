@@ -17,7 +17,7 @@ module.exports = {
     description,
     admin_id
   )
-  VALUES ($1, $2, $3)
+  VALUES ($1, $2, $3) returning group_id
   `,
 
   getAllGroups: `SELECT * FROM barkschema.groups`,
