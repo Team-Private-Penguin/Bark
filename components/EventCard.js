@@ -23,8 +23,8 @@ function EventCard({ image, event }) {
     group_name,
     admin_id,
   } = event;
-  const [isAdmin, setIsAdmin] = useState(true);
-  //get admin id of this group, if it matches id here, conditionally render the buttons
+  const [isAdmin, setIsAdmin] = useState(false);
+
   useEffect(() => {
     // axios({
     //   method: 'get',
@@ -40,41 +40,41 @@ function EventCard({ image, event }) {
     // .catch((err) => {
     //   console.log(err);
     // })
-    setIsAdmin(true);
+    setIsAdmin(false);
   }, [isAdmin]);
 
   const handleEdit = (event) => {
     event.preventDefault();
-    axios({
-      method: "PUT",
-      url: "/api/events",
-      params: {
-        everything: "",
-      },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios({
+    //   method: "PUT",
+    //   url: "/api/events",
+    //   params: {
+    //     everything: "",
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   const handleDelete = (event) => {
     event.preventDefault();
-    axios({
-      method: "DELETE",
-      url: "/api/events",
-      params: {
-        body: 1, //id of the event to delete.
-      },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios({
+    //   method: "DELETE",
+    //   url: "/api/events",
+    //   params: {
+    //     body: 1, //id of the event to delete.
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -102,7 +102,7 @@ function EventCard({ image, event }) {
                 </Button>
               </Group>
             ) : (
-              <p>need admin privileges for button</p>
+              <p>need admin privileges to change</p>
             )}
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
