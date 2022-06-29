@@ -2,7 +2,7 @@ import { Stack, Group, Avatar, Box, ScrollArea } from "@mantine/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-export default function messagesList(list, user = "Isaac", friend = "Doggo") {
+export default function messagesList(list) {
   const mappedMessages = list?.map((message, i) => {
     const timeStamp =  new Date(message.time)
     return (

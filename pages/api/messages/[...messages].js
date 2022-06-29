@@ -2,6 +2,7 @@ import db from "../db";
 
 export default async function handler(req, res) {
   const [user, friend] = req.query.messages;
+  console.log(user, friend);
   if (req.method === "GET") {
     await db
       .query(
@@ -13,25 +14,27 @@ export default async function handler(req, res) {
         m.time,
         m.user_id
       FROM barkschema.messages m
-      WHERE user_id = ${user} OR friend_id=${user}
+      WHERE (user_id = $2 AND friend_id = $1) OR (user_id = $1 AND friend_id = $2)
       ORDER BY m.time;
-      `
+      `, [user, friend]
       )
       .then((result) => res.status(200).send(result.rows))
       .catch((err) => {
-        console.log(err)
+        console.log(err, "message get err", friend, user);
         res.status(400).end();
       });
   }
   if (req.method === "POST") {
-    await db.query(
-      `INSERT INTO barkschema.messages(user_id, friend_id, text, time)
-      VALUES (${user}, ${friend}, ${"'" + req.body.message + "'"}, (SELECT now()))
-      `
-    ).then(() => res.status(200).end())
-    .catch((err) => {
-      console.log(err)
-      res.status(400).end()
-    })
+    await db
+      .query(
+        `INSERT INTO barkschema.messages(user_id, friend_id, text, time)
+      VALUES ($1, $2, $3, (SELECT now()))
+      `, [user, friend, req.body.message]
+      )
+      .then(() => res.status(200).end())
+      .catch((err) => {
+        console.log(err, "message post err");
+        res.status(400).end();
+      });
   }
 }

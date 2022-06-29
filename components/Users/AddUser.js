@@ -23,7 +23,10 @@ function AddUser() {
     },
   });
   const submitUser = (values) => {
-    const userId = user.sub.split("google-oauth2|")[1];
+    let userId = user.sub.split("google-oauth2|")[1];
+    if (!userId) {
+      userId = user.sub.split("auth0|")[1];
+    }
     const submission = {
       user_id: userId,
       name: values.name,
