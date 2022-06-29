@@ -4,11 +4,7 @@ import { useRouter } from "next/router";
 import EventFeed from "../components/EventFeed";
 import AddEvent from "../components/AddEvent";
 import { Button, Group, Stack } from "@mantine/core";
-<<<<<<< HEAD
-import UserInfo from "../components/Users/UserInfo";
-=======
 import GroupsComp from "../components/AddGroup";
->>>>>>> ae8d24d1328de234801b23fc167492dfb55861ee
 import Navbar from "../components/Navbar";
 import User from "../components/Users/User";
 import axios from "axios";
