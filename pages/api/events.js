@@ -15,7 +15,6 @@ export default function handler(req, res) {
       values: [name, description, address, group_id, date, prospective],
     };
     let values = [name, description, address, group_id, date, prospective];
-    console.log(query);
     return db
       .queryAsync(postEvent, values)
       .then(() => res.status(201).send("Ok"))
@@ -28,7 +27,7 @@ export default function handler(req, res) {
 
     return db
       .queryAsync(getAdmin)
-      .then(() => res.status(200).send("OK")) //this need to change to send the admin id back.
+      .then((res) => res.status(200).send(res.data)) //this need to change to send the admin id back.
       .catch((err) => {
         console.log(err);
         res.status(404).send(err);
@@ -39,7 +38,6 @@ export default function handler(req, res) {
       text: getEventsGroup,
       values: [group_id],
     };
-    console.log(query);
     return db
       .queryAsync(query)
       .then((results) => res.status(200).send(results))

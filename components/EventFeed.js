@@ -11,14 +11,11 @@ function EventFeed({ userFeed }) {
   } = useRouter();
   const { user } = useUser();
   const user_id = user?.sub.split("google-oauth2|")[1];
-  const [currentEvents, setCurrentEvents] = useState([]);
+  const [currentEvents, setCurrentEvents] = useState([{}]);
   function getUserEvents() {
     axios
       .get(`/api/userevents?user_id=${user_id}`)
       .then((data) => setCurrentEvents(data.data[0].rows))
-      .then(() => {
-        console.log("post get require", currentEvents);
-      })
       .catch((err) => console.log(err));
   }
 
@@ -26,12 +23,7 @@ function EventFeed({ userFeed }) {
     axios
       .get(`/api/events?group_id=${id}`)
       .then((data) => {
-        console.log(data.data[0].rows.slice());
-        let events = data.data[0].rows.slice();
-        setCurrentEvents(events);
-      })
-      .then(() => {
-        console.log("post get require", currentEvents);
+        setCurrentEvents(data.data[0].rows);
       })
       .catch((err) => console.log(err));
   }
@@ -40,16 +32,15 @@ function EventFeed({ userFeed }) {
     if (userFeed) {
       getUserEvents();
     } else {
-      console.log(currentEvents);
       getGroupEvents();
     }
   }, []);
 
   return (
-    <Stack className="h-[74vh] overflow-auto">
-      {currentEvents.map((event, index) => (
-        <EventCard key={index} image={true} event={event} />
-      ))}
+    <Stack className="h-[84vh] overflow-auto">
+      {currentEvents.map((event, index) => {
+        return <EventCard key={index} image={true} event={event} />;
+      })}
     </Stack>
   );
 }

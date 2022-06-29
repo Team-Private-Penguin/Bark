@@ -10,19 +10,20 @@ function GroupList() {
   const [UserGroups, setUserGroups] = useState([]);
   useEffect(() => {
     axios.get(`/api/usergroup?user_id=${user_id}`).then((data) => {
+      console.log("groups list", data.data[0].rows);
       setUserGroups(data.data[0].rows);
     });
   }, []);
 
   return (
-    <Stack>
-      {UserGroups.map(({ group_id, name }) => {
+    <Stack className="h-[35vh] overflow-auto">
+      {UserGroups.map(({ group_id, name, description }, index) => {
         return (
-          <Link key={group_id} href={`/group?id=${group_id}`} passHref>
-            <Group>
-              {name}
-              {group_id}
-            </Group>
+          <Link key={index} href={`/group?id=${group_id}`} passHref>
+            <Stack className="border cursor-pointer">
+              <div>{name}</div>
+              <div>{description.slice(0, 100)}</div>
+            </Stack>
           </Link>
         );
       })}

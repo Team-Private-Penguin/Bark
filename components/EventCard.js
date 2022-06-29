@@ -14,10 +14,17 @@ const defaultPhoto1 =
 function EventCard({ image, event }) {
   image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
-  const { name, description, date } = event;
-  const [isAdmin, setIsAdmin] = useState(true);
+  const {
+    name,
+    address,
+    date,
+    prospective,
+    description,
+    group_name,
+    admin_id,
+  } = event;
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  //get admin id of this group, if it matches id here, conditionally render the buttons
   useEffect(() => {
     // axios({
     //   method: 'get',
@@ -33,41 +40,41 @@ function EventCard({ image, event }) {
     // .catch((err) => {
     //   console.log(err);
     // })
-    setIsAdmin(true);
-  }, isAdmin);
+    setIsAdmin(false);
+  }, [isAdmin]);
 
   const handleEdit = (event) => {
     event.preventDefault();
-    axios({
-      method: "PUT",
-      url: "/api/events",
-      params: {
-        everything: "",
-      },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios({
+    //   method: "PUT",
+    //   url: "/api/events",
+    //   params: {
+    //     everything: "",
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   const handleDelete = (event) => {
     event.preventDefault();
-    axios({
-      method: "DELETE",
-      url: "/api/events",
-      params: {
-        body: 1, //id of the event to delete.
-      },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios({
+    //   method: "DELETE",
+    //   url: "/api/events",
+    //   params: {
+    //     body: 1, //id of the event to delete.
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -82,7 +89,7 @@ function EventCard({ image, event }) {
               </Text>
             </Group>
             <Text color="var(--black)" align="left">
-              Event Location(Short)
+              {address}
             </Text>
 
             {isAdmin ? (
@@ -95,7 +102,7 @@ function EventCard({ image, event }) {
                 </Button>
               </Group>
             ) : (
-              <p>need admin privileges for button</p>
+              <p>need admin privileges to change</p>
             )}
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
@@ -103,7 +110,7 @@ function EventCard({ image, event }) {
           </Card.Section>
           <Card.Section className="p-2">
             <Group className="group">
-              <Text className="">Group Name TEMP</Text>
+              <Text className="">{group_name}</Text>
               <FontAwesomeIcon icon={faPaw} />
             </Group>
           </Card.Section>
@@ -119,7 +126,7 @@ function EventCard({ image, event }) {
         size="65%"
         overflow="outside"
       >
-        <EventDetail />
+        <EventDetail image={image} event={event} />
       </Modal>
     </div>
   );

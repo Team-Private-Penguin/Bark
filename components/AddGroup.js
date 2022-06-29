@@ -28,7 +28,9 @@ const AddGroup = () => {
   return (
     <div>
       <Group position="center">
-        <Button onClick={() => setOpened(true)}>Add a Group!</Button>
+        <Button className="bg-slate-800" onClick={() => setOpened(true)}>
+          Create a New Group!
+        </Button>
       </Group>
       <Modal
         opened={opened}

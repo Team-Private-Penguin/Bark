@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import EventFeed from "../components/EventFeed";
 import AddEvent from "../components/AddEvent";
 import { Button, Group, Stack } from "@mantine/core";
-import GroupsComp from "../components/AddGroup";
 import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
 import AddUser from "../components/Users/AddUser";
 import axios from "axios";
 import Friends from "../components/Friends/Friends";
 import { useUser } from "@auth0/nextjs-auth0";
+import GroupList from "../components/GroupList";
+import AddGroup from "../components/AddGroup";
+import ExploreGroups from "../components/ExploreGroups";
 
 const Groups = () => {
   const { user } = useUser();
@@ -23,6 +25,14 @@ const Groups = () => {
     query: { id },
   } = useRouter();
   const [currentGroups, setCurrentGroups] = useState([]);
+  const [groupDetails, setGroupDetails] = useState([{}]);
+
+  function getGroupDetails() {
+    axios
+      .get(`/api/groups?id=${id}`)
+      .then((data) => setGroupDetails(data.data[0].rows[0]))
+      .catch((err) => console.log(err));
+  }
 
   function joinGroup() {
     let values = { user_id: userId, group_id: id };
@@ -36,7 +46,9 @@ const Groups = () => {
       })
       .catch((err) => console.log(err));
   }
-
+  useEffect(() => {
+    getGroupDetails();
+  }, []);
   return (
     <main className="min-h-screen w-screen">
       <Navbar />
@@ -48,20 +60,11 @@ const Groups = () => {
           </div>
           <div className="border h-[54vh] space shadows cursor-pointer homeBox">
             <h2>🐶 Groups</h2>
-            <GroupsComp />
-            {currentGroups.map(
-              (
-                group: { group_id: number; name: string; description: string },
-                index: number
-              ) => (
-                <Link href={`/group?id=${group.group_id}`} passHref>
-                  <Group key={index}>
-                    {" "}
-                    {group.name} {group.description}{" "}
-                  </Group>
-                </Link>
-              )
-            )}
+            <Stack>
+              <ExploreGroups />
+              <AddGroup />
+              <GroupList />
+            </Stack>
           </div>
         </Stack>
         <Stack style={{ flexGrow: 1 }}>
@@ -70,7 +73,7 @@ const Groups = () => {
               <h2>
                 <Group className="justify-between">
                   {" "}
-                  <span>🐶 Group {id}</span>{" "}
+                  <span>🐶 {groupDetails.name}</span>{" "}
                   <Button onClick={joinGroup}> Join Group </Button>
                 </Group>
               </h2>

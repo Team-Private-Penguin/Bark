@@ -115,7 +115,7 @@ function AddEvent() {
             {...form.getInputProps("prospective")}
           />
           <Group position="right" mt="md">
-            <Button color="dark" type="submit">
+            <Button className="bg-slate-800" type="submit">
               Submit
             </Button>
           </Group>
@@ -123,7 +123,9 @@ function AddEvent() {
       </Modal>
 
       <Group position="center">
-        <Button onClick={() => setOpened(true)}>Add an Event!</Button>
+        <Button className="bg-slate-800" onClick={() => setOpened(true)}>
+          Add an Event!
+        </Button>
       </Group>
     </div>
   );
