@@ -20,7 +20,9 @@ module.exports = {
   VALUES ($1, $2, $3)
   `,
 
-  getAllGroups: `SELECT * from barkschema.groups`,
+  getAllGroups: `SELECT * FROM barkschema.groups`,
+
+  getGroup: `SELECT * FROM barkschema.groups WHERE group_id = $1`,
 
   postUserToGroup: `INSERT INTO barkschema.users_groups (
     user_id,
@@ -49,12 +51,20 @@ module.exports = {
   lng = $6,
   address = $7,
   prospective = $8 `,
+
   getUserEvents: `SELECT *
-      FROM barkschema.users_events
-      JOIN barkschema.events USING (event_id)
-      WHERE user_id = $1
-    `,
-  postUser: `INSERT INTO barkschema.Users (
+    FROM barkschema.users_events
+    JOIN barkschema.events USING (event_id)
+    WHERE user_id = $1
+  `,
+  getUserGroupsEvents: `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id
+  FROM barkschema.users_groups ug
+  JOIN barkschema.groups g USING (group_id)
+  JOIN barkschema.events e USING (group_id)
+  WHERE user_id = $1
+`,
+
+  postUser: `INSERT INTO barkschema.users (
     user_id,
     zipcode,
     size,

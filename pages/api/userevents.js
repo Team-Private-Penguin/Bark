@@ -1,5 +1,5 @@
 import db from "./db";
-import { getUserEvents } from "./db/model";
+import { getUserGroupsEvents } from "./db/model";
 import React from "react";
 
 export default function handler(req, res) {
@@ -7,7 +7,7 @@ export default function handler(req, res) {
   } else if (req.method === "GET") {
     let { user_id } = req.query;
     const query = {
-      text: getUserEvents,
+      text: getUserGroupsEvents,
       values: [user_id],
     };
     return db

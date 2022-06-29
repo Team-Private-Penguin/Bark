@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import EventFeed from "../components/EventFeed";
@@ -23,6 +23,14 @@ const Groups = () => {
     query: { id },
   } = useRouter();
   const [currentGroups, setCurrentGroups] = useState([]);
+  const [groupDetails, setGroupDetails] = useState([{}]);
+
+  function getGroupDetails() {
+    axios
+      .get(`/api/groups?id=${id}`)
+      .then((data) => setGroupDetails(data.data[0].rows[0]))
+      .catch((err) => console.log(err));
+  }
 
   function joinGroup() {
     let values = { user_id: userId, group_id: id };
@@ -36,7 +44,9 @@ const Groups = () => {
       })
       .catch((err) => console.log(err));
   }
-
+  useEffect(() => {
+    getGroupDetails();
+  }, []);
   return (
     <main className="min-h-screen w-screen">
       <Navbar />
@@ -70,19 +80,19 @@ const Groups = () => {
               <h2>
                 <Group className="justify-between">
                   {" "}
-                  <span>🐶 Group {id}</span>{" "}
+                  <span>🐶 {groupDetails.name}</span>{" "}
                   <Button onClick={joinGroup}> Join Group </Button>
                 </Group>
               </h2>
               <AddEvent />
             </div>
-            <EventFeed />
+            <EventFeed userFeed={false} />
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
           <Stack className="border h-[84vh] space shadows gap-0">
             <h2>🐶 Group Members</h2>
-            <Friends groupId={id} listType={'groups'}/>
+            <Friends groupId={id} listType={"groups"} />
           </Stack>
         </Stack>
       </Group>
