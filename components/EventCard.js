@@ -37,14 +37,23 @@ function EventCard({ image }) {
 
   }, isAdmin);
 
-
-
-
   const handleEdit = (event) => {
     event.preventDefault();
-    console.log('edit');
-
+    axios({
+      method: 'PUT',
+      url: '/api/events',
+      params: {
+        everything: ''
+      }
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
+
   const handleDelete = (event) => {
     event.preventDefault();
     axios({
@@ -76,6 +85,7 @@ function EventCard({ image }) {
             <Text color="var(--black)" align="left">
               Event Location(Short)
             </Text>
+
 
             { isAdmin ? <Group grow spacing={0} >
               <Button onClick={handleEdit} variant="default" >

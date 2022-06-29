@@ -1,5 +1,5 @@
 import db from "./db";
-import { postEvent, getEventsGroup, getAdmin, deleteEvent } from "./db/model";
+import { postEvent, getEventsGroup, getAdmin, deleteEvent, updateEvent } from "./db/model";
 
 export default function handler(req, res) {
   if (req.method === "POST") {
@@ -41,6 +41,16 @@ export default function handler(req, res) {
     .queryAsync(deleteEvent, req.query.body)
     .then(() => {
       res.status(200).send("Deleted!");
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
+  } else if (req.method === "PUT") {  //consider patch
+
+    return db
+    .queryAsync(updateEvent, req.body)
+    .then(() => {
+      res.status(200).send("Updated!");
     })
     .catch((err) => {
       res.status(400).send(err);
