@@ -30,15 +30,18 @@ function EventCard({ image, event, eventId1 }) {
     axios({
       method: 'get',
       url:  '/api/events',
+      headers: {
+        key: "getEvent"
+      },
       params: {
-        body: 'admin'
+        body: eventId1
       }
     })
     .then((response) => {
-      console.log(response);
       setIsAdmin(response.data); //edit this in accordance with the response.
     })
     .catch((err) => {
+      console.log('didnt get id correctly');
       console.log(err);
     })
   }, [isAdmin]);

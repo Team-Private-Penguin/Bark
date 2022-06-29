@@ -3,11 +3,13 @@ import {
   postEvent,
   getEventsGroup,
   getAdmin,
+  getGroupId,
   deleteEvent,
   updateEvent,
 } from "./db/model";
 
 export default function handler(req, res) {
+  console.log(req);
   if (req.method === "POST") {
     let { name, description, address, group_id, date, prospective } = req.body;
     const query = {
@@ -22,16 +24,17 @@ export default function handler(req, res) {
         console.log(err);
         res.status(404).send(err);
       });
-  } else if (req.method === "GET" && req.query.body === "admin") {
-    //for getting admin id.
+  } else if (req.method === "GET" && req.headers.key === "getEvent") {
 
+    console.log('WE HERE!');
     return db
-      .queryAsync(getAdmin)
+      .queryAsync(getGroupId, req.query.group_id)
       .then((res) => res.status(200).send(res.data)) //this need to change to send the admin id back.
-      .catch((err) => {
-        console.log(err);
-        res.status(404).send(err);
-      });
+        .catch((err) => {
+          console.log(err);
+          res.status(404).send(err);
+        });
+
   } else if (req.method === "GET") {
     let { group_id } = req.query;
     const query = {
