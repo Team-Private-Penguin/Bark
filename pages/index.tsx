@@ -28,7 +28,7 @@ const Home: NextPage = () => {
                 <div className="centered">Please add your pet above!</div>
               )}
             </div>
-            <div className="border h-[60vh] space shadows cursor-pointer homeBox">
+            <div className="border h-[60vh] space shadows homeBox">
               <h2>🐶 Groups</h2>
               <Stack>
                 <ExploreGroups />

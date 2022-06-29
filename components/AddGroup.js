@@ -23,12 +23,15 @@ const AddGroup = () => {
 
   const handleSubmit = (values) => {
     axios.post("/api/groups", values);
+    setOpened(false);
   };
 
   return (
     <div>
       <Group position="center">
-        <Button onClick={() => setOpened(true)}>Add a Group!</Button>
+        <Button className="bg-slate-800" onClick={() => setOpened(true)}>
+          Create a New Group!
+        </Button>
       </Group>
       <Modal
         opened={opened}
@@ -51,7 +54,7 @@ const AddGroup = () => {
           />
 
           <Group position="right" mt="md">
-            <Button color="dark" type="submit">
+            <Button className="bg-slate-800" type="submit">
               Submit
             </Button>
           </Group>
