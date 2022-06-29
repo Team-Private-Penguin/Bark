@@ -57,6 +57,12 @@ module.exports = {
     JOIN barkschema.events USING (event_id)
     WHERE user_id = $1
   `,
+  getUserGroupsEvents: `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id
+  FROM barkschema.users_groups ug
+  JOIN barkschema.groups g USING (group_id)
+  JOIN barkschema.events e USING (group_id)
+  WHERE user_id = $1
+`,
 
   postUser: `INSERT INTO barkschema.users (
     user_id,
@@ -94,4 +100,14 @@ module.exports = {
   `,
 
   deleteComment: `DELETE FROM barkschema.comments WHERE event_id = $1`,
+
+  editUser: `UPDATE barkschema.Users
+  SET zipcode = $2,
+  size = $3,
+  energy = $4,
+  f_people = $5,
+  f_dogs = $6,
+  photo = $7,
+  name = $8
+  WHERE user_id = $1`,
 };

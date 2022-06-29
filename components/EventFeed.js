@@ -35,6 +35,7 @@ function EventFeed({ userFeed }) {
       getGroupEvents();
     }
   }, []);
+
   return (
     <Stack className="h-[74vh] overflow-auto">
       {currentEvents.map((event, index) => {

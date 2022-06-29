@@ -4,7 +4,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { Group, ScrollArea, Stack } from "@mantine/core";
 import Link from "next/link";
-import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
 import Friends from "../components/Friends/Friends";
 import AddGroup from "../components/AddGroup";
@@ -12,8 +11,10 @@ import GroupList from "../components/GroupList";
 import ExploreGroups from "../components/ExploreGroups";
 import EventFeed from "../components/EventFeed";
 import User from "../components/Users/User";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 const Home: NextPage = () => {
+  const { user } = useUser();
   return (
     <>
       <main className="min-h-screen w-screen ">
@@ -22,8 +23,10 @@ const Home: NextPage = () => {
           <Stack justify="flex-start" style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
               <h2 className="section-title">🐶 User Info</h2>
-              <h1>Please log in!</h1>
-              <User />
+              {user && <User />}
+              {!user && (
+                <div className="centered">Please add your pet above!</div>
+              )}
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <h2>🐶 Groups</h2>
@@ -60,3 +63,5 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps = withPageAuthRequired();
