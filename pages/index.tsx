@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { Group, Stack } from "@mantine/core";
+import { Group, ScrollArea, Stack } from "@mantine/core";
 import Link from "next/link";
-import UserInfo from "../components/UserInfo";
+import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
 import Friends from "../components/Friends/Friends";
 import AddGroup from "../components/AddGroup";
 import GroupList from "../components/GroupList";
 import ExploreGroups from "../components/ExploreGroups";
 import EventFeed from "../components/EventFeed";
+import User from "../components/Users/User";
 
 const Home: NextPage = () => {
   return (
@@ -20,8 +21,9 @@ const Home: NextPage = () => {
         <Group className="group">
           <Stack justify="flex-start" style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
-              <h2>🐶 User Info</h2>
-              <UserInfo />
+              <h2 className="section-title">🐶 User Info</h2>
+              <h1>Please log in!</h1>
+              <User />
             </div>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <h2>🐶 Groups</h2>
@@ -41,13 +43,13 @@ const Home: NextPage = () => {
           </Stack>
 
           <Stack style={{ width: "20%" }}>
-            <div className="border h-[28vh] space shadows homeBox">
+            <Stack className="border h-[28vh] space shadows homeBox gap-0">
               <h2>🐶 Friends</h2>
-              <Friends />
-            </div>
+              <Friends listType={'friends'}/>
+            </Stack>
             <div className="border h-[60vh] space shadows cursor-pointer homeBox">
               <Link href="/map" passHref>
-                <h2>🐶 Map</h2>
+                <h2 className="section-title">🐶 Map</h2>
               </Link>
             </div>
           </Stack>
