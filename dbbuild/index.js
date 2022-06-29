@@ -25,7 +25,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     group_id BIGSERIAL,
     description VARCHAR,
     name VARCHAR,
-    admin_id BIGSERIAL
+    admin_id VARCHAR
     )`
     )
   )
@@ -38,6 +38,7 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     db.queryAsync(`
     CREATE TABLE barkschema.Events (
       event_id BIGSERIAL,
+       owner_id VARCHAR,
       group_id BIGSERIAL NOT NULL,
       name VARCHAR,
       date DATE NOT NULL,

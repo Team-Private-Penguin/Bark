@@ -10,8 +10,8 @@ export default function handler(req, res) {
     };
     return db
       .queryAsync(query)
-      .then(() => {
-        res.status(201).json({ message: "ok" });
+      .then((data) => {
+        res.status(201).send(data);
       })
       .catch((err) => {
         console.log(err);
