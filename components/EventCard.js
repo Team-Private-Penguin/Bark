@@ -51,7 +51,7 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id, eventId1 }) {
   useEffect(() => {
     axios({
       method: 'get',
-      url:  '/api/events',
+      url:  '/api/admin',
       params: {
         type: "getGroupId",
         event_id: 1

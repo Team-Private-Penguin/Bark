@@ -5,9 +5,9 @@ export default function handler(req, res) {
 
   console.log('what is this request', req);
 
-  if (req.method === "GET" && req.headers.key === "getEvent") {
+  if (req.method === "GET" ) {
 
-    console.log('WE HERE!');
+    console.log('here?11');
     return db
 
     .queryAsync(getGroupId)
@@ -18,7 +18,5 @@ export default function handler(req, res) {
       });
   } else {
     res.sendStatus(404);
-  } else if (req.method === "GET") {
-
   }
 }
