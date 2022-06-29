@@ -39,36 +39,36 @@ function EventCard({ image }) {
 
   const handleEdit = (event) => {
     event.preventDefault();
-    axios({
-      method: 'PUT',
-      url: '/api/events',
-      params: {
-        everything: ''
-      }
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    // axios({
+    //   method: 'PUT',
+    //   url: '/api/events',
+    //   params: {
+    //     everything: ''
+    //   }
+    // })
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // })
   }
 
   const handleDelete = (event) => {
     event.preventDefault();
-    axios({
-      method: 'DELETE',
-      url: '/api/events',
-      params: {
-        body: 1 //id of the event to delete.
-      }
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    // axios({
+    //   method: 'DELETE',
+    //   url: '/api/events',
+    //   params: {
+    //     body: 1 //id of the event to delete.
+    //   }
+    // })
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // })
   }
 
   return (
