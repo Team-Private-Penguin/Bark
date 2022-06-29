@@ -40,7 +40,7 @@ function Navbar({setUpdateFriends}) {
     if (userId) {
       axios.get(`/api/requests/${userId}`).then((res) => setRequests(res.data))
     }
-  }, [userId, updateList]);
+  }, [userId, updateList, userProfile]);
 
   return (
     <nav className="navbar">
@@ -66,7 +66,7 @@ function Navbar({setUpdateFriends}) {
         >
           <Requests userId={userId} setUpdateList={setUpdateList} requests={requests} setUpdateFriends={setUpdateFriends}/>
         </Popover>
-        <AddUser />
+        {!userProfile && <AddUser />}
         {userProfile && (
           <>
             <span className="nav-name">{userProfile.name}</span>

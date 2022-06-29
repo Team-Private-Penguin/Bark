@@ -1,21 +1,21 @@
 import React from "react";
 import { Group, Text, Card } from "@mantine/core";
 
-function Comment() {
+function Comment({ commentObj }) {
+  const { comment, date, name } = commentObj;
   return (
     <Card className="border rounded-xl">
       <Card.Section className="bg-main" p=".5rem">
         <Group>
-          <div>UserIcon</div>
           <Text className="" color="var(--black)" align="left">
-            UserName
+            {name}
           </Text>
           <Text className="" color="var(--black)" align="left">
-            Date and Time
+            {date}
           </Text>
         </Group>
       </Card.Section>
-      <Card.Section p=".5rem">Comment</Card.Section>
+      <Card.Section p=".5rem">{comment}</Card.Section>
     </Card>
   );
 }

@@ -5,9 +5,8 @@ import EventFeed from "../components/EventFeed";
 import AddEvent from "../components/AddEvent";
 import { Button, Group, Stack } from "@mantine/core";
 import GroupsComp from "../components/AddGroup";
-import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
-import AddUser from "../components/Users/AddUser";
+import User from "../components/Users/User";
 import axios from "axios";
 import Friends from "../components/Friends/Friends";
 import { useUser } from "@auth0/nextjs-auth0";
@@ -54,7 +53,10 @@ const Groups = () => {
         <Stack className="hidden lg:flex" style={{ width: "20%" }}>
           <div className="border h-[28vh] space shadows ">
             <h2 className="section-title">🐶 User Info</h2>
-            <AddUser />
+            {user && <User />}
+            {!user && (
+              <div className="centered">Please add your pet above!</div>
+            )}
           </div>
           <div className="border h-[54vh] space shadows cursor-pointer homeBox">
             <h2>🐶 Groups</h2>

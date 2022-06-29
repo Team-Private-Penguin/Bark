@@ -2,16 +2,12 @@ import { Stack } from "@mantine/core";
 import React from "react";
 import Comment from "./Comment";
 
-function CommentFeed() {
+function CommentFeed({ comments }) {
   return (
     <Stack>
-      {/* .map of Comment array */}
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
+      {comments.map((commentObj, index) => (
+        <Comment key={index} commentObj={commentObj} />
+      ))}
     </Stack>
   );
 }
