@@ -34,7 +34,7 @@ function EventFeed({ userFeed }) {
     } else {
       getGroupEvents();
     }
-  }, []);
+  }, [user_id]);
 
   return (
     <Stack className="h-[84vh] overflow-auto">
