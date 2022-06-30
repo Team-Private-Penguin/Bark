@@ -23,7 +23,7 @@ export default function MapContainer() {
   return (
     <MapContainerState.Provider value={{ opened, setOpened, rsvp, setRSVP, center, setCenter, searchValue, markers, setMarkers, drawerCards, setDrawerCards }}>
       <Drawer key='MapDrawerLeft' size="lg" withOverlay={false} closeOnEscape="true" closeOnClickOutside={true} padding="xl" opened={opened} onClose={() => { setOpened(false); }} title={title}>
-      <ScrollArea
+        <ScrollArea
               offsetScrollbars
               scrollbarSize={8}
               className="mt-2"
@@ -36,7 +36,7 @@ export default function MapContainer() {
               )
             })
           }
-          </ScrollArea>
+        </ScrollArea>
       </Drawer>
       <Map />
     </MapContainerState.Provider>
