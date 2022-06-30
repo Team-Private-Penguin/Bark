@@ -38,13 +38,23 @@ function EventDetail({
   const timeStamp = new Date(date);
   const [comments, setComments] = useState([{}]);
   const [attendees, setAttendees] = useState([{}]);
-
+  const [openEdit, setOpenEdit] = useState(false);
   function getComments() {
     axios
       .get(`/api/event/comment?id=${event_id}`)
       .then((data) => setComments(data.data[0].rows))
       .catch((err) => console.log(err));
   }
+
+  const editForm = useForm({
+    name: "",
+    address: "",
+    date: "",
+    prospective: "",
+    description: "",
+    group_name: "",
+    event_id: "",
+  });
 
   useEffect(() => {
     if (event_id) {
@@ -75,6 +85,18 @@ function EventDetail({
       </Group>
     );
   });
+
+  const editEvent = (values) => {
+    values["admin_id"] = user_id;
+    axios.patch("/api/event", values)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err)=> {
+        console.log(err);
+      })
+    setOpenEdit(false);
+  }
 
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
@@ -160,6 +182,58 @@ function EventDetail({
           {attendeeList}
         </ScrollArea>
       </Card>
+
+      <Modal
+        opened={openEdit}
+        onClose={() => setOpenEdit(false)}
+        title="Edit"
+      >
+        <form onSubmit={form.onSubmit((values) => editEvent(values))}>
+          <TextInput
+            placeholder="Event Name"
+            label="Event name"
+            required
+            {...editForm.getInputProps("name")}
+          />
+          <TextInput
+            placeholder="Address Line 1"
+            label="Address"
+            required
+            {...editForm.getInputProps("address_1")}
+          />
+          <TextInput
+            placeholder="description"
+            label="Description"
+            required
+            {...editForm.getInputProps("description")}
+          />
+          <DatePicker
+            placeholder="Pick date"
+            label="Event date"
+            required
+            {...editForm.getInputProps("date")}
+          />
+          <DatePicker
+            placeholder="event id"
+            label="Event id"
+            required
+            {...editForm.getInputProps("event_id")}
+          />
+          <DatePicker
+            placeholder="group id"
+            label="group id"
+            required
+            {...editForm.getInputProps("group_id")}
+          />
+
+          <Group position="right" mt="md">
+            <Button className="bg-slate-800" type="submit">
+              Submit
+            </Button>
+          </Group>
+        </form>
+      </Modal>
+
     </div>
   );
 }
