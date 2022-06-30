@@ -3,7 +3,7 @@ const db = require("../pages/api/db");
 db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() => db.queryAsync(`CREATE SCHEMA barkschema`))
   .then(() =>
-    db.queryAsync(`CREATE TABLE barkschema.Users (
+    db.queryAsync(`CREATE TABLE barkschema.users (
     user_id VARCHAR,
     zipcode VARCHAR,
     size VARCHAR,
@@ -16,12 +16,12 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   )
   .then(() =>
     db.queryAsync(
-      `ALTER TABLE barkschema.Users ADD CONSTRAINT Users_pkey PRIMARY KEY (user_id)`
+      `ALTER TABLE barkschema.users ADD CONSTRAINT users_pkey PRIMARY KEY (user_id)`
     )
   )
   .then(() =>
     db.queryAsync(
-      `CREATE TABLE barkschema.Groups (
+      `CREATE TABLE barkschema.groups (
     group_id BIGSERIAL,
     description VARCHAR,
     name VARCHAR,
@@ -31,12 +31,12 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   )
   .then(() =>
     db.queryAsync(
-      `ALTER TABLE barkschema.Groups ADD CONSTRAINT Groups_pkey PRIMARY KEY (group_id)`
+      `ALTER TABLE barkschema.groups ADD CONSTRAINT groups_pkey PRIMARY KEY (group_id)`
     )
   )
   .then(() =>
     db.queryAsync(`
-    CREATE TABLE barkschema.Events (
+    CREATE TABLE barkschema.events (
       event_id BIGSERIAL,
       owner_id VARCHAR,
       group_id BIGSERIAL NOT NULL,
@@ -52,12 +52,17 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   )
   .then(() =>
     db.queryAsync(`
-    ALTER TABLE barkschema.Events ADD CONSTRAINT Events_pkey PRIMARY KEY (event_id)
+    ALTER TABLE barkschema.events ADD CONSTRAINT events_pkey PRIMARY KEY (event_id)
   `)
   )
   .then(() =>
+    db.queryAsync(
+      `CREATE INDEX eventsgroup_index ON barkschema.events (group_id)`
+    )
+  )
+  .then(() =>
     db.queryAsync(`
-    CREATE TABLE barkschema.Comments (
+    CREATE TABLE barkschema.comments (
     comment_id BIGSERIAL,
     comment VARCHAR,
     event_id BIGSERIAL,
@@ -68,26 +73,55 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   )
   .then(() =>
     db.queryAsync(`
-    ALTER TABLE barkschema.Comments ADD CONSTRAINT Comments_pkey PRIMARY KEY (comment_id)
+  ALTER TABLE barkschema.comments ADD CONSTRAINT comments_pkey PRIMARY KEY (comment_id)
   `)
   )
   .then(() =>
+    db.queryAsync(
+      `CREATE INDEX commentsevent_index ON barkschema.comments (event_id)`
+    )
+  )
+  .then(() =>
+    db.queryAsync(
+      `CREATE INDEX commentsuser_index ON barkschema.comments (user_id)`
+    )
+  )
+  .then(() =>
     db.queryAsync(`
-    CREATE TABLE barkschema.Friends (
+    CREATE TABLE barkschema.friends (
     friend_id VARCHAR,
     user_id VARCHAR
     )
   `)
   )
-
+  .then(() =>
+    db.queryAsync(
+      `CREATE INDEX friendsfriend_index ON barkschema.friends (user_id)`
+    )
+  )
+  .then(() =>
+    db.queryAsync(
+      `CREATE INDEX friendsuser_index ON barkschema.friends (friend_id)`
+    )
+  )
   .then(() =>
     db.queryAsync(`
-    CREATE TABLE barkschema.Users_Groups (
+    CREATE TABLE barkschema.users_groups (
     id SERIAL PRIMARY KEY,
     user_id VARCHAR,
     group_id BIGSERIAL
     )
   `)
+  )
+  .then(() =>
+    db.queryAsync(
+      `CREATE INDEX groupsuser_index ON barkschema.users_groups (user_id)`
+    )
+  )
+  .then(() =>
+    db.queryAsync(
+      `CREATE INDEX usersgroup_index ON barkschema.users_groups (group_id)`
+    )
   )
   .then(() =>
     db.queryAsync(`
@@ -97,6 +131,16 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     event_id BIGSERIAL
     )
   `)
+  )
+  .then(() =>
+    db.queryAsync(
+      `CREATE INDEX eventsuser_index ON barkschema.users_events (user_id)`
+    )
+  )
+  .then(() =>
+    db.queryAsync(
+      `CREATE INDEX usersevent_index ON barkschema.users_events (event_id)`
+    )
   )
   .then(() =>
     db.queryAsync(`
@@ -109,7 +153,16 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
       )
     `)
   )
-
+  .then(() =>
+    db.queryAsync(
+      `CREATE INDEX messagesuser_index ON barkschema.messages (user_id)`
+    )
+  )
+  .then(() =>
+    db.queryAsync(
+      `CREATE INDEX messegesfriend_index ON barkschema.messages(friend_id)`
+    )
+  )
   .then(() =>
     db.queryAsync(`
     ALTER TABLE barkschema.Messages ADD CONSTRAINT
