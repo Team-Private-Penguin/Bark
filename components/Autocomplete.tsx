@@ -181,7 +181,7 @@ export default function Input({ userId }) {
   );
 
   return (
-    <div className="ml-[33%]">
+    <div className="ml-[31%]">
       <Tabs
         color="dark"
         position="center"
@@ -192,9 +192,9 @@ export default function Input({ userId }) {
         }}
         onClick={() => setDrawer(true)}
       >
-        <Tabs.Tab label="USERS"></Tabs.Tab>
-        <Tabs.Tab label="Groups"></Tabs.Tab>
-        <Tabs.Tab label="Events"></Tabs.Tab>
+        <Tabs.Tab label="SEARCH USERS"></Tabs.Tab>
+        <Tabs.Tab label="SEARCH Groups"></Tabs.Tab>
+        <Tabs.Tab label="SEARCH Events"></Tabs.Tab>
         <Modal opened={modal} onClose={() => setModal(false)} size="xl">
           {modal && <UserModal userId={userId} clicked={clicked} />}
         </Modal>
