@@ -13,11 +13,12 @@ export default async function handler(req, res) {
         FROM barkschema.friends f
         WHERE friend_id=$1 AND
         user_id NOT IN
-        (select friend_id from barkschema.friends where user_id = user_id);
+        (select friend_id from barkschema.friends where user_id = $1 AND friend_id is not null);
       `,
         [user]
       )
-      .then((result) => res.status(200).send(result.rows))
+      .then((result) => { console.log(user)
+        res.status(200).send(result.rows)})
       .catch((err) => {
         console.log(err, "requests get err");
         res.status(400).end();

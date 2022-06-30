@@ -4,6 +4,7 @@ const { FileWatcherEventKind } = require("typescript");
 require('dotenv').config();
 
 const pool = new Pool({
+
   user: process.env.PGUSERNAME,
   host: process.env.PGHOST,
   database: "bark",

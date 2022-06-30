@@ -19,8 +19,6 @@ function UserModal({ clicked, userId }) {
     zipcode: "",
   });
 
-  console.log(clicked);
-
   useEffect(() => {
     const promises = [
       axios.get(`/api/friend/${userId}/${clicked.user_id}`),
@@ -86,7 +84,6 @@ function UserModal({ clicked, userId }) {
               <li className="friend-prop">
                 <FontAwesomeIcon
                   icon={faPaw}
-                  color="red"
                   className="fa-paw-icons friend-inline-paw"
                 />
                 Friendly to people: {userProfile?.f_people}

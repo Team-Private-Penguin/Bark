@@ -46,7 +46,7 @@ function Navbar({ setUpdateFriends }) {
     <nav className="navbar">
       <Link href="/" passHref>
         <span className="navbar-header">
-          <FontAwesomeIcon icon={faPaw} className="fa-paw" />
+          <FontAwesomeIcon icon={faPaw} className="fa-paw-nav-icon" />
           <h1 className="navbar-title">BARK</h1>
         </span>
       </Link>
@@ -54,21 +54,27 @@ function Navbar({ setUpdateFriends }) {
       <section className="add-user-section">
         <Link href="/map_page" passHref>
           <span className="globe-cont">
-            <FontAwesomeIcon icon={faEarthAsia} className="globe" />
+            <FontAwesomeIcon icon={faEarthAsia} className="globe pointer" />
           </span>
         </Link>
         <Popover
           opened={opened}
           onClose={() => setOpened(false)}
           target={
-
             <ActionIcon
               variant="filled"
               className="m-1 bell-hover"
               onClick={() => setOpened((o) => !o)}
             >
-              <Indicator position="top-end" color="red" size={15} offset={2} label={requests.length}>
-                <FontAwesomeIcon icon={faBell} className="w-[75%]" />
+              <Indicator
+                position="top-end"
+                color="red"
+                size={15}
+                offset={2}
+                label={requests.length}
+                className="bell"
+              >
+                <FontAwesomeIcon icon={faBell} className="w-[75%] bell" />
               </Indicator>
             </ActionIcon>
           }
@@ -97,7 +103,7 @@ function Navbar({ setUpdateFriends }) {
                 "https://res.cloudinary.com/dppbuevux/image/upload/v1656609122/puppy2_gqbggt.jpg"
               }
               alt="puppy-photo"
-              className="nav-photo"
+              className="nav-photo pointer"
               onClick={() => setSignOut(true)}
             />
           }
