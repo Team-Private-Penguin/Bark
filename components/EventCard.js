@@ -31,14 +31,14 @@ function EventCard({ event, rsvp, getUserRsvps, user_id, getEvents }) {
     admin_id,
     event_id,
     group_id,
-    image,
+    img_url,
     owner_id,
   } = event;
   const [isAdmin, setIsAdmin] = useState(false);
   const isOwner = owner_id === user_id;
   const timeStamp = new Date(date);
-  let disImage = image || defaultPhoto;
-
+  let image = img_url || defaultPhoto;
+  console.log(img_url);
   function handleRsvp() {
     if (rsvp) {
       axios({
@@ -161,7 +161,7 @@ function EventCard({ event, rsvp, getUserRsvps, user_id, getEvents }) {
           <Card.Section className="flex justify-center items-center">
             <img
               className="rounded-[10px] max-h-[400px]"
-              src={disImage}
+              src={image}
               onClick={() => setOpened(true)}
             />
           </Card.Section>
