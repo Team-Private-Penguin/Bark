@@ -39,7 +39,10 @@ module.exports = {
     WHERE user_id = $1
     `,
 
-  getAdmin: `SELECT admin_id FROM barkschema.Groups`,
+  getGroupId: `SELECT (group_id) FROM barkschema.events
+  WHERE event_id = $1`,
+
+  getAdminId: ``,
 
   updateEvent: `UPDATE barkschema.Events
   SET group_id = $1,

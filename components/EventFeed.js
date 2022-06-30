@@ -63,6 +63,7 @@ function EventFeed({ userFeed }) {
             event={event}
             user_id={user_id}
             getEvents={userFeed ? getUserEvents : getGroupEvents}
+            event_id={event.event_id}
           />
         );
       })}

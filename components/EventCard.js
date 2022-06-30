@@ -11,15 +11,22 @@ import {
   Stack,
   Title,
 } from "@mantine/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faPaw } from "@fortawesome/free-solid-svg-icons";
 const axios = require("axios").default;
 import Link from "next/link";
 
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
 
-function EventCard({ event, rsvp, getUserRsvps, user_id, getEvents }) {
+function EventCard({
+  image,
+  event,
+  rsvp,
+  getUserRsvps,
+  user_id,
+  eventId1,
+  getEvents,
+}) {
+  image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
   const {
     name,
@@ -39,6 +46,8 @@ function EventCard({ event, rsvp, getUserRsvps, user_id, getEvents }) {
   const timeStamp = new Date(date);
   let image = img_url || defaultPhoto;
   console.log(img_url);
+  const [groupId, setGroupId] = useState(0);
+
   function handleRsvp() {
     if (rsvp) {
       axios({
@@ -60,56 +69,57 @@ function EventCard({ event, rsvp, getUserRsvps, user_id, getEvents }) {
     }
   }
 
-  useEffect(() => {
-    // axios({
-    //   method: 'get',
-    //   url:  '/api/events',
-    //   params: {
-    //     body: 'admin'
-    //   }
-    // })
-    // .then((response) => {
-    //   console.log(response);
-    //   setIsAdmin(response.data); //edit this in accordance with the response.
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // })
-    setIsAdmin(false);
-  }, [isAdmin]);
+  // useEffect(() => {
+  // axios({
+  //   method: 'get',
+  //   url:  '/api/admin',
+  //   params: {
+  //     type: "getGroupId",
+  //     event_id: 1
+  //   }
+  // })
+  // .then((response) => {
+  //   setIsAdmin(response.data); //edit this in accordance with the response.
+  // })
+  // .catch((err) => {
+  //   console.log('didnt get id correctly');
+  // })
+
+  // }, [isAdmin]);  //gets group id, use group id to get admin id, then compare with user id...
 
   const handleEdit = (event) => {
     event.preventDefault();
-    // axios({
-    //   method: "PUT",
-    //   url: "/api/events",
-    //   params: {
-    //     everything: "",
-    //   },
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios({
+      method: "PUT",
+      url: "/api/admin",
+      params: {
+        body: "asdfasdf",
+        event_id: eventId1,
+      },
+    })
+      .then((response) => {
+        console.log("updating!");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleDelete = (event) => {
     event.preventDefault();
-    // axios({
-    //   method: "DELETE",
-    //   url: "/api/events",
-    //   params: {
-    //     body: 1, //id of the event to delete.
-    //   },
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios({
+      method: "DELETE",
+      url: "/api/events",
+      params: {
+        body: eventId1, //id of the event to delete.
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   function handleDeleteEvent() {
