@@ -49,8 +49,8 @@ function Navbar({setUpdateFriends}) {
           <h1 className="navbar-title">BARK</h1>
         </span>
       </Link>
-      <section className="add-user-section">
       <Input userId={userId}/>
+      <section className="add-user-section">
         <Popover
           opened={opened}
           onClose={() => setOpened(false)}
