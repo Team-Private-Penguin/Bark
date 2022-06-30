@@ -149,7 +149,7 @@ function EventDetail({
       <Card className="space-y-1 w-[24%] h-[90vh]" radius="10px" shadow="sm">
         <Card.Section className="bg-main p-2">
           <Title align="center" order={4}>
-            Attendees
+            {prospective ? "Interested" : "RSVPs"}
           </Title>
         </Card.Section>
         <ScrollArea className="h-[98%] overflow-auto">
