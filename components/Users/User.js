@@ -71,7 +71,6 @@ function User() {
             <li className="dog-prop">
               <FontAwesomeIcon
                 icon={faPaw}
-                color="red"
                 className="fa-paw-icons inline-paw"
               />
               Friendly to people: {userProfile?.f_people}

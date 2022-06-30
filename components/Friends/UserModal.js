@@ -19,7 +19,7 @@ function UserModal({ clicked, userId }) {
     zipcode: "",
   });
 
-  console.log(userProfile, "friends user profile");
+  console.log(list, "list");
 
   useEffect(() => {
     const promises = [
