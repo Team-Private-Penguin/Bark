@@ -95,16 +95,17 @@ const Groups = () => {
                   <span className="center-feed">
                     🐶 {groupDetails.name}
                   </span>{" "}
-                  {joined ? null : (
-                    <Button onClick={joinGroup}> Join Group </Button>
-                  )}
                 </Group>
               </h2>
-              <AddEvent
-                joined={joined}
-                eventCount={eventCounter}
-                setCount={setEventCounter}
-              />
+              {joined ? (
+                <AddEvent
+                  joined={joined}
+                  eventCount={eventCounter}
+                  setCount={setEventCounter}
+                />
+              ) : (
+                <Button onClick={joinGroup}> Join Group </Button>
+              )}
             </div>
             <ScrollArea
               offsetScrollbars
