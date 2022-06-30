@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import { useForm } from "@mantine/form";
 import { useUser } from "@auth0/nextjs-auth0";
 
-const AddGroup = () => {
+const AddGroup = ({ groupCount, setGroupCount }) => {
   const { user } = useUser();
   const user_id = user?.sub.split("google-oauth2|")[1];
 
@@ -27,13 +27,18 @@ const AddGroup = () => {
 
   const handleSubmit = (values) => {
     values["admin_id"] = user_id;
-    axios.post("/api/groups", values).then((data) => {
-      let submission = {
-        user_id: user_id,
-        group_id: data.data[0].rows[0]["group_id"],
-      };
-      axios.post("/api/usergroup", submission);
-    });
+    axios
+      .post("/api/groups", values)
+      .then((data) => {
+        let submission = {
+          user_id: user_id,
+          group_id: data.data[0].rows[0]["group_id"],
+        };
+        axios.post("/api/usergroup", submission);
+      })
+      .then(() => {
+        setGroupCount(groupCount + 1);
+      });
     setOpened(false);
   };
 

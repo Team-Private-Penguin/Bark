@@ -6,6 +6,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import EditUser from "./EditUser";
+import AddUser from "./AddUser";
 
 function User() {
   const { user } = useUser();
@@ -37,7 +38,9 @@ function User() {
       <h1 className="dog-name">
         <span className="dog-name-text">{userProfile?.name}</span>
         {!userProfile?.name ? (
-          <div className="centered">Please add your pet above!</div>
+          <span>
+            <AddUser />
+          </span>
         ) : (
           <span>
             <EditUser />
@@ -71,7 +74,6 @@ function User() {
             <li className="dog-prop">
               <FontAwesomeIcon
                 icon={faPaw}
-                color="red"
                 className="fa-paw-icons inline-paw"
               />
               Friendly to people: {userProfile?.f_people}
@@ -88,7 +90,6 @@ function User() {
       )}
     </section>
   );
-
 }
 
 export default User;
