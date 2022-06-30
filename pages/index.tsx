@@ -42,7 +42,14 @@ const Home: NextPage = () => {
           <Stack style={{ flexGrow: 1 }}>
             <div className="border h-[90vh] shadows homeBox">
               <h2 className="sticky top-0 z-50">🐶 Events</h2>
-              <EventFeed userFeed={true} />
+              <ScrollArea
+                offsetScrollbars
+                scrollbarSize={8}
+                className="mt-2"
+                style={{ height: "82vh" }}
+              >
+                <EventFeed userFeed={true} />
+              </ScrollArea>
             </div>
           </Stack>
 
