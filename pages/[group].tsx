@@ -112,7 +112,11 @@ const Groups = () => {
               className="mt-2"
               style={{ height: "80vh" }}
             >
-              <EventFeed eventCount={eventCounter} userFeed={false} />
+              <EventFeed
+                group={id}
+                eventCount={eventCounter}
+                userFeed={false}
+              />
             </ScrollArea>
           </div>
         </Stack>
