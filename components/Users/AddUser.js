@@ -114,7 +114,12 @@ function AddUser() {
           <Dropzone setImage={setImage} />
 
           <Group position="center" mt="md">
-            <Button color="dark" variant="outline" type="submit">
+            <Button
+              color="dark"
+              variant="outline"
+              type="submit"
+              onClick={() => setOpened(false)}
+            >
               Submit
             </Button>
           </Group>
@@ -122,7 +127,9 @@ function AddUser() {
       </Modal>
 
       <Group position="center">
-        <Button onClick={() => setOpened(true)}>ADD YOUR PET</Button>
+        <Button className="bg-slate-800" onClick={() => setOpened(true)}>
+          ADD YOUR PET
+        </Button>
       </Group>
     </div>
   );

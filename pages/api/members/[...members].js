@@ -9,10 +9,11 @@ export default async function handler(req, res) {
       SELECT
         (select name from barkschema.users where user_id = u.user_id),
         (select photo from barkschema.users where user_id = u.user_id),
-        (select user_id from barkschema.users where user_id = u.user_id)
+        (select user_id from barkschema.users where user_id = u.user_id),
+        (select admin_id from barkschema.groups where group_id = $1)
       FROM barkschema.users_groups u
-      WHERE group_id = ${group}
-      `
+      WHERE group_id = $1
+      `, [group]
       )
       .then((result) => res.status(200).send(result.rows))
       .catch((err) => {

@@ -40,8 +40,8 @@ function Friends({groupId, listType, updateFriends}) {
 
   return (
     <>
-      {friendList.length > 0 ? (
-        <FriendList friendList={friendList} handleChat={handleChat} setClicked={setClicked} setModal={setModal}/>
+      {friendList.length > 0 && userId ? (
+        <FriendList userId={userId} friendList={friendList} handleChat={handleChat} setClicked={setClicked} setModal={setModal}/>
       ) : (
         <span>Join groups to find friends!</span>
       )}

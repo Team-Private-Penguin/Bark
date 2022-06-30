@@ -59,12 +59,6 @@ module.exports = {
     JOIN barkschema.events USING (event_id)
     WHERE user_id = $1
   `,
-  getUserGroupsEvents: `SELECT e.address, e.name, e.owner_id, e.img_url, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id
-  FROM barkschema.users_groups ug
-  JOIN barkschema.groups g USING (group_id)
-  JOIN barkschema.events e USING (group_id)
-  WHERE user_id = $1
-`,
 
   postUser: `INSERT INTO barkschema.users (
     user_id,
@@ -84,6 +78,7 @@ module.exports = {
     JOIN barkschema.groups g USING (group_id)
     JOIN barkschema.events e USING (group_id)
     WHERE user_id = $1
+    ORDER BY e.date DESC
   `,
 
   postEventComment: `INSERT INTO barkschema.comments (

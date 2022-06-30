@@ -30,7 +30,12 @@ function AddComment({ setComments, event, user_id }) {
         />
       </Stack>
       <Stack>
-        <Button size="md" disabled={!comment.length} onClick={handleClick}>
+        <Button
+          className="bg-slate-800"
+          size="md"
+          disabled={!comment.length}
+          onClick={handleClick}
+        >
           Post
         </Button>
       </Stack>

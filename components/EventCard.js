@@ -40,7 +40,6 @@ function EventCard({
   const canEdit = owner_id === user_id || admin_id === user_id;
   const timeStamp = new Date(date);
   let image = img_url || defaultPhoto;
-  console.log(img_url);
   const [groupId, setGroupId] = useState(0);
 
   function handleRsvp() {
