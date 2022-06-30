@@ -19,6 +19,8 @@ function UserModal({ clicked, userId }) {
     zipcode: "",
   });
 
+  console.log(clicked);
+
   useEffect(() => {
     const promises = [
       axios.get(`/api/friend/${userId}/${clicked.user_id}`),
