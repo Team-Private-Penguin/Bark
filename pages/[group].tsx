@@ -90,19 +90,31 @@ const Groups = () => {
           <div className="border h-[90vh] shadows">
             <div className="sticky top-0 z-50">
               <h2>
-                <Group className="justify-between">
+                <Group>
                   {" "}
-                  <span>🐶 {groupDetails.name}</span>{" "}
-                  {joined ? null : (
-                    <Button onClick={joinGroup}> Join Group </Button>
-                  )}
+                  <span className="center-feed">
+                    🐶 {groupDetails.name}
+                  </span>{" "}
                 </Group>
               </h2>
-              <AddEvent
-                joined={joined}
-                eventCount={eventCounter}
-                setCount={setEventCounter}
-              />
+              <Group position="center">
+                {joined ? (
+                  <AddEvent
+                    joined={joined}
+                    eventCount={eventCounter}
+                    setCount={setEventCounter}
+                  />
+                ) : (
+                  <Button
+                    disabled={joined}
+                    onClick={joinGroup}
+                    className="bg-slate-800"
+                  >
+                    {" "}
+                    Join Group{" "}
+                  </Button>
+                )}
+              </Group>
             </div>
             <ScrollArea
               offsetScrollbars
@@ -110,11 +122,7 @@ const Groups = () => {
               className="mt-2"
               style={{ height: "80vh" }}
             >
-              <EventFeed
-                group={id}
-                eventCount={eventCounter}
-                userFeed={false}
-              />
+              <EventFeed eventCount={eventCounter} userFeed={false} />
             </ScrollArea>
           </div>
         </Stack>
