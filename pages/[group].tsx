@@ -64,7 +64,7 @@ const Groups = () => {
         setJoined(true);
       }
     });
-  }, [userId]);
+  }, [userId, id]);
   return (
     <main className="min-h-screen w-screen">
       <Navbar />
