@@ -107,12 +107,15 @@ h2 {
   transform: rotate(0.1turn);
 }
 
-.fa-paw-icons {
-  height: 25px;
-  width: 25px;
+.fa-header-icons {
+  height: 20px;
+  width: 20px;
   filter: invert(0);
   transform: rotate(0turn);
-  color: var(--blue);
+  color: var(--white);
+  display: inline;
+  margin: 0px 10px;
+  offset: 10px;
 }
 
 .section-title {
@@ -351,7 +354,8 @@ h2 {
 
 .center-feed {
   margin: auto;
-  font-weight: 700;
+  font-weight: 400;
+  font-size: 16px;
   /* border: solid 5px blue; */
 }
 
