@@ -1,11 +1,14 @@
 import db from "./db";
-import {
-  postEvent,
-  getEventsGroup,
-  getAdmin,
-  deleteEvent,
-  updateEvent,
-} from "./db/model";
+import { postEvent, getAdmin, updateEvent } from "./db/model";
+
+const deleteEvent = `DELETE
+FROM barkschema.events
+WHERE event_id = $1;
+`;
+
+const deleteComments = `DELETE FROM barkschema.comments WHERE event_id = $1`;
+
+const deleteUsersEvents = `DELETE FROM barkschema.users_events WHERE event_id = $1`;
 
 const getGroupEvents = `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id, e.owner_id, e.img_url, e.event_id
 FROM barkschema.events e
@@ -66,9 +69,10 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "DELETE") {
-    console.log(req);
     return db
-      .queryAsync(deleteEvent, [req.body.event_id])
+      .queryAsync(deleteComments, [req.body.event_id])
+      .then(() => db.queryAsync(deleteUsersEvents, [req.body.event_id]))
+      .then(() => db.queryAsync(deleteEvent, [req.body.event_id]))
       .then(() => {
         res.status(200).send("Deleted!");
       })

@@ -41,9 +41,6 @@ module.exports = {
 
   getAdmin: `SELECT admin_id FROM barkschema.Groups`,
 
-  deleteEvent: `DELETE FROM barkschema.events
-  WHERE event_id = $1`,
-
   updateEvent: `UPDATE barkschema.Events
   SET group_id = $1,
   name = $2,
@@ -100,8 +97,6 @@ module.exports = {
     WHERE event_id = $1
     ORDER BY date DESC
   `,
-
-  deleteComment: `DELETE FROM barkschema.comments WHERE event_id = $1`,
 
   editUser: `UPDATE barkschema.Users
   SET zipcode = $2,
