@@ -4,7 +4,7 @@ import Link from "next/link";
 import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
 
-function GroupList() {
+function GroupList({ groupCount }) {
   const { user } = useUser();
   const user_id = user?.sub.split("google-oauth2|")[1];
   const [UserGroups, setUserGroups] = useState([]);
@@ -12,7 +12,7 @@ function GroupList() {
     axios.get(`/api/usergroup?user_id=${user_id}`).then((data) => {
       setUserGroups(data.data[0].rows);
     });
-  }, [user_id]);
+  }, [user_id, groupCount]);
 
   return (
     <Stack className="h-[35vh] overflow-auto">

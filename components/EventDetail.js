@@ -47,14 +47,18 @@ function EventDetail({
   }
 
   useEffect(() => {
-    getComments();
+    if (event_id) {
+      getComments();
+    }
   }, [user_id]);
 
   useEffect(() => {
-    axios
-      .get(`/api/event/rsvp?event_id=${event_id}`)
-      .then((data) => setAttendees(data.data[0].rows))
-      .catch((err) => console.log(err));
+    if (event_id) {
+      axios
+        .get(`/api/event/rsvp?event_id=${event_id}`)
+        .then((data) => setAttendees(data.data[0].rows))
+        .catch((err) => console.log(err));
+    }
   }, [rsvp, user_id]);
 
   const attendeeList = attendees.map((attendee, index) => {

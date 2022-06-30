@@ -17,11 +17,14 @@ import ExploreGroups from "../components/ExploreGroups";
 const Groups = () => {
   const { user } = useUser();
   const [joined, setJoined] = useState(false);
+  const [groupCount, setGroupCount] = useState(0);
+  const [eventCounter, setEventCounter] = useState(0);
   let userId = user?.sub.split("google-oauth2|")[1];
   if (!userId) {
     userId = user?.sub.split("auth0|")[1];
   }
   // const TempUserId = 1;
+
   const {
     query: { id },
   } = useRouter();
@@ -53,7 +56,7 @@ const Groups = () => {
   useEffect(() => {
     getGroupDetails();
     axios.get(`/api/usergroup?user_id=${userId}`).then((data) => {
-      console.log("join check", data.data[0].rows);
+      console.log("join check", data.data[0]);
       if (
         data.data[0].rows.filter((obj: { group_id: string }) => {
           return obj["group_id"] === id;
@@ -62,7 +65,7 @@ const Groups = () => {
         setJoined(true);
       }
     });
-  }, []);
+  }, [userId]);
   return (
     <main className="min-h-screen w-screen">
       <Navbar />
@@ -79,8 +82,8 @@ const Groups = () => {
             <h2>🐶 Groups</h2>
             <Stack>
               <ExploreGroups />
-              <AddGroup />
-              <GroupList />
+              <AddGroup groupCount={groupCount} setGroupCount={setGroupCount} />
+              <GroupList groupCount={groupCount} />
             </Stack>
           </div>
         </Stack>
@@ -96,7 +99,11 @@ const Groups = () => {
                   )}
                 </Group>
               </h2>
-              <AddEvent />
+              <AddEvent
+                joined={joined}
+                eventCount={eventCounter}
+                setCount={setEventCounter}
+              />
             </div>
             <ScrollArea
               offsetScrollbars
@@ -104,7 +111,7 @@ const Groups = () => {
               className="mt-2"
               style={{ height: "80vh" }}
             >
-              <EventFeed userFeed={false} />
+              <EventFeed eventCount={eventCounter} userFeed={false} />
             </ScrollArea>
           </div>
         </Stack>
