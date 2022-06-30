@@ -80,7 +80,12 @@ function EventDetail({
       >
         <Card.Section className="bg-main p-2">
           <Group position="apart">
-            <Title order={5}>{group_name}</Title>
+            <Title order={3}>{name}</Title>
+            <Title order={5}>
+              {timeStamp.toLocaleString([], {
+                dateStyle: "short",
+              })}
+            </Title>
             {isOwner ? (
               <Button onClick={handleDeleteEvent} color="red">
                 Delete Event
@@ -92,30 +97,27 @@ function EventDetail({
           {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
         </Stack>
         <Card.Section className="flex items-center justify-center space-x-4">
-          <Stack className="w-[35%] flex-column">
-            <h3 className="text-center font-bold color-accent">{name}</h3>
-            <Text color="var(--light-blue)" align="center" size="sm">
-              {timeStamp.toLocaleString([], {
-                dateStyle: "short",
-              })}
-            </Text>
-            <Text color="var(--black)" align="center">
-              {address}
-            </Text>
-          </Stack>
-
           <Stack className="w-[40%]">
             <Image radius="10px" fit="contain" src={image} />
-            <Group position="center">
-              <Switch
-                checked={rsvp}
-                onChange={handleRsvp}
-                label={prospective ? "Interested?" : "RSVP"}
-              ></Switch>
-            </Group>
           </Stack>
         </Card.Section>
-        <Card.Section p=".5rem">{description}</Card.Section>
+
+        <Card.Section p=".5rem">
+          <Group position="apart">
+            <Badge className="">{group_name}</Badge>
+            <Switch
+              checked={rsvp}
+              onChange={handleRsvp}
+              label={prospective ? "Interested?" : "RSVP"}
+            ></Switch>
+          </Group>
+          <Text color="var(--black)" size="lg">
+            {address}
+          </Text>
+          <Text color="var(--black)" size="md">
+            {description}
+          </Text>
+        </Card.Section>
         <Card.Section>
           <AddComment
             user_id={user_id}
