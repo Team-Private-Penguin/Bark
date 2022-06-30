@@ -100,19 +100,22 @@ h2 {
   color: var(--white);
 }
 
-.fa-paw {
+.fa-paw-nav-icon {
   height: 25px;
   width: 25px;
   filter: invert(1);
   transform: rotate(0.1turn);
 }
 
-.fa-paw-icons {
-  height: 25px;
-  width: 25px;
+.fa-header-icons {
+  height: 20px;
+  width: 20px;
   filter: invert(0);
   transform: rotate(0turn);
-  color: var(--blue);
+  color: var(--white);
+  display: inline;
+  margin: 0px 10px;
+  offset: 10px;
 }
 
 .section-title {
@@ -217,6 +220,7 @@ h2 {
   height: 10px;
   width: 10px;
   margin: 0 3px;
+  filter: invert(0);
 }
 
 .centered {
@@ -267,42 +271,6 @@ h2 {
   height: 20px;
   width: 20px;
   color: var(--light-blue);
-}
-
-.bell-hover:hover {
-  background-color: transparent;
-}
-
-.bell {
-  transition: all 700ms ease;
-}
-
-.bell:hover {
-  font-size: 200px;
-  opacity: 0.8;
-  color: var(--light-blue);
-  height: 25px;
-  width: 25px;
-  animation-name: RevSpin;
-  animation-duration: 2s;
-  transition-timing-function: linear;
-}
-
-@keyframes RevSpin {
-  0% {
-    transform: rotate(0turn) scale(1);
-  }
-  25% {
-    transform: rotate(0.1turn) scale(1);
-    color: var(--light-blue);
-  }
-  75% {
-    transform: rotate(-0.1turn) scale(1);
-    color: var(--light-blue);
-  }
-  100% {
-    transform: rotate(0turn) scale(1);
-  }
 }
 
 .friend-dog-name-text {
@@ -387,6 +355,55 @@ h2 {
 
 .center-feed {
   margin: auto;
-  font-weight: 700;
+  font-weight: 400;
+  font-size: 16px;
   /* border: solid 5px blue; */
+}
+
+.bell-hover:hover {
+  background-color: transparent;
+}
+
+.bell {
+  transition: all 700ms ease;
+}
+
+.bell:hover {
+  font-size: 200px;
+  opacity: 0.8;
+  color: var(--light-blue);
+  height: 25px;
+  width: 25px;
+  animation-name: RevSpin;
+  animation-duration: 2s;
+  transition-timing-function: linear;
+}
+
+@keyframes RevSpin {
+  0% {
+    transform: rotate(0turn) scale(1);
+  }
+  25% {
+    transform: rotate(0.1turn) scale(1);
+    color: var(--light-blue);
+  }
+  75% {
+    transform: rotate(-0.1turn) scale(1);
+    color: var(--light-blue);
+  }
+  100% {
+    transform: rotate(0turn) scale(1);
+  }
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+.fa-paw-icons {
+  color: var(--light-blue);
+}
+.paw-groups {
+  filter: invert(0);
+  color: var(--red);
 }

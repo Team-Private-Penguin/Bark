@@ -2,6 +2,8 @@ import AddComment from "./AddComment";
 import CommentFeed from "./CommentFeed";
 import UserModal from "./Friends/UserModal";
 import React, { useEffect, useState } from "react";
+import { useForm } from "@mantine/form";
+import { DatePicker } from "@mantine/dates";
 import {
   Card,
   Image,
@@ -15,6 +17,7 @@ import {
   Button,
   ScrollArea,
   Modal,
+  TextInput,
 } from "@mantine/core";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -40,9 +43,23 @@ function EventDetail({
     event_id,
   } = event;
   const timeStamp = new Date(date);
+
+  const editForm = useForm({
+    initialValues: {
+      name: "",
+      date: "",
+      description: "",
+      lat: "",
+      lng: "",
+      address: "",
+      prospective: "",
+    },
+  });
+
   const [comments, setComments] = useState([{}]);
   const [attendees, setAttendees] = useState([{}]);
   const [modal, setModal] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
 
   function getComments() {
     axios
@@ -103,6 +120,18 @@ function EventDetail({
     );
   });
 
+  const editEvent = (values) => {
+    values["admin_id"] = user_id;
+    axios.patch("/api/event", values)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err)=> {
+        console.log(err);
+      })
+    setOpenEdit(false);
+  }
+
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
       <Card
@@ -123,7 +152,7 @@ function EventDetail({
         <Stack>
           {canEdit ? (
             <Group grow spacing={0}>
-              <Button onClick={handleEdit} variant="default">
+              <Button onClick={()=> setOpenEdit(true)} variant="default">
                 EDIT
               </Button>
               <Button onClick={handleDeleteEvent} variant="default">
@@ -131,7 +160,7 @@ function EventDetail({
               </Button>
             </Group>
           ) : null}
-          {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
+          {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
         </Stack>
         <Card.Section className="h-[25vh] flex items-center justify-center space-x-4">
           <Stack>
@@ -144,8 +173,9 @@ function EventDetail({
 
         <Card.Section p=".5rem">
           <Group position="apart">
-            <Badge className="">{group_name}</Badge>
+            <Badge color="cyan">{group_name}</Badge>
             <Switch
+              color="cyan"
               checked={rsvp}
               onChange={handleRsvp}
               label={prospective ? "Interested?" : "RSVP"}
@@ -187,6 +217,58 @@ function EventDetail({
           {attendeeList}
         </ScrollArea>
       </Card>
+
+      <Modal
+        opened={openEdit}
+        onClose={() => setOpenEdit(false)}
+        title="Edit event"
+      >
+        <form onSubmit={editForm.onSubmit((values) => editEvent(values))}>
+          <TextInput
+            placeholder="Event Name"
+            label="Event name"
+            required
+            {...editForm.getInputProps("name")}
+          />
+          <TextInput
+            placeholder="Address Line 1"
+            label="Address"
+            required
+            {...editForm.getInputProps("address_1")}
+          />
+          <TextInput
+            placeholder="description"
+            label="Description"
+            required
+            {...editForm.getInputProps("description")}
+          />
+          <DatePicker
+            placeholder="Pick date"
+            label="Event date"
+            required
+            {...editForm.getInputProps("date")}
+          />
+          <TextInput
+            placeholder="event id"
+            label="Event id"
+            required
+            {...editForm.getInputProps("event_id")}
+          />
+          <TextInput
+            placeholder="group id"
+            label="group id"
+            required
+            {...editForm.getInputProps("group_id")}
+          />
+
+          <Group position="right" mt="md">
+            <Button className="bg-slate-800" type="submit">
+              Update
+            </Button>
+          </Group>
+        </form>
+      </Modal>
+
     </div>
   );
 }

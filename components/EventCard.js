@@ -10,7 +10,10 @@ import {
   Badge,
   Stack,
   Title,
+  TextInput,
 } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { DatePicker } from "@mantine/dates";
 const axios = require("axios").default;
 import Link from "next/link";
 
@@ -62,24 +65,19 @@ function EventCard({
         .catch((err) => console.log(err));
     }
   }
+  const editForm = useForm({
+    initialValues: {
+      name: "",
+      date: "",
+      description: "",
+      lat: "",
+      lng: "",
+      address: "",
+      prospective: "",
+    },
+  });
 
-  // useEffect(() => {
-  // axios({
-  //   method: 'get',
-  //   url:  '/api/admin',
-  //   params: {
-  //     type: "getGroupId",
-  //     event_id: 1
-  //   }
-  // })
-  // .then((response) => {
-  //   setIsAdmin(response.data); //edit this in accordance with the response.
-  // })
-  // .catch((err) => {
-  //   console.log('didnt get id correctly');
-  // })
-
-  // }, [isAdmin]);  //gets group id, use group id to get admin id, then compare with user id...
+  const [openEdit, setOpenEdit] = useState(false);
 
   const handleEdit = (event) => {
     event.preventDefault();
@@ -117,10 +115,14 @@ function EventCard({
         <Card radius="10px" shadow="sm" p="sm">
           <Card.Section className="p-2">
             <Stack>
-              {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
+              {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
             </Stack>
             <Group position="apart">
-              <Title order={3} className="" onClick={() => setOpened(true)}>
+              <Title
+                order={3}
+                className="cursor-pointer"
+                onClick={() => setOpened(true)}
+              >
                 {name}
               </Title>
 
@@ -132,9 +134,9 @@ function EventCard({
             </Group>
             {canEdit ? (
               <Group grow spacing={0}>
-                <Button onClick={handleEdit} variant="default">
-                  EDIT
-                </Button>
+                <Button onClick={()=> setOpenEdit(true)} variant="default">
+                EDIT
+              </Button>
                 <Button onClick={handleDeleteEvent} variant="default">
                   DELETE
                 </Button>
@@ -143,7 +145,7 @@ function EventCard({
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
             <img
-              className="rounded-[10px] max-h-[400px]"
+              className="rounded-[10px] max-h-[400px] cursor-pointer"
               src={image}
               onClick={() => setOpened(true)}
             />
@@ -151,9 +153,13 @@ function EventCard({
           <Card.Section className="p-2">
             <Group className="group">
               <Link href={`/group?id=${group_id}`} passHref>
-                <Badge className="">{group_name}</Badge>
+                <Badge color="cyan" className="hover:cursor-pointer">
+                  {group_name}
+                </Badge>
               </Link>
+
               <Switch
+                color="cyan"
                 checked={rsvp}
                 onChange={handleRsvp}
                 label={prospective ? "Interested?" : "RSVP"}
@@ -182,6 +188,56 @@ function EventCard({
           handleEdit={handleEdit}
           canEdit={canEdit}
         />
+      </Modal>
+      <Modal
+        opened={openEdit}
+        onClose={() => setOpenEdit(false)}
+        title="Edit event"
+      >
+        <form onSubmit={editForm.onSubmit((values) => editEvent(values))}>
+          <TextInput
+            placeholder="Event Name"
+            label="Event name"
+            required
+            {...editForm.getInputProps("name")}
+          />
+          <TextInput
+            placeholder="Address Line 1"
+            label="Address"
+            required
+            {...editForm.getInputProps("address_1")}
+          />
+          <TextInput
+            placeholder="description"
+            label="Description"
+            required
+            {...editForm.getInputProps("description")}
+          />
+          <DatePicker
+            placeholder="Pick date"
+            label="Event date"
+            required
+            {...editForm.getInputProps("date")}
+          />
+          <TextInput
+            placeholder="event id"
+            label="Event id"
+            required
+            {...editForm.getInputProps("event_id")}
+          />
+          <TextInput
+            placeholder="group id"
+            label="group id"
+            required
+            {...editForm.getInputProps("group_id")}
+          />
+
+          <Group position="right" mt="md">
+            <Button className="bg-slate-800" type="submit">
+              Update
+            </Button>
+          </Group>
+        </form>
       </Modal>
     </div>
   );
