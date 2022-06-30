@@ -6,6 +6,8 @@ function UserModal({ clicked, userId }) {
   const [currStatus, setCurrStatus] = useState("notFriends");
   const [list, setList] = useState({});
 
+  console.log(clicked);
+
   useEffect(() => {
     const promises = [
       axios.get(`/api/friend/${userId}/${clicked.user_id}`),
@@ -14,7 +16,6 @@ function UserModal({ clicked, userId }) {
     Promise.all(promises).then((res) => {
       setList({ user: res[0].data.length, friend: res[1].data.length });
     });
-
   }, [clicked, currStatus]);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ function UserModal({ clicked, userId }) {
       setCurrStatus("accept");
     }
     if (clicked.user_id === userId) {
-      setCurrStatus('self')
+      setCurrStatus("self");
     }
   }, [list, currStatus]);
 
