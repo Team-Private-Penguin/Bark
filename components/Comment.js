@@ -27,17 +27,17 @@ function Comment({ commentObj, isOwner, getComments }) {
               {name}
             </Text>
           </Group>
-          {isOwner ? (
-            <Button color="red" onClick={handleDeleteComment}>
-              Delete
-            </Button>
-          ) : null}
           <Badge color="gray" variant="light">
             {timeStamp.toLocaleString([], {
               dateStyle: "short",
               timeStyle: "short",
             })}
           </Badge>
+          {isOwner ? (
+            <Button color="red" onClick={handleDeleteComment}>
+              Delete Comment
+            </Button>
+          ) : null}
         </Group>
       </Card.Section>
       <Card.Section p=".5rem">{comment}</Card.Section>

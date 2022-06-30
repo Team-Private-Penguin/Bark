@@ -5,11 +5,13 @@ import {
   Card,
   Image,
   Text,
-  Button,
+  Switch,
   Stack,
   Group,
   Avatar,
   Badge,
+  Title,
+  Button,
 } from "@mantine/core";
 import axios from "axios";
 
@@ -77,7 +79,14 @@ function EventDetail({
         shadow="sm"
       >
         <Card.Section className="bg-main p-2">
-          <h3 className="text-left font-bold">{group_name}</h3>
+          <Group position="apart">
+            <Title order={5}>{group_name}</Title>
+            {isOwner ? (
+              <Button onClick={handleDeleteEvent} color="red">
+                Delete Event
+              </Button>
+            ) : null}
+          </Group>
         </Card.Section>
         <Stack>
           {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
@@ -94,11 +103,16 @@ function EventDetail({
               {address}
             </Text>
           </Stack>
-          <Stack className="">
-            <Button onClick={handleRsvp}>{rsvp ? "Cancel" : "RSVP!"}</Button>
-          </Stack>
+
           <Stack className="w-[40%]">
             <Image radius="10px" fit="contain" src={image} />
+            <Group position="center">
+              <Switch
+                checked={rsvp}
+                onChange={handleRsvp}
+                label={prospective ? "Interested?" : "RSVP"}
+              ></Switch>
+            </Group>
           </Stack>
         </Card.Section>
         <Card.Section p=".5rem">{description}</Card.Section>
