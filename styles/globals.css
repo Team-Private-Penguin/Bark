@@ -262,4 +262,11 @@ h2 {
   color: var(--queen-blue);
 }
 
+.mapCardButton {
+  height: 20px;
+  width: 20px;
+}
 
+.mapCardButtonDiv :hover {
+  cursor: pointer;
+}

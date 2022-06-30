@@ -3,18 +3,44 @@ import {
   postEvent,
   getEventsGroup,
   getAdmin,
+  getGroupId,
   deleteEvent,
   updateEvent,
 } from "./db/model";
 
+const getGroupEvents = `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id
+FROM barkschema.events e
+JOIN barkschema.groups g USING (group_id)
+WHERE group_id = $1
+`;
+
 export default function handler(req, res) {
   if (req.method === "POST") {
-    let { name, description, address, group_id, date, prospective } = req.body;
+    let { name, description, address, group_id, date, prospective, owner_id } =
+      req.body;
     const query = {
       text: postEvent,
-      values: [name, description, address, group_id, date, prospective],
+      values: [
+        name,
+        description,
+        address,
+        group_id,
+        date,
+        prospective,
+        img_url,
+        owner_id,
+      ],
     };
-    let values = [name, description, address, group_id, date, prospective];
+    let values = [
+      name,
+      description,
+      address,
+      group_id,
+      date,
+      prospective,
+      img_url,
+      owner_id,
+    ];
     return db
       .queryAsync(postEvent, values)
       .then(() => res.status(201).send("Ok"))
@@ -22,20 +48,20 @@ export default function handler(req, res) {
         console.log(err);
         res.status(404).send(err);
       });
-  } else if (req.method === "GET" && req.query.body === "admin") {
-    //for getting admin id.
-
+  } else if (req.method === "GET" && req.query.type === "getGroupId") {
+    console.log('in get group id');
     return db
-      .queryAsync(getAdmin)
+      .queryAsync(getGroupId, [req.query.event_id])
       .then((res) => res.status(200).send(res.data)) //this need to change to send the admin id back.
-      .catch((err) => {
-        console.log(err);
-        res.status(404).send(err);
-      });
+        .catch((err) => {
+          console.log(err);
+          res.status(404).send(err);
+        });
+
   } else if (req.method === "GET") {
     let { group_id } = req.query;
     const query = {
-      text: getEventsGroup,
+      text: getGroupEvents,
       values: [group_id],
     };
     return db
@@ -46,8 +72,9 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "DELETE") {
+    console.log('TEST999', req.query.body);
     return db
-      .queryAsync(deleteEvent, req.query.body)
+      .queryAsync(deleteEvent, [req.query.body])
       .then(() => {
         res.status(200).send("Deleted!");
       })

@@ -5,7 +5,6 @@ import EventFeed from "../components/EventFeed";
 import AddEvent from "../components/AddEvent";
 import { Button, Group, Stack } from "@mantine/core";
 import UserInfo from "../components/Users/UserInfo";
-import GroupsComp from "../components/AddGroup";
 import Navbar from "../components/Navbar";
 import User from "../components/Users/User";
 import axios from "axios";
@@ -76,7 +75,7 @@ const Groups = () => {
               <div className="centered">Please add your pet above!</div>
             )}
           </div>
-          <div className="border h-[54vh] space shadows cursor-pointer homeBox">
+          <div className="border h-[54vh] space shadows homeBox">
             <h2>🐶 Groups</h2>
             <Stack>
               <ExploreGroups />

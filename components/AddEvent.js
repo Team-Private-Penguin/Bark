@@ -9,6 +9,7 @@ import {
   Select,
   Textarea,
   TextInput,
+  Input,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import Link from "next/link";
@@ -17,8 +18,14 @@ import { stateData } from "./statedata.js";
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
 import { faBullseye } from "@fortawesome/free-solid-svg-icons";
+import { useUser } from "@auth0/nextjs-auth0";
+import ImageDropzone from "./Users/Dropzone";
 
 function AddEvent() {
+  const { user } = useUser();
+  const user_id = user?.sub.split("google-oauth2|")[1];
+  const [image, setImage] = useState("");
+
   const [opened, setOpened] = useState(false);
   const {
     query: { id },
@@ -34,7 +41,7 @@ function AddEvent() {
       description: "",
       date: "",
       prospective: false,
-      img_url: "",
+      img_url: image,
     },
   });
   const submitEvent = (values) => {
@@ -47,6 +54,8 @@ function AddEvent() {
       date: values.date,
       description: values.description,
       prospective: values.prospective,
+      img_url: image,
+      owner_id: user_id,
     };
     axios.post("/api/events", submission).then(() => {
       setOpened(false);
@@ -110,6 +119,7 @@ function AddEvent() {
             required
             {...form.getInputProps("date")}
           />
+          <ImageDropzone setImage={setImage} />
           <Checkbox
             label="Prospective?"
             {...form.getInputProps("prospective")}

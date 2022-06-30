@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from "react";
 import EventDetail from "./EventDetail";
-import { Modal, Card, Text, Group } from "@mantine/core";
+import {
+  Modal,
+  Card,
+  Text,
+  Group,
+  Switch,
+  Button,
+  Badge,
+  Stack,
+  Title,
+} from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { Switch, Button } from "@mantine/core";
 const axios = require("axios").default;
+import Link from "next/link";
 
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
 const defaultPhoto1 =
   "https://images.unsplash.com/photo-1598875706250-21faaf804361?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OXx8fGVufDB8fHx8&w=1000&q=80";
 
-function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
+function EventCard({ image, event, rsvp, getUserRsvps, user_id, eventId1 }) {
   image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
   const {
@@ -23,9 +33,11 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
     group_name,
     admin_id,
     event_id,
+    group_id,
   } = event;
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
   const timeStamp = new Date(date);
+  const [groupId, setGroupId] = useState(0);
 
   function handleRsvp() {
     if (rsvp) {
@@ -34,6 +46,7 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
         url: "/api/event/rsvp",
         data: {
           user_id,
+          event_id,
         },
       })
         .then(() => getUserRsvps())
@@ -47,56 +60,57 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
     }
   }
 
-  useEffect(() => {
+  // useEffect(() => {
     // axios({
     //   method: 'get',
-    //   url:  '/api/events',
+    //   url:  '/api/admin',
     //   params: {
-    //     body: 'admin'
+    //     type: "getGroupId",
+    //     event_id: 1
     //   }
     // })
     // .then((response) => {
-    //   console.log(response);
     //   setIsAdmin(response.data); //edit this in accordance with the response.
     // })
     // .catch((err) => {
-    //   console.log(err);
+    //   console.log('didnt get id correctly');
     // })
-    setIsAdmin(false);
-  }, [isAdmin]);
+
+  // }, [isAdmin]);  //gets group id, use group id to get admin id, then compare with user id...
 
   const handleEdit = (event) => {
     event.preventDefault();
-    // axios({
-    //   method: "PUT",
-    //   url: "/api/events",
-    //   params: {
-    //     everything: "",
-    //   },
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios({
+      method: "PUT",
+      url: "/api/admin",
+      params: {
+        body: "asdfasdf",
+        event_id: eventId1
+      },
+    })
+      .then((response) => {
+        console.log('updating!');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleDelete = (event) => {
     event.preventDefault();
-    // axios({
-    //   method: "DELETE",
-    //   url: "/api/events",
-    //   params: {
-    //     body: 1, //id of the event to delete.
-    //   },
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios({
+      method: "DELETE",
+      url: "/api/events",
+      params: {
+        body: eventId1, //id of the event to delete.
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -104,18 +118,19 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
       <div className="w-[550px]">
         <Card radius="10px" shadow="sm" p="sm">
           <Card.Section className="p-2" onClick={() => setOpened(true)}>
-            <Group>
-              <Text className="">{name}</Text>
-              <Text color="var(--light-blue)" align="left" size="sm">
+            <Stack>
+              {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
+            </Stack>
+            <Group position="apart">
+              <Title order={3} className="">
+                {name}
+              </Title>
+              <Title order={5}>
                 {timeStamp.toLocaleString([], {
                   dateStyle: "short",
                 })}
-              </Text>
+              </Title>
             </Group>
-            <Text color="var(--black)" align="left">
-              {address}
-            </Text>
-
             {isAdmin ? (
               <Group grow spacing={0}>
                 <Button onClick={handleEdit} variant="default">
@@ -125,9 +140,7 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
                   DELETE
                 </Button>
               </Group>
-            ) : (
-              <p>need admin privileges to change</p>
-            )}
+            ) : null}
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
             <img
@@ -138,11 +151,13 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
           </Card.Section>
           <Card.Section className="p-2">
             <Group className="group">
-              <Text className="">{group_name}</Text>
+              <Link href={`/group?id=${group_id}`} passHref>
+                <Badge className="">{group_name}</Badge>
+              </Link>
               <Switch
                 checked={rsvp}
                 onChange={handleRsvp}
-                label="RSVP"
+                label={prospective ? "Interested?" : "RSVP"}
               ></Switch>
             </Group>
           </Card.Section>
