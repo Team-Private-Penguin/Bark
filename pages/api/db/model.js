@@ -37,7 +37,10 @@ module.exports = {
     WHERE user_id = $1
     `,
 
-  getAdmin: `SELECT admin_id FROM barkschema.Groups`,
+  getGroupId: `SELECT (group_id) FROM barkschema.events
+  WHERE event_id = $1`,
+
+  getAdminId: ``,
 
   deleteEvent: `DELETE FROM barkschema.Events
   WHERE event_id = $1`,

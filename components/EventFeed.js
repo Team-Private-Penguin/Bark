@@ -62,6 +62,7 @@ function EventFeed({ userFeed }) {
             image={true}
             event={event}
             user_id={user_id}
+            event_id={event.event_id}
           />
         );
       })}
