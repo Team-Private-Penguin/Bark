@@ -303,3 +303,39 @@ h2 {
     transform: rotate(0turn) scale(1);
   }
 }
+
+.friend-dog-name-text {
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 700;
+  font-size: 70px;
+  align-self: center;
+  display: flex;
+  align-items: flex-end;
+  /* border: solid 5px red; */
+}
+
+.friend-puppy-photo {
+  border-radius: 10rem;
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  align-self: center;
+  border: 2.5px solid var(--dark-blue);
+  margin-bottom: 10px;
+}
+
+.friend-prop {
+  text-transform: uppercase;
+  font-size: 30px;
+  text-align: start;
+  letter-spacing: 2px;
+}
+
+.friend-inline-paw {
+  display: inline;
+  height: 30px;
+  width: 30px;
+  margin: 0 10px;
+  transform: rotate(20deg);
+}
