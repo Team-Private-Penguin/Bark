@@ -27,13 +27,13 @@ let users = [
 
 let groups = [
   {
-    group_id: 1,
+    group_id: 122554,
     description: 'A German Shorthair group centered around scent training',
     name: 'GSP Scent Trainers',
     admin_id: 888111
   },
   {
-    group_id: 2,
+    group_id: 222556,
     description: 'A German Shepherd group centered around home defense',
     name: 'German Shepherd Home Defense Group',
     admin_id: 888122
@@ -42,7 +42,7 @@ let groups = [
 
 let events = [
   {
-    event_id: 5555,
+    event_id: 555589,
     owner_id: 888111,
     group_id: 1,
     name: 'Scent Training 101',
@@ -55,7 +55,7 @@ let events = [
     img_url: 'https://www.mesaparks.com/home/showpublishedimage/23732/637044005290900000'
   },
   {
-    event_id: 5544,
+    event_id: 554489,
     owner_id: 888122,
     group_id: 2,
     name: 'Home Defense 101',

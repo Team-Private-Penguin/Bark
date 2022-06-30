@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import Map from './Map.jsx';
-import { Drawer, Button, LoadingOverlay } from '@mantine/core';
+import { Drawer, Button, LoadingOverlay, ScrollArea } from '@mantine/core';
 import MapDrawerCard from './MapDrawerCard.jsx';
 import Navbar from '../Navbar.js';
 
@@ -23,13 +23,20 @@ export default function MapContainer() {
   return (
     <MapContainerState.Provider value={{ opened, setOpened, rsvp, setRSVP, center, setCenter, searchValue, markers, setMarkers, drawerCards, setDrawerCards }}>
       <Drawer key='MapDrawerLeft' size="lg" withOverlay={false} closeOnEscape="true" closeOnClickOutside={true} padding="xl" opened={opened} onClose={() => { setOpened(false); }} title={title}>
-        {
-          drawerCards.map((card) => {
-            return (
-              <MapDrawerCard card={card} key={card.lat} />
-            )
-          })
-        }
+      <ScrollArea
+              offsetScrollbars
+              scrollbarSize={8}
+              className="mt-2"
+              style={{ height: "95vh" }}
+            >
+          {
+            drawerCards.map((card) => {
+              return (
+                <MapDrawerCard card={card} key={card.lat} />
+              )
+            })
+          }
+          </ScrollArea>
       </Drawer>
       <Map />
     </MapContainerState.Provider>

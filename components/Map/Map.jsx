@@ -33,6 +33,13 @@ export default function Map() {
         console.log(response.data);
         setSearchResults(searchResults = [...response.data]);
 
+        searchResults.map((result) => {
+          if (result.img_url === '') {
+            console.log(result);
+            result.img_url = 'https://www.elegantthemes.com/blog/wp-content/uploads/2020/02/000-404.png';
+          }
+        })
+
         if (searchResults.length > 0) {
           setDrawerCards(drawerCards = [...searchResults]);
           setOpened(true);
@@ -50,7 +57,8 @@ export default function Map() {
   // Here is where we will set the map center and markers based on incoming context
   useEffect(() => {
     let keyDownHandler = (event) => {
-      console.log(`User Pressed: ${event.key}`);
+      // Enable below if you want to see keylog in console
+      // console.log(`User Pressed: ${event.key}`);
 
       if (event.key === 'Enter') {
         event.preventDefault();

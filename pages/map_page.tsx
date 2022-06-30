@@ -11,7 +11,7 @@ const MapPage = () => {
       <Group position="apart" className="h-[90vh] Group">
         <Navbar />
         <Stack style={{ width: "100%", height: "100%" }}>
-          <MapContainer />
+            <MapContainer />
         </Stack>
       </Group>
   </main>
