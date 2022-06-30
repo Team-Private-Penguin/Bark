@@ -1,5 +1,6 @@
 import AddComment from "./AddComment";
 import CommentFeed from "./CommentFeed";
+import UserModal from "./Friends/UserModal";
 import React, { useEffect, useState } from "react";
 import {
   Card,
@@ -13,8 +14,11 @@ import {
   Title,
   Button,
   ScrollArea,
+  Modal,
 } from "@mantine/core";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 function EventDetail({
   image,
@@ -38,23 +42,14 @@ function EventDetail({
   const timeStamp = new Date(date);
   const [comments, setComments] = useState([{}]);
   const [attendees, setAttendees] = useState([{}]);
-  const [openEdit, setOpenEdit] = useState(false);
+  const [modal, setModal] = useState(false);
+
   function getComments() {
     axios
       .get(`/api/event/comment?id=${event_id}`)
       .then((data) => setComments(data.data[0].rows))
       .catch((err) => console.log(err));
   }
-
-  const editForm = useForm({
-    name: "",
-    address: "",
-    date: "",
-    prospective: "",
-    description: "",
-    group_name: "",
-    event_id: "",
-  });
 
   useEffect(() => {
     if (event_id) {
@@ -73,15 +68,37 @@ function EventDetail({
 
   const attendeeList = attendees.map((attendee, index) => {
     return (
-      <Group key={index} className="border-b-2 pb-1 pt-50 mb-3">
+      <Group
+        key={index}
+        position="apart"
+        className="border-b-2 pb-1 pt-50 mb-3"
+      >
+        <Group>
+          <Avatar
+            src={attendee.photo}
+            radius="xl"
+            component="span"
+            size={30}
+            className="ml-2"
+            onClick={() => setModal(true)}
+          />
+          <Text onClick={() => setModal(true)} className="ml-0">
+            {attendee.name}
+          </Text>
+        </Group>
         <Avatar
-          src={attendee.photo}
           radius="xl"
-          component="span"
-          size={30}
-          className="ml-5"
-        />
-        <Text className="ml-1">{attendee.name}</Text>
+          size={25}
+          className="cursor-pointer shadow mr-2"
+          onClick={() => {
+            setModal(true);
+          }}
+        >
+          <FontAwesomeIcon icon={faUserCircle} className="w-[55%] " />
+        </Avatar>
+        <Modal opened={modal} onClose={() => setModal(false)} size="xl">
+          <UserModal userId={user_id} clicked={{ user_id: attendee.user_id }} />
+        </Modal>
       </Group>
     );
   });

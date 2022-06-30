@@ -4,8 +4,9 @@ import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw, faBell } from "@fortawesome/free-solid-svg-icons";
-import { ActionIcon, Popover } from "@mantine/core";
+import AddUser from "./Users/AddUser";
+import { ActionIcon, Indicator, Popover } from "@mantine/core";
+import { faPaw, faBell, faEarthAsia } from "@fortawesome/free-solid-svg-icons";
 import Requests from "./Friends/Requests";
 import Input from "./Autocomplete";
 function Navbar({ setUpdateFriends }) {
@@ -49,21 +50,26 @@ function Navbar({ setUpdateFriends }) {
           <h1 className="navbar-title">BARK</h1>
         </span>
       </Link>
+      <Input userId={userId} />
       <section className="add-user-section">
-        <Input userId={userId} />
         <Link href="/map_page" passHref>
-          <h2>🐶 Map</h2>
+          <span className="globe-cont">
+            <FontAwesomeIcon icon={faEarthAsia} className="globe" />
+          </span>
         </Link>
         <Popover
           opened={opened}
           onClose={() => setOpened(false)}
           target={
+
             <ActionIcon
               variant="filled"
               className="m-1 bell-hover"
               onClick={() => setOpened((o) => !o)}
             >
-              <FontAwesomeIcon icon={faBell} className="w-[75%] bell" />
+              <Indicator position="top-end" color="red" size={15} offset={2} label={requests.length}>
+                <FontAwesomeIcon icon={faBell} className="w-[75%]" />
+              </Indicator>
             </ActionIcon>
           }
           position="bottom"
