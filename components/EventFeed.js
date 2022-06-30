@@ -10,7 +10,8 @@ function EventFeed({ userFeed, eventCount }) {
     query: { id },
   } = useRouter();
   const { user } = useUser();
-  const user_id = user?.sub.split("google-oauth2|")[1];
+  const user_id =
+    user?.sub.split("google-oauth2|")[1] || user?.sub.split("auth0|")[1];
   const [currentEvents, setCurrentEvents] = useState([]);
   const [userRsvps, setUserRsvps] = useState([]);
 
@@ -22,14 +23,14 @@ function EventFeed({ userFeed, eventCount }) {
   }
 
   function getUserEvents() {
-    axios
+    return axios
       .get(`/api/userevents?user_id=${user_id}`)
       .then((data) => setCurrentEvents(data.data[0].rows))
       .catch((err) => console.log(err));
   }
 
   function getGroupEvents() {
-    axios
+    return axios
       .get(`/api/events?group_id=${id}`)
       .then((data) => {
         setCurrentEvents(data.data[0].rows);
@@ -38,12 +39,12 @@ function EventFeed({ userFeed, eventCount }) {
   }
 
   useEffect(() => {
-    if (userFeed) {
-      getUserEvents();
-      getUserRsvps();
-    } else {
-      getGroupEvents();
-      getUserRsvps();
+    if (user_id) {
+      if (userFeed) {
+        Promise.all([getUserEvents(), getUserRsvps()]);
+      } else {
+        Promise.all([getGroupEvents(), getUserRsvps()]);
+      }
     }
   }, [user_id, eventCount, userFeed]);
 
