@@ -24,7 +24,7 @@ function Requests({ requests, setUpdateList, userId, setUpdateFriends }) {
   const mappedFriends = requests.map((friend, index) => {
     return (
       <Group key={index} className="border-b-2 pb-1 pt-50 mb-3">
-        <Group className=" w-[50%]">
+        <Group noWrap className=" gap-2 w-[50%]">
           <Avatar
             src={friend.photo}
             radius="xl"
