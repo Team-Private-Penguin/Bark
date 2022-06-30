@@ -27,9 +27,9 @@ export default function Map() {
     searchValue = searchValue.toLowerCase();
 
     // *** Disable axios request when using dummy data ***
-    axios.get(`/api/map/search?value=${searchValue}`)
+    axios.get(`/api/map/search?value=${searchValue}&eventSearch=true&groupSearch=true`)
       .then((response) => {
-        console.log(response);
+
       })
 
     if (searchResults.length > 0) {

@@ -36,13 +36,6 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
       `ALTER TABLE barkschema.Groups ADD CONSTRAINT Groups_pkey PRIMARY KEY (group_id)`
     )
   )
-  .then(() => {
-    db.queryAsync(`ALTER TABLE barkschema.Groups ADD COLUMN ts tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED`
-    )
-  })
-  .then(() => {
-    db.queryAsync(`CREATE INDEX ts_idx ON barkschema.Groups USING GIN (ts)`)
-  })
   .then(() =>
     db.queryAsync(`
     CREATE TABLE barkschema.Events (
@@ -64,13 +57,6 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     ALTER TABLE barkschema.Events ADD CONSTRAINT Events_pkey PRIMARY KEY (event_id)
   `)
   )
-  .then(() => {
-    db.queryAsync(`ALTER TABLE barkschema.Events ADD COLUMN ts tsvector GENERATED ALWAYS AS (to_tsvector('english', description)) STORED`
-    )
-  })
-  .then(() => {
-    db.queryAsync(`CREATE INDEX ts_idx ON barkschema.Events USING GIN`)
-  })
   .then(() =>
     db.queryAsync(`
     CREATE TABLE barkschema.Comments (

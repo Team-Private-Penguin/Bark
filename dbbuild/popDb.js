@@ -69,42 +69,11 @@ let events = [
   }
 ];
 
-// Promise.all(users.map((user) => {
-//   db.queryAsync(`INSERT INTO barkschema.Users(
-//     user_id
-//     zipcode,
-//     size,
-//     energy,
-//     f_people,
-//     f_dogs,
-//     photo,
-//     name
-//     )
-//     VALUES (
-//       ${user.user_id},
-//       ${user.zipcode},
-//       ${user.size},
-//       ${user.energy},
-//       ${user.f_people},
-//       ${user.f_dogs},
-//       ${user.photo},
-//       ${user.name})`
-//   )
-// }))
 
-Promise.all(groups.map((group) => {
-  db.queryAsync(`INSERT INTO barkschema.Groups(
-    group_id,
-    description,
-    name,
-    admin_id
-    )
-    VALUES(
-      ${group.group_id},
-      ${group.description},
-      ${group.name},
-      ${group.admin_id}
-    )`)
-}));
+  Promise.all(users.map((user) => db.queryAsync(`INSERT INTO barkschema.Users(user_id, zipcode, size, energy, f_people, f_dogs, photo, name) VALUES('${user.user_id}', '${user.zipcode}', '${user.size}', '${user.energy}', '${user.f_people}', '${user.f_dogs}', '${user.photo}', '${user.name}')`)))
+
+  Promise.all(groups.map((group) =>db.queryAsync(`INSERT INTO barkschema.Groups(group_id, description, name, admin_id) VALUES('${group.group_id}', '${group.description}', '${group.name}', '${group.admin_id}')`)))
+
+  Promise.all(events.map((event) => db.queryAsync(`INSERT INTO barkschema.Events(event_id, owner_id, group_id, name, date, description, lat, lng, address, prospective, img_url) VALUES('${event.event_id}', '${event.owner_id}', '${event.group_id}', '${event.name}', '${event.date}', '${event.description}', '${event.lat}', '${event.lng}', '${event.address}', '${event.prospective}', '${event.img_url}')`)))
 
 
