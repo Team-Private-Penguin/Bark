@@ -54,17 +54,8 @@ module.exports = {
   prospective = $9,
   img_url = $10
   WHERE event_id = $1,
-  getAdminId: ``,
+  `,
 
-  updateEvent: `UPDATE barkschema.Events
-  SET group_id = $1,
-  name = $2,
-  date = $3,
-  description = $4,
-  lat = $5,
-  lng = $6,
-  address = $7,
-  prospective = $8 `,
 
   getUserEvents: `SELECT *
     FROM barkschema.users_events
