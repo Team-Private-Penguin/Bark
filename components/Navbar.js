@@ -61,14 +61,20 @@ function Navbar({ setUpdateFriends }) {
           opened={opened}
           onClose={() => setOpened(false)}
           target={
-
             <ActionIcon
               variant="filled"
               className="m-1 bell-hover"
               onClick={() => setOpened((o) => !o)}
             >
-              <Indicator position="top-end" color="red" size={15} offset={2} label={requests.length}>
-                <FontAwesomeIcon icon={faBell} className="w-[75%]" />
+              <Indicator
+                position="top-end"
+                color="red"
+                size={15}
+                offset={2}
+                label={requests.length}
+                className="bell"
+              >
+                <FontAwesomeIcon icon={faBell} className="w-[75%] bell" />
               </Indicator>
             </ActionIcon>
           }

@@ -269,42 +269,6 @@ h2 {
   color: var(--light-blue);
 }
 
-.bell-hover:hover {
-  background-color: transparent;
-}
-
-.bell {
-  transition: all 700ms ease;
-}
-
-.bell:hover {
-  font-size: 200px;
-  opacity: 0.8;
-  color: var(--light-blue);
-  height: 25px;
-  width: 25px;
-  animation-name: RevSpin;
-  animation-duration: 2s;
-  transition-timing-function: linear;
-}
-
-@keyframes RevSpin {
-  0% {
-    transform: rotate(0turn) scale(1);
-  }
-  25% {
-    transform: rotate(0.1turn) scale(1);
-    color: var(--light-blue);
-  }
-  75% {
-    transform: rotate(-0.1turn) scale(1);
-    color: var(--light-blue);
-  }
-  100% {
-    transform: rotate(0turn) scale(1);
-  }
-}
-
 .friend-dog-name-text {
   text-transform: uppercase;
   letter-spacing: 5px;
@@ -389,4 +353,40 @@ h2 {
   margin: auto;
   font-weight: 700;
   /* border: solid 5px blue; */
+}
+
+.bell-hover:hover {
+  background-color: transparent;
+}
+
+.bell {
+  transition: all 700ms ease;
+}
+
+.bell:hover {
+  font-size: 200px;
+  opacity: 0.8;
+  color: var(--light-blue);
+  height: 25px;
+  width: 25px;
+  animation-name: RevSpin;
+  animation-duration: 2s;
+  transition-timing-function: linear;
+}
+
+@keyframes RevSpin {
+  0% {
+    transform: rotate(0turn) scale(1);
+  }
+  25% {
+    transform: rotate(0.1turn) scale(1);
+    color: var(--light-blue);
+  }
+  75% {
+    transform: rotate(-0.1turn) scale(1);
+    color: var(--light-blue);
+  }
+  100% {
+    transform: rotate(0turn) scale(1);
+  }
 }
