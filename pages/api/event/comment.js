@@ -1,6 +1,8 @@
 import db from "../db";
-import { postEventComment, getEventComments, deleteComment } from "../db/model";
+import { postEventComment, getEventComments } from "../db/model";
 import React from "react";
+
+const deleteComment = `DELETE FROM barkschema.comments WHERE comment_id = $1`;
 
 export default function handler(req, res) {
   if (req.method === "POST") {
@@ -30,10 +32,10 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "DELETE") {
-    let { id } = req.query;
+    let { comment_id } = req.body;
     const query = {
       text: deleteComment,
-      values: [id],
+      values: [comment_id],
     };
     return db
       .queryAsync(query)
