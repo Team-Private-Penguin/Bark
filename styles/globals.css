@@ -19,6 +19,12 @@
   --queen-blue: #41658a;
   --dark-blue: #41658a;
   --english-violet: #41658a;
+  /* casey's colors; */
+  --dark-green: #283d3b;
+  --teal: #197278;
+  --c-white: #edddd4;
+  --orange: #c44536;
+  --brick-red: #772e25;
 }
 
 /* Scrollbar */
@@ -262,6 +268,77 @@ h2 {
   color: var(--queen-blue);
 }
 
+.bell-hover:hover {
+  background-color: transparent;
+}
+
+.bell {
+  transition: all 700ms ease;
+}
+
+.bell:hover {
+  font-size: 200px;
+  opacity: 0.8;
+  color: var(--english-violet);
+  height: 25px;
+  width: 25px;
+  animation-name: RevSpin;
+  animation-duration: 2s;
+  transition-timing-function: linear;
+}
+
+@keyframes RevSpin {
+  0% {
+    transform: rotate(0turn) scale(1);
+  }
+  25% {
+    transform: rotate(0.1turn) scale(1);
+    color: var(--english-violet);
+  }
+  75% {
+    transform: rotate(-0.1turn) scale(1);
+    color: var(--english-violet);
+  }
+  100% {
+    transform: rotate(0turn) scale(1);
+  }
+}
+
+.friend-dog-name-text {
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 700;
+  font-size: 70px;
+  align-self: center;
+  display: flex;
+  align-items: flex-end;
+  /* border: solid 5px red; */
+}
+
+.friend-puppy-photo {
+  border-radius: 10rem;
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  align-self: center;
+  border: 2.5px solid var(--dark-blue);
+  margin-bottom: 10px;
+}
+
+.friend-prop {
+  text-transform: uppercase;
+  font-size: 30px;
+  text-align: start;
+  letter-spacing: 2px;
+}
+
+.friend-inline-paw {
+  display: inline;
+  height: 30px;
+  width: 30px;
+  margin: 0 10px;
+  transform: rotate(20deg);
+}
 .mapCardButton {
   height: 20px;
   width: 20px;

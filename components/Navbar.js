@@ -5,7 +5,6 @@ import Link from "next/link";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faBell } from "@fortawesome/free-solid-svg-icons";
-import AddUser from "./Users/AddUser";
 import { ActionIcon, Popover } from "@mantine/core";
 import Requests from "./Friends/Requests";
 import Input from "./Autocomplete";
@@ -22,6 +21,7 @@ function Navbar({ setUpdateFriends }) {
     zipcode: "",
   });
   const [opened, setOpened] = useState(false);
+  const [signOut, setSignOut] = useState(false);
   const [requests, setRequests] = useState([]);
   const [updateList, setUpdateList] = useState(0);
 
@@ -58,8 +58,12 @@ function Navbar({ setUpdateFriends }) {
           opened={opened}
           onClose={() => setOpened(false)}
           target={
-            <ActionIcon onClick={() => setOpened((o) => !o)}>
-              <FontAwesomeIcon icon={faBell} className="w-[75%]" />
+            <ActionIcon
+              variant="filled"
+              className="m-1 bell-hover"
+              onClick={() => setOpened((o) => !o)}
+            >
+              <FontAwesomeIcon icon={faBell} className="w-[75%] bell" />
             </ActionIcon>
           }
           position="bottom"
@@ -74,17 +78,34 @@ function Navbar({ setUpdateFriends }) {
             setUpdateFriends={setUpdateFriends}
           />
         </Popover>
-        {!userProfile && <AddUser />}
-        {userProfile && (
-          <>
-            <span className="nav-name">{userProfile.name}</span>
+
+        <span className="nav-name">{userProfile?.name}</span>
+
+        <Popover
+          opened={signOut}
+          onClose={() => setSignOut(false)}
+          target={
             <img
-              src={userProfile.photo}
+              src={
+                userProfile?.photo ||
+                "https://res.cloudinary.com/dppbuevux/image/upload/v1656609122/puppy2_gqbggt.jpg"
+              }
               alt="puppy-photo"
               className="nav-photo"
+              onClick={() => setSignOut(true)}
             />
-          </>
-        )}
+          }
+          position="bottom"
+          withCloseButton
+          width={260}
+          title="Sign Out"
+        >
+          <a href="/api/auth/logout">
+            <button className="bg-transparent hover:bg-accent text-accent font-semibold hover:text-white py-2 px-4 border border-accent hover:border-transparent rounded">
+              Logout
+            </button>
+          </a>
+        </Popover>
       </section>
     </nav>
   );

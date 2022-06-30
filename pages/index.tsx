@@ -18,7 +18,6 @@ const Home: NextPage = () => {
   const { user } = useUser();
   let userId =
     user?.sub.split("google-oauth2|")[1] || user?.sub.split("auth0|")[1];
-  console.log("userID:", userId);
   const [updateFriends, setUpdateFriends] = useState(false);
   return (
     <>
@@ -29,9 +28,6 @@ const Home: NextPage = () => {
             <div className="border h-[28vh] space shadows homeBox">
               <h2 className="section-title">🐶 User Info</h2>
               {user && <User />}
-              {!user && (
-                <div className="centered">Please add your pet above!</div>
-              )}
             </div>
             <div className="border h-[60vh] space shadows homeBox">
               <h2>🐶 Groups</h2>
