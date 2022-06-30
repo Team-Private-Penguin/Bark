@@ -19,13 +19,11 @@ function UserModal({ clicked, userId }) {
     zipcode: "",
   });
 
-  console.log(list, "list");
-
   useEffect(() => {
     const promises = [
       axios.get(`/api/friend/${userId}/${clicked.user_id}`),
       axios.get(`/api/friend/${clicked.user_id}/${userId}`),
-      axios.get(`api/users/users?user_id=${userId}`),
+      axios.get(`api/users/users?user_id=${clicked.user_id}`),
     ];
     Promise.all(promises).then((res) => {
       setList({ user: res[0].data.length, friend: res[1].data.length });

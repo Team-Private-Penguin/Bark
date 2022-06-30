@@ -5,7 +5,6 @@ import Link from "next/link";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faBell } from "@fortawesome/free-solid-svg-icons";
-import AddUser from "./Users/AddUser";
 import { ActionIcon, Popover } from "@mantine/core";
 import Requests from "./Friends/Requests";
 import Input from "./Autocomplete";
@@ -80,7 +79,6 @@ function Navbar({ setUpdateFriends }) {
           />
         </Popover>
 
-        {!userProfile && <AddUser />}
         <span className="nav-name">{userProfile?.name}</span>
 
         <Popover
@@ -88,7 +86,10 @@ function Navbar({ setUpdateFriends }) {
           onClose={() => setSignOut(false)}
           target={
             <img
-              src={userProfile?.photo}
+              src={
+                userProfile?.photo ||
+                "https://res.cloudinary.com/dppbuevux/image/upload/v1656609122/puppy2_gqbggt.jpg"
+              }
               alt="puppy-photo"
               className="nav-photo"
               onClick={() => setSignOut(true)}

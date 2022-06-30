@@ -3,15 +3,10 @@ const { Pool } = require("pg");
 const { FileWatcherEventKind } = require("typescript");
 
 const pool = new Pool({
-<<<<<<< HEAD
-  user: process.env.PGUSERNAME || "postgres",
-  host: "127.0.0.1",
-=======
-  user: process.env.PGUSERNAME || "",
-  host: process.env.PGHOST || "127.0.0.1",
->>>>>>> 05d7779fd3b54369399516ba051423b312f8079d
+  user: process.env.PGUSERNAME || "ubuntu",
+  host: process.env.PGHOST || "34.214.151.84",
   database: "bark",
-  password: process.env.PGPASS || "password",
+  password: process.env.PGPASS || "Penguin2204",
   port: process.env.PGPORT || 5432,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,

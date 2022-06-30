@@ -122,7 +122,9 @@ function AddUser() {
       </Modal>
 
       <Group position="center">
-        <Button onClick={() => setOpened(true)}>ADD YOUR PET</Button>
+        <Button className="bg-slate-800" onClick={() => setOpened(true)}>
+          ADD YOUR PET
+        </Button>
       </Group>
     </div>
   );
