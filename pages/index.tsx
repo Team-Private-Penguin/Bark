@@ -14,7 +14,11 @@ import User from "../components/Users/User";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 const Home: NextPage = () => {
+  const [groupCount, setGroupCount] = useState(0);
   const { user } = useUser();
+  let userId =
+    user?.sub.split("google-oauth2|")[1] || user?.sub.split("auth0|")[1];
+  console.log("userID:", userId);
   const [updateFriends, setUpdateFriends] = useState(false);
   return (
     <>
@@ -33,8 +37,11 @@ const Home: NextPage = () => {
               <h2>🐶 Groups</h2>
               <Stack>
                 <ExploreGroups />
-                <AddGroup />
-                <GroupList />
+                <AddGroup
+                  groupCount={groupCount}
+                  setGroupCount={setGroupCount}
+                />
+                <GroupList groupCount={groupCount} />
               </Stack>
             </div>
           </Stack>

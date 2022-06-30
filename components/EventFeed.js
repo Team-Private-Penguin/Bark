@@ -5,14 +5,14 @@ import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 
-function EventFeed({ userFeed }) {
+function EventFeed({ userFeed, eventCount }) {
   const {
     query: { id },
   } = useRouter();
   const { user } = useUser();
   const user_id = user?.sub.split("google-oauth2|")[1];
-  const [currentEvents, setCurrentEvents] = useState([{}]);
-  const [userRsvps, setUserRsvps] = useState([{}]);
+  const [currentEvents, setCurrentEvents] = useState([]);
+  const [userRsvps, setUserRsvps] = useState([]);
 
   function getUserRsvps() {
     axios
@@ -45,7 +45,7 @@ function EventFeed({ userFeed }) {
       getGroupEvents();
       getUserRsvps();
     }
-  }, [user_id, userFeed]);
+  }, [user_id, eventCount, userFeed]);
 
   return (
     <Stack className="h-[vh] overflow-auto">
