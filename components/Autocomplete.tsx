@@ -28,10 +28,10 @@ export default function Input({ userId }) {
   const form = useForm({ initialValues: { name: "" } });
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
-  const [sizeValue, setSizeValue] = useState('');
-  const [energyValue, setEnergyValue] = useState('');
-  const [dogValue, setDogValue] = useState('');
-  const [peopleValue, setPeopleValue] = useState('');
+  const [sizeValue, setSizeValue] = useState("");
+  const [energyValue, setEnergyValue] = useState("");
+  const [dogValue, setDogValue] = useState("");
+  const [peopleValue, setPeopleValue] = useState("");
 
   const defaultPhoto =
     "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
@@ -53,7 +53,6 @@ export default function Input({ userId }) {
       });
     } else if (activeTab === 1) {
       axios.get("/api/groups").then((res) => {
-        console.log(res.data);
         const mappedEvents = res.data[0].rows.map((event) => {
           return {
             user_id: event.admin_id,
@@ -210,13 +209,14 @@ export default function Input({ userId }) {
         <Center>
           {activeTab === 0 && (
             <>
-              <Stack align="center" >
+              <Stack align="center">
                 <Group>
                   {" "}
                   <Select
+                    size="xs"
                     label="Dog size"
                     data={[
-                      { value: '', label: "Any" },
+                      { value: "", label: "Any" },
                       { value: "small", label: "Small" },
                       { value: "medium", label: "Medium" },
                       { value: "large", label: "Large" },
@@ -225,9 +225,10 @@ export default function Input({ userId }) {
                     onChange={setSizeValue}
                   />
                   <Select
+                    size="xs"
                     label="Energy level"
                     data={[
-                      { value: '', label: "Any" },
+                      { value: "", label: "Any" },
                       { value: "low", label: "Low" },
                       { value: "medium", label: "Medium" },
                       { value: "high", label: "High" },
@@ -236,9 +237,10 @@ export default function Input({ userId }) {
                     onChange={setEnergyValue}
                   />
                   <Select
+                    size="xs"
                     label="Dog friendliness"
                     data={[
-                      { value: '', label: "Any" },
+                      { value: "", label: "Any" },
                       { value: "friendly", label: "Friendly" },
                       { value: "aggressive", label: "Aggressive" },
                     ]}
@@ -246,9 +248,10 @@ export default function Input({ userId }) {
                     onChange={setDogValue}
                   />
                   <Select
+                    size="xs"
                     label="People friendliness"
                     data={[
-                      { value: '', label: "Any" },
+                      { value: "", label: "Any" },
                       { value: "friendly", label: "Friendly" },
                       { value: "aggressive", label: "Aggressive" },
                     ]}
@@ -261,21 +264,17 @@ export default function Input({ userId }) {
                   itemComponent={AutoCompleteItem}
                   data={data}
                   filter={(value, item) => {
-                    console.log (sizeValue, value, item)
+                    console.log(sizeValue, value, item);
                     return (
                       item.value
                         .toLowerCase()
                         .includes(value.toLowerCase().trim()) &&
-                        item.size?.toLowerCase().includes(sizeValue)
-                        &&
-                        item.energy?.toLowerCase().includes(energyValue)
-                        &&
-                        item.dogs?.toLowerCase().includes(dogValue)
-                        &&
-                        item.people?.toLowerCase().includes(peopleValue)
-                    )
-                  }
-                  }
+                      item.size?.toLowerCase().includes(sizeValue) &&
+                      item.energy?.toLowerCase().includes(energyValue) &&
+                      item.dogs?.toLowerCase().includes(dogValue) &&
+                      item.people?.toLowerCase().includes(peopleValue)
+                    );
+                  }}
                   className="autocomplete"
                   value={form.values.name}
                   onChange={(event) => {
