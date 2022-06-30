@@ -6,7 +6,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faBell } from "@fortawesome/free-solid-svg-icons";
 import AddUser from "./Users/AddUser";
-import { ActionIcon, Popover } from "@mantine/core";
+import { ActionIcon, Indicator, Popover } from "@mantine/core";
 import Requests from "./Friends/Requests";
 import Input from "./Autocomplete";
 function Navbar({ setUpdateFriends }) {
@@ -59,7 +59,9 @@ function Navbar({ setUpdateFriends }) {
           onClose={() => setOpened(false)}
           target={
             <ActionIcon onClick={() => setOpened((o) => !o)}>
-              <FontAwesomeIcon icon={faBell} className="w-[75%]" />
+              <Indicator position="top-end" color="red" size={15} offset={2} label={requests.length}>
+                <FontAwesomeIcon icon={faBell} className="w-[75%]" />
+              </Indicator>
             </ActionIcon>
           }
           position="bottom"
