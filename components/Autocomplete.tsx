@@ -67,7 +67,6 @@ export default function Input({ userId }) {
       });
     } else if (activeTab === 0) {
       axios.get("/api/allusers").then((res) => {
-        console.log(res.data);
         const mappedEvents = res.data.map((userInfo) => {
           return {
             user_id: userInfo.user_id,
