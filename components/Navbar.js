@@ -4,7 +4,7 @@ import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw, faBell } from "@fortawesome/free-solid-svg-icons";
+import { faPaw, faBell, faEarthAsia } from "@fortawesome/free-solid-svg-icons";
 import { ActionIcon, Popover } from "@mantine/core";
 import Requests from "./Friends/Requests";
 import Input from "./Autocomplete";
@@ -52,7 +52,9 @@ function Navbar({ setUpdateFriends }) {
       <section className="add-user-section">
         <Input userId={userId} />
         <Link href="/map_page" passHref>
-          <h2>🐶 Map</h2>
+          <span className="globe-cont">
+            <FontAwesomeIcon icon={faEarthAsia} className="globe" />
+          </span>
         </Link>
         <Popover
           opened={opened}
