@@ -268,7 +268,6 @@ h2 {
   color: var(--queen-blue);
 }
 
-<<<<<<< HEAD
 .bell-hover:hover {
   background-color: transparent;
 }
@@ -340,7 +339,6 @@ h2 {
   margin: 0 10px;
   transform: rotate(20deg);
 }
-=======
 .mapCardButton {
   height: 20px;
   width: 20px;
@@ -349,4 +347,3 @@ h2 {
 .mapCardButtonDiv :hover {
   cursor: pointer;
 }
->>>>>>> 05d7779fd3b54369399516ba051423b312f8079d

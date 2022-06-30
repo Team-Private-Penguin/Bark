@@ -52,12 +52,9 @@ function Navbar({ setUpdateFriends }) {
       </Link>
       <section className="add-user-section">
         <Input userId={userId} />
-<<<<<<< HEAD
-=======
         <Link href="/map_page" passHref>
           <h2>🐶 Map</h2>
         </Link>
->>>>>>> 05d7779fd3b54369399516ba051423b312f8079d
         <Popover
           opened={opened}
           onClose={() => setOpened(false)}
