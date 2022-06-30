@@ -390,3 +390,8 @@ h2 {
   font-weight: 700;
   /* border: solid 5px blue; */
 }
+
+.paw-groups {
+  filter: invert(0);
+  color: var(--red);
+}
