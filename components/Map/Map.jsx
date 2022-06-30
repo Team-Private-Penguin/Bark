@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faOctagonExclamation } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { eventData1, eventData2 } from './mapDrawerData.js';
+import Promise from 'bluebird';
 
 export default function Map() {
 
@@ -27,24 +28,21 @@ export default function Map() {
     searchValue = searchValue.toLowerCase();
 
     // *** Disable axios request when using dummy data ***
-    axios.get(`/api/map/search?value=${searchValue}&eventSearch=true&groupSearch=true`)
+    axios.get(`/api/map/search?value=${searchValue}`)
       .then((response) => {
+        console.log(response.data);
+        setSearchResults(searchResults = [...response.data]);
 
+        if (searchResults.length > 0) {
+          setDrawerCards(drawerCards = [...searchResults]);
+          setOpened(true);
+        } else {
+          alert('No search results found');
+        }
       })
-
-    if (searchResults.length > 0) {
-      setDrawerCards(searchResults);
-      setOpened(true);
-    } else {
-      alert('No results found');
-    }
-
-    if (searchResults.length > 0) {
-      setDrawerCards(drawerCards = searchResults);
-      setOpened(true);
-    } else {
-      alert('No search results found');
-    }
+      .catch((err) => {
+        return err;
+      })
 
 
   }
