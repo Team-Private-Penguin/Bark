@@ -23,7 +23,6 @@ const Groups = () => {
   if (!userId) {
     userId = user?.sub.split("auth0|")[1];
   }
-  // const TempUserId = 1;
 
   const {
     query: { id },
