@@ -160,7 +160,7 @@ function EventDetail({
               </Button>
             </Group>
           ) : null}
-          {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
+          {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
         </Stack>
         <Card.Section className="h-[25vh] flex items-center justify-center space-x-4">
           <Stack>
@@ -173,8 +173,9 @@ function EventDetail({
 
         <Card.Section p=".5rem">
           <Group position="apart">
-            <Badge className="">{group_name}</Badge>
+            <Badge color="cyan">{group_name}</Badge>
             <Switch
+              color="cyan"
               checked={rsvp}
               onChange={handleRsvp}
               label={prospective ? "Interested?" : "RSVP"}

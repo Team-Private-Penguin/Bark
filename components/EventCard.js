@@ -115,10 +115,14 @@ function EventCard({
         <Card radius="10px" shadow="sm" p="sm">
           <Card.Section className="p-2">
             <Stack>
-              {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
+              {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
             </Stack>
             <Group position="apart">
-              <Title order={3} className="" onClick={() => setOpened(true)}>
+              <Title
+                order={3}
+                className="cursor-pointer"
+                onClick={() => setOpened(true)}
+              >
                 {name}
               </Title>
 
@@ -141,7 +145,7 @@ function EventCard({
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
             <img
-              className="rounded-[10px] max-h-[400px]"
+              className="rounded-[10px] max-h-[400px] cursor-pointer"
               src={image}
               onClick={() => setOpened(true)}
             />
@@ -149,9 +153,13 @@ function EventCard({
           <Card.Section className="p-2">
             <Group className="group">
               <Link href={`/group?id=${group_id}`} passHref>
-                <Badge className="">{group_name}</Badge>
+                <Badge color="cyan" className="hover:cursor-pointer">
+                  {group_name}
+                </Badge>
               </Link>
+
               <Switch
+                color="cyan"
                 checked={rsvp}
                 onChange={handleRsvp}
                 label={prospective ? "Interested?" : "RSVP"}
