@@ -13,16 +13,31 @@ export default function Map() {
   let [searchResults, setSearchResults] = useState([]);
 
   let searchEvent = (searchValue) => {
-    setDrawerCards(drawerCards = [eventData1, eventData2]);
+
+    // *** Uncomment all below to enable dummy data ***
+    // setDrawerCards(drawerCards = [eventData1, eventData2]);
+    // drawerCards.map((card) => {
+    //   if (card.name.toLowerCase().includes(searchValue) || card.description.toLowerCase().includes(searchValue)) {
+    //     setSearchResults(searchResults = [...searchResults, card]);
+    //   }
+    // })
+
     setSearchResults(searchResults = []);
 
     searchValue = searchValue.toLowerCase();
 
-    drawerCards.map((card) => {
-      if (card.name.toLowerCase().includes(searchValue) || card.description.toLowerCase().includes(searchValue)) {
-        setSearchResults(searchResults = [...searchResults, card]);
-      }
-    })
+    // *** Disable axios request when using dummy data ***
+    axios.get(`/api/map/search?value=${searchValue}`)
+      .then((response) => {
+        console.log(response);
+      })
+
+    if (searchResults.length > 0) {
+      setDrawerCards(searchResults);
+      setOpened(true);
+    } else {
+      alert('No results found');
+    }
 
     if (searchResults.length > 0) {
       setDrawerCards(drawerCards = searchResults);
@@ -32,18 +47,6 @@ export default function Map() {
     }
 
 
-  // Query database in production
-  //   axios.get(`/api/map/search?value=${searchValue}`)
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-
-  //   if (searchResults.length > 0) {
-  //     setDrawerCards(searchResults);
-  //     setOpened(true);
-  //   } else {
-  //     alert('No results found');
-  //   }
   }
 
   // Here is where we will set the map center and markers based on incoming context

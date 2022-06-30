@@ -1,5 +1,7 @@
 const db = require("../pages/api/db");
+
 //`CREATE DATABASE bark` if not exists
+
 db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() => db.queryAsync(`CREATE SCHEMA barkschema`))
   .then(() =>
@@ -34,6 +36,13 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
       `ALTER TABLE barkschema.Groups ADD CONSTRAINT Groups_pkey PRIMARY KEY (group_id)`
     )
   )
+  .then(() => {
+    db.queryAsync(`ALTER TABLE barkschema.Groups ADD COLUMN ts tsvector GENERATED ALWAYS AS (to_tsvector('english', name)) STORED`
+    )
+  })
+  .then(() => {
+    db.queryAsync(`CREATE INDEX ts_idx ON barkschema.Groups USING GIN (ts)`)
+  })
   .then(() =>
     db.queryAsync(`
     CREATE TABLE barkschema.Events (
@@ -55,6 +64,13 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     ALTER TABLE barkschema.Events ADD CONSTRAINT Events_pkey PRIMARY KEY (event_id)
   `)
   )
+  .then(() => {
+    db.queryAsync(`ALTER TABLE barkschema.Events ADD COLUMN ts tsvector GENERATED ALWAYS AS (to_tsvector('english', description)) STORED`
+    )
+  })
+  .then(() => {
+    db.queryAsync(`CREATE INDEX ts_idx ON barkschema.Events USING GIN`)
+  })
   .then(() =>
     db.queryAsync(`
     CREATE TABLE barkschema.Comments (
@@ -163,4 +179,4 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     ALTER TABLE barkschema.Events ADD CONSTRAINT Events_group_id_fkey FOREIGN KEY (group_id) REFERENCES barkschema.Groups(group_id)
   `)
   )
-  .then(() => console.log("congrats! you are a champion"));
+  .then(() => console.log("congrats! you are a champion"))
