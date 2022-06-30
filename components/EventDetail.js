@@ -88,15 +88,16 @@ function EventDetail({
 
   const editEvent = (values) => {
     values["admin_id"] = user_id;
-    axios.patch("/api/event", values)
+    axios
+      .patch("/api/event", values)
       .then((res) => {
         console.log(res);
       })
-      .catch((err)=> {
+      .catch((err) => {
         console.log(err);
-      })
+      });
     setOpenEdit(false);
-  }
+  };
 
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
@@ -183,11 +184,7 @@ function EventDetail({
         </ScrollArea>
       </Card>
 
-      <Modal
-        opened={openEdit}
-        onClose={() => setOpenEdit(false)}
-        title="Edit"
-      >
+      <Modal opened={openEdit} onClose={() => setOpenEdit(false)} title="Edit">
         <form onSubmit={form.onSubmit((values) => editEvent(values))}>
           <TextInput
             placeholder="Event Name"
@@ -233,7 +230,6 @@ function EventDetail({
           </Group>
         </form>
       </Modal>
-
     </div>
   );
 }
