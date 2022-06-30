@@ -17,11 +17,13 @@ import ExploreGroups from "../components/ExploreGroups";
 const Groups = () => {
   const { user } = useUser();
   const [joined, setJoined] = useState(false);
+  const [eventCounter, setEventCounter] = useState(0);
   let userId = user?.sub.split("google-oauth2|")[1];
   if (!userId) {
     userId = user?.sub.split("auth0|")[1];
   }
   // const TempUserId = 1;
+
   const {
     query: { id },
   } = useRouter();
@@ -96,9 +98,9 @@ const Groups = () => {
                   )}
                 </Group>
               </h2>
-              <AddEvent />
+              <AddEvent eventCount={eventCounter} setCount={setEventCounter} />
             </div>
-            <EventFeed userFeed={false} />
+            <EventFeed eventCount={eventCounter} userFeed={false} />
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>

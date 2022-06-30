@@ -5,7 +5,7 @@ import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 
-function EventFeed({ userFeed }) {
+function EventFeed({ userFeed, eventCount }) {
   const {
     query: { id },
   } = useRouter();
@@ -45,7 +45,7 @@ function EventFeed({ userFeed }) {
       getGroupEvents();
       getUserRsvps();
     }
-  }, [user_id]);
+  }, [user_id, eventCount]);
 
   return (
     <Stack className="h-[84vh] overflow-auto">

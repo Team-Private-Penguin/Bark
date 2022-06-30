@@ -21,7 +21,7 @@ import { faBullseye } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "@auth0/nextjs-auth0";
 import ImageDropzone from "./Users/Dropzone";
 
-function AddEvent() {
+function AddEvent({ setCount, eventCount }) {
   const { user } = useUser();
   const user_id = user?.sub.split("google-oauth2|")[1];
   const [image, setImage] = useState("");
@@ -57,9 +57,14 @@ function AddEvent() {
       img_url: image,
       owner_id: user_id,
     };
-    axios.post("/api/events", submission).then(() => {
-      setOpened(false);
-    });
+    axios
+      .post("/api/events", submission)
+      .then(() => {
+        setOpened(false);
+      })
+      .then(() => {
+        setCount(eventCount + 1);
+      });
   };
   return (
     <div>
