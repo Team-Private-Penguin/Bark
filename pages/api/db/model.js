@@ -5,9 +5,11 @@ module.exports = {
     address,
     group_id,
     date,
-    prospective
+    prospective,
+    owner_id,
+    img_url
   )
-  VALUES ($1, $2, $3, $4, $5, $6)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
   `,
 
   getEventsGroup: `SELECT * FROM barkschema.events WHERE group_id = $1`,
@@ -39,7 +41,7 @@ module.exports = {
 
   getAdmin: `SELECT admin_id FROM barkschema.Groups`,
 
-  deleteEvent: `DELETE FROM barkschema.Events
+  deleteEvent: `DELETE FROM barkschema.events
   WHERE event_id = $1`,
 
   updateEvent: `UPDATE barkschema.Events
@@ -57,7 +59,7 @@ module.exports = {
     JOIN barkschema.events USING (event_id)
     WHERE user_id = $1
   `,
-  getUserGroupsEvents: `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id
+  getUserGroupsEvents: `SELECT e.address, e.name, e.owner_id, e.img_url, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id
   FROM barkschema.users_groups ug
   JOIN barkschema.groups g USING (group_id)
   JOIN barkschema.events e USING (group_id)

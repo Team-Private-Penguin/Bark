@@ -18,11 +18,8 @@ import Link from "next/link";
 
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
-const defaultPhoto1 =
-  "https://images.unsplash.com/photo-1598875706250-21faaf804361?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OXx8fGVufDB8fHx8&w=1000&q=80";
 
-function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
-  image = image ? defaultPhoto : defaultPhoto1;
+function EventCard({ event, rsvp, getUserRsvps, user_id, getEvents }) {
   const [opened, setOpened] = useState(false);
   const {
     name,
@@ -34,9 +31,13 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
     admin_id,
     event_id,
     group_id,
+    image,
+    owner_id,
   } = event;
   const [isAdmin, setIsAdmin] = useState(false);
+  const isOwner = owner_id === user_id;
   const timeStamp = new Date(date);
+  let disImage = image || defaultPhoto;
 
   function handleRsvp() {
     if (rsvp) {
@@ -111,18 +112,35 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
     //   });
   };
 
+  function handleDeleteEvent() {
+    axios({
+      method: "DELETE",
+      url: "/api/events",
+      data: {
+        event_id,
+      },
+    })
+      .then(() => getEvents())
+      .catch((err) => console.log(err));
+  }
+
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
         <Card radius="10px" shadow="sm" p="sm">
-          <Card.Section className="p-2" onClick={() => setOpened(true)}>
+          <Card.Section className="p-2">
             <Stack>
               {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
             </Stack>
             <Group position="apart">
-              <Title order={3} className="">
+              <Title order={3} className="" onClick={() => setOpened(true)}>
                 {name}
               </Title>
+              {isOwner ? (
+                <Button onClick={handleDeleteEvent} color="red">
+                  Delete Event
+                </Button>
+              ) : null}
               <Title order={5}>
                 {timeStamp.toLocaleString([], {
                   dateStyle: "short",
@@ -143,7 +161,7 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id }) {
           <Card.Section className="flex justify-center items-center">
             <img
               className="rounded-[10px] max-h-[400px]"
-              src={image}
+              src={disImage}
               onClick={() => setOpened(true)}
             />
           </Card.Section>

@@ -7,7 +7,7 @@ import {
   updateEvent,
 } from "./db/model";
 
-const getGroupEvents = `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id
+const getGroupEvents = `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id, e.owner_id, e.img_url, e.event_id
 FROM barkschema.events e
 JOIN barkschema.groups g USING (group_id)
 WHERE group_id = $1
@@ -15,21 +15,16 @@ WHERE group_id = $1
 
 export default function handler(req, res) {
   if (req.method === "POST") {
-    let { name, description, address, group_id, date, prospective, owner_id } =
-      req.body;
-    const query = {
-      text: postEvent,
-      values: [
-        name,
-        description,
-        address,
-        group_id,
-        date,
-        prospective,
-        img_url,
-        owner_id,
-      ],
-    };
+    let {
+      name,
+      description,
+      address,
+      group_id,
+      date,
+      prospective,
+      owner_id,
+      img_url,
+    } = req.body;
     let values = [
       name,
       description,
@@ -37,8 +32,8 @@ export default function handler(req, res) {
       group_id,
       date,
       prospective,
-      img_url,
       owner_id,
+      img_url,
     ];
     return db
       .queryAsync(postEvent, values)
@@ -71,8 +66,9 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "DELETE") {
+    console.log(req);
     return db
-      .queryAsync(deleteEvent, req.query.body)
+      .queryAsync(deleteEvent, [req.body.event_id])
       .then(() => {
         res.status(200).send("Deleted!");
       })

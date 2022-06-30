@@ -7,7 +7,7 @@ function Comment({ commentObj }) {
   return (
     <Card className="border rounded-xl">
       <Card.Section className="bg-main" p=".5rem">
-        <Group>
+        <Group position="apart">
           <Avatar src={photo} radius="xl" component="span" size={30} />
           <Text className="" color="var(--black)" align="left">
             {name}

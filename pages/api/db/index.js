@@ -3,7 +3,7 @@ const { Pool } = require("pg");
 const { FileWatcherEventKind } = require("typescript");
 
 const pool = new Pool({
-  user: process.env.PGUSERNAME || "michaelzaki",
+  user: process.env.PGUSERNAME || "jasonmatta",
   host: "127.0.0.1",
   database: "bark",
   password: process.env.PGPASS || "",

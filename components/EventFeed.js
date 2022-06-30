@@ -45,7 +45,7 @@ function EventFeed({ userFeed }) {
       getGroupEvents();
       getUserRsvps();
     }
-  }, [user_id]);
+  }, [user_id, userFeed]);
 
   return (
     <Stack className="h-[84vh] overflow-auto">
@@ -62,6 +62,7 @@ function EventFeed({ userFeed }) {
             image={true}
             event={event}
             user_id={user_id}
+            getEvents={userFeed ? getUserEvents : getGroupEvents}
           />
         );
       })}
