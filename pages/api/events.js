@@ -15,12 +15,31 @@ WHERE group_id = $1
 
 export default function handler(req, res) {
   if (req.method === "POST") {
-    let { name, description, address, group_id, date, prospective } = req.body;
+    let { name, description, address, group_id, date, prospective, owner_id } =
+      req.body;
     const query = {
       text: postEvent,
-      values: [name, description, address, group_id, date, prospective],
+      values: [
+        name,
+        description,
+        address,
+        group_id,
+        date,
+        prospective,
+        img_url,
+        owner_id,
+      ],
     };
-    let values = [name, description, address, group_id, date, prospective];
+    let values = [
+      name,
+      description,
+      address,
+      group_id,
+      date,
+      prospective,
+      img_url,
+      owner_id,
+    ];
     return db
       .queryAsync(postEvent, values)
       .then(() => res.status(201).send("Ok"))
