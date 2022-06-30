@@ -12,9 +12,8 @@ function Requests({ requests, setUpdateList, userId, setUpdateFriends }) {
       setUpdateList((o) => !o);
     })
   };
-
+console.log(requests)
   const handleAccept = (id) => {
-    console.log(id, userId);
     axios.post(`/api/friend/send`, { user: userId, friend: id }).then((res) => {
       setUpdateList((o) => !o);
       setUpdateFriends((o) => !o);
