@@ -86,18 +86,18 @@ function EventDetail({
     );
   });
 
-  const editEvent = (values) => {
-    values["admin_id"] = user_id;
-    axios.patch("/api/event", values)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err)=> {
-        console.log(err);
-      })
-    setOpenEdit(false);
-  }
-
+  // const editEvent = (values) => {
+  //   values["admin_id"] = user_id;
+  //   axios.patch("/api/event", values)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err)=> {
+  //       console.log(err);
+  //     })
+  //   setOpenEdit(false);
+  // }
+  const placeholder = "PLACEHOLDER";
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
       <Card
@@ -183,7 +183,7 @@ function EventDetail({
         </ScrollArea>
       </Card>
 
-      <Modal
+      {placeholder /* <Modal
         opened={openEdit}
         onClose={() => setOpenEdit(false)}
         title="Edit"
@@ -232,7 +232,7 @@ function EventDetail({
             </Button>
           </Group>
         </form>
-      </Modal>
+      </Modal> */}
 
     </div>
   );
