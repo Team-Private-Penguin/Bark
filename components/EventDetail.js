@@ -12,11 +12,16 @@ import {
   Badge,
 } from "@mantine/core";
 import axios from "axios";
-import { useUser } from "@auth0/nextjs-auth0";
 
-function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
-  const { user } = useUser();
-  let userId = user?.sub.split("google-oauth2|")[1];
+function EventDetail({
+  image,
+  event,
+  rsvp,
+  handleRsvp,
+  user_id,
+  handleDeleteEvent,
+  isOwner,
+}) {
   const {
     name,
     address,
@@ -30,19 +35,24 @@ function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
   const timeStamp = new Date(date);
   const [comments, setComments] = useState([{}]);
   const [attendees, setAttendees] = useState([{}]);
-  useEffect(() => {
+
+  function getComments() {
     axios
       .get(`/api/event/comment?id=${event_id}`)
       .then((data) => setComments(data.data[0].rows))
       .catch((err) => console.log(err));
-  }, [userId]);
+  }
+
+  useEffect(() => {
+    getComments();
+  }, [user_id]);
 
   useEffect(() => {
     axios
       .get(`/api/event/rsvp?event_id=${event_id}`)
       .then((data) => setAttendees(data.data[0].rows))
       .catch((err) => console.log(err));
-  }, [rsvp]);
+  }, [rsvp, user_id]);
 
   const attendeeList = attendees.map((attendee, index) => {
     return (
@@ -94,13 +104,17 @@ function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
         <Card.Section p=".5rem">{description}</Card.Section>
         <Card.Section>
           <AddComment
-            user_id={userId}
+            user_id={user_id}
             event={event}
             setComments={setComments}
           />
         </Card.Section>
         <Card.Section className="p-2 h-[37vh] overflow-auto">
-          <CommentFeed comments={comments} />
+          <CommentFeed
+            comments={comments}
+            isOwner={isOwner}
+            getComments={getComments}
+          />
         </Card.Section>
       </Card>
       <Card className="space-y-1 w-[24%] h-[85vh]" radius="10px" shadow="sm">

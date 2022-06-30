@@ -152,7 +152,7 @@ function EventCard({ event, rsvp, getUserRsvps, user_id, getEvents }) {
                 <Button onClick={handleEdit} variant="default">
                   EDIT
                 </Button>
-                <Button onClick={handleDelete} variant="default">
+                <Button onClick={handleDeleteEvent} variant="default">
                   DELETE
                 </Button>
               </Group>
@@ -195,6 +195,8 @@ function EventCard({ event, rsvp, getUserRsvps, user_id, getEvents }) {
           rsvp={rsvp}
           user_id={user_id}
           handleRsvp={handleRsvp}
+          handleDeleteEvent={handleDeleteEvent}
+          isOwner={isOwner}
         />
       </Modal>
     </div>
