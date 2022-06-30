@@ -22,7 +22,8 @@ function EventDetail({
   handleRsvp,
   user_id,
   handleDeleteEvent,
-  isOwner,
+  handleEdit,
+  canEdit,
 }) {
   const {
     name,
@@ -86,14 +87,19 @@ function EventDetail({
                 dateStyle: "short",
               })}
             </Title>
-            {isOwner ? (
-              <Button onClick={handleDeleteEvent} color="red">
-                Delete Event
-              </Button>
-            ) : null}
           </Group>
         </Card.Section>
         <Stack>
+          {canEdit ? (
+            <Group grow spacing={0}>
+              <Button onClick={handleEdit} variant="default">
+                EDIT
+              </Button>
+              <Button onClick={handleDeleteEvent} variant="default">
+                DELETE
+              </Button>
+            </Group>
+          ) : null}
           {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
         </Stack>
         <Card.Section className="flex items-center justify-center space-x-4">
@@ -128,7 +134,7 @@ function EventDetail({
         <Card.Section className="p-2 h-[37vh] overflow-auto">
           <CommentFeed
             comments={comments}
-            isOwner={isOwner}
+            isOwner={canEdit}
             getComments={getComments}
           />
         </Card.Section>

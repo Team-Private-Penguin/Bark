@@ -59,7 +59,6 @@ function EventFeed({ userFeed }) {
             }
             getUserRsvps={getUserRsvps}
             key={index}
-            image={true}
             event={event}
             user_id={user_id}
             getEvents={userFeed ? getUserEvents : getGroupEvents}

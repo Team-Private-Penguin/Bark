@@ -35,7 +35,7 @@ function Comment({ commentObj, isOwner, getComments }) {
           </Badge>
           {isOwner ? (
             <Button color="red" onClick={handleDeleteComment}>
-              Delete Comment
+              Delete
             </Button>
           ) : null}
         </Group>

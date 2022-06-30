@@ -1,16 +1,5 @@
 import db from "./db";
-<<<<<<< HEAD
-import { postEvent, getAdmin, updateEvent } from "./db/model";
-=======
-import {
-  postEvent,
-  getEventsGroup,
-  getAdmin,
-  getGroupId,
-  deleteEvent,
-  updateEvent,
-} from "./db/model";
->>>>>>> main
+import { postEvent, getGroupId, updateEvent } from "./db/model";
 
 const deleteEvent = `DELETE
 FROM barkschema.events
@@ -57,15 +46,14 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "GET" && req.query.type === "getGroupId") {
-    console.log('in get group id');
+    console.log("in get group id");
     return db
       .queryAsync(getGroupId, [req.query.event_id])
       .then((res) => res.status(200).send(res.data)) //this need to change to send the admin id back.
-        .catch((err) => {
-          console.log(err);
-          res.status(404).send(err);
-        });
-
+      .catch((err) => {
+        console.log(err);
+        res.status(404).send(err);
+      });
   } else if (req.method === "GET") {
     let { group_id } = req.query;
     const query = {
@@ -80,7 +68,7 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "DELETE") {
-    console.log('TEST999', req.query.body);
+    console.log("TEST999", req.query.body);
     return db
       .queryAsync(deleteComments, [req.body.event_id])
       .then(() => db.queryAsync(deleteUsersEvents, [req.body.event_id]))

@@ -18,7 +18,6 @@ const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
 
 function EventCard({
-  image,
   event,
   rsvp,
   getUserRsvps,
@@ -26,14 +25,11 @@ function EventCard({
   eventId1,
   getEvents,
 }) {
-  image = image ? defaultPhoto : defaultPhoto1;
   const [opened, setOpened] = useState(false);
   const {
     name,
-    address,
     date,
     prospective,
-    description,
     group_name,
     admin_id,
     event_id,
@@ -41,8 +37,7 @@ function EventCard({
     img_url,
     owner_id,
   } = event;
-  const [isAdmin, setIsAdmin] = useState(false);
-  const isOwner = owner_id === user_id;
+  const canEdit = owner_id === user_id || admin_id === user_id;
   const timeStamp = new Date(date);
   let image = img_url || defaultPhoto;
   console.log(img_url);
@@ -105,23 +100,6 @@ function EventCard({
       });
   };
 
-  const handleDelete = (event) => {
-    event.preventDefault();
-    axios({
-      method: "DELETE",
-      url: "/api/events",
-      params: {
-        body: eventId1, //id of the event to delete.
-      },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   function handleDeleteEvent() {
     axios({
       method: "DELETE",
@@ -146,18 +124,14 @@ function EventCard({
               <Title order={3} className="" onClick={() => setOpened(true)}>
                 {name}
               </Title>
-              {isOwner ? (
-                <Button onClick={handleDeleteEvent} color="red">
-                  Delete Event
-                </Button>
-              ) : null}
+
               <Title order={5}>
                 {timeStamp.toLocaleString([], {
                   dateStyle: "short",
                 })}
               </Title>
             </Group>
-            {isAdmin ? (
+            {canEdit ? (
               <Group grow spacing={0}>
                 <Button onClick={handleEdit} variant="default">
                   EDIT
@@ -206,7 +180,8 @@ function EventCard({
           user_id={user_id}
           handleRsvp={handleRsvp}
           handleDeleteEvent={handleDeleteEvent}
-          isOwner={isOwner}
+          handleEdit={handleEdit}
+          canEdit={canEdit}
         />
       </Modal>
     </div>
