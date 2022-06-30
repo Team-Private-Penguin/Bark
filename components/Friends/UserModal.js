@@ -86,7 +86,6 @@ function UserModal({ clicked, userId }) {
               <li className="friend-prop">
                 <FontAwesomeIcon
                   icon={faPaw}
-                  color="red"
                   className="fa-paw-icons friend-inline-paw"
                 />
                 Friendly to people: {userProfile?.f_people}
