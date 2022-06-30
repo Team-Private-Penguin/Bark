@@ -42,17 +42,20 @@ module.exports = {
   getGroupId: `SELECT (group_id) FROM barkschema.events
   WHERE event_id = $1`,
 
-  getAdminId: ``,
-
   updateEvent: `UPDATE barkschema.Events
-  SET group_id = $1,
-  name = $2,
-  date = $3,
-  description = $4,
-  lat = $5,
-  lng = $6,
-  address = $7,
-  prospective = $8 `,
+  SET
+  group_id = $2,
+  name = $3,
+  date = $4,
+  description = $5,
+  lat = $6,
+  lng = $7,
+  address = $8,
+  prospective = $9,
+  img_url = $10
+  WHERE event_id = $1,
+  `,
+
 
   getUserEvents: `SELECT *
     FROM barkschema.users_events

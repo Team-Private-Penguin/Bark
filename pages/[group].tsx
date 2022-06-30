@@ -72,7 +72,7 @@ const Groups = () => {
         setJoined(true);
       }
     });
-  }, [userId]);
+  }, [userId, id]);
   return (
     <main className="min-h-screen w-screen">
       <Navbar />
@@ -113,16 +113,26 @@ const Groups = () => {
                     />{" "}
                     {groupDetails.name}
                   </span>{" "}
-                  {joined ? null : (
-                    <Button onClick={joinGroup}> Join Group </Button>
-                  )}
                 </Group>
               </h2>
-              <AddEvent
-                joined={joined}
-                eventCount={eventCounter}
-                setCount={setEventCounter}
-              />
+              <Group position="center">
+                {joined ? (
+                  <AddEvent
+                    joined={joined}
+                    eventCount={eventCounter}
+                    setCount={setEventCounter}
+                  />
+                ) : (
+                  <Button
+                    disabled={joined}
+                    onClick={joinGroup}
+                    className="bg-slate-800"
+                  >
+                    {" "}
+                    Join Group{" "}
+                  </Button>
+                )}
+              </Group>
             </div>
             <ScrollArea
               offsetScrollbars
@@ -130,7 +140,11 @@ const Groups = () => {
               className="mt-2"
               style={{ height: "80vh" }}
             >
-              <EventFeed eventCount={eventCounter} userFeed={false} />
+              <EventFeed
+                group={id}
+                eventCount={eventCounter}
+                userFeed={false}
+              />
             </ScrollArea>
           </div>
         </Stack>

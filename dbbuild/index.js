@@ -1,5 +1,7 @@
 const db = require("../pages/api/db");
+
 //`CREATE DATABASE bark` if not exists
+
 db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
   .then(() => db.queryAsync(`CREATE SCHEMA barkschema`))
   .then(() =>
@@ -216,4 +218,4 @@ db.queryAsync(`DROP SCHEMA IF EXISTS barkschema CASCADE`)
     ALTER TABLE barkschema.Events ADD CONSTRAINT Events_group_id_fkey FOREIGN KEY (group_id) REFERENCES barkschema.Groups(group_id)
   `)
   )
-  .then(() => console.log("congrats! you are a champion"));
+  .then(() => console.log("congrats! you are a champion"))
