@@ -114,7 +114,12 @@ function AddUser() {
           <Dropzone setImage={setImage} />
 
           <Group position="center" mt="md">
-            <Button color="dark" variant="outline" type="submit">
+            <Button
+              color="dark"
+              variant="outline"
+              type="submit"
+              onClick={() => setOpened(false)}
+            >
               Submit
             </Button>
           </Group>
