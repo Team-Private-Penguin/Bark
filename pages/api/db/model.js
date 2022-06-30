@@ -64,6 +64,7 @@ module.exports = {
   JOIN barkschema.groups g USING (group_id)
   JOIN barkschema.events e USING (group_id)
   WHERE user_id = $1
+  ORDER BY e.date DESC
 `,
 
   postUser: `INSERT INTO barkschema.users (

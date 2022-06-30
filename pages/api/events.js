@@ -14,6 +14,7 @@ const getGroupEvents = `SELECT e.address, e.name, e.date, g.name AS group_name, 
 FROM barkschema.events e
 JOIN barkschema.groups g USING (group_id)
 WHERE group_id = $1
+ORDER BY e.date DESC
 `;
 
 export default function handler(req, res) {
