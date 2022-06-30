@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import EventFeed from "../components/EventFeed";
 import AddEvent from "../components/AddEvent";
-import { Button, Group, Stack } from "@mantine/core";
+import { Button, Group, ScrollArea, Stack } from "@mantine/core";
 import UserInfo from "../components/Users/UserInfo";
 import Navbar from "../components/Navbar";
 import User from "../components/Users/User";
@@ -17,6 +17,7 @@ import ExploreGroups from "../components/ExploreGroups";
 const Groups = () => {
   const { user } = useUser();
   const [joined, setJoined] = useState(false);
+  const [groupCount, setGroupCount] = useState(0);
   const [eventCounter, setEventCounter] = useState(0);
   let userId = user?.sub.split("google-oauth2|")[1];
   if (!userId) {
@@ -55,7 +56,7 @@ const Groups = () => {
   useEffect(() => {
     getGroupDetails();
     axios.get(`/api/usergroup?user_id=${userId}`).then((data) => {
-      console.log("join check", data.data[0].rows);
+      console.log("join check", data.data[0]);
       if (
         data.data[0].rows.filter((obj: { group_id: string }) => {
           return obj["group_id"] === id;
@@ -64,13 +65,13 @@ const Groups = () => {
         setJoined(true);
       }
     });
-  }, []);
+  }, [userId]);
   return (
     <main className="min-h-screen w-screen">
       <Navbar />
       <Group className="group">
         <Stack className="hidden lg:flex" style={{ width: "20%" }}>
-          <div className="border h-[28vh] space shadows ">
+          <div className="border h-[34vh] space shadows ">
             <h2 className="section-title">🐶 User Info</h2>
             {user && <User />}
             {!user && (
@@ -81,13 +82,13 @@ const Groups = () => {
             <h2>🐶 Groups</h2>
             <Stack>
               <ExploreGroups />
-              <AddGroup />
-              <GroupList />
+              <AddGroup groupCount={groupCount} setGroupCount={setGroupCount} />
+              <GroupList groupCount={groupCount} />
             </Stack>
           </div>
         </Stack>
         <Stack style={{ flexGrow: 1 }}>
-          <div className="border h-[84vh] shadows">
+          <div className="border h-[90vh] shadows">
             <div className="sticky top-0 z-50">
               <h2>
                 <Group className="justify-between">
@@ -98,13 +99,24 @@ const Groups = () => {
                   )}
                 </Group>
               </h2>
-              <AddEvent eventCount={eventCounter} setCount={setEventCounter} />
+              <AddEvent
+                joined={joined}
+                eventCount={eventCounter}
+                setCount={setEventCounter}
+              />
             </div>
-            <EventFeed eventCount={eventCounter} userFeed={false} />
+            <ScrollArea
+              offsetScrollbars
+              scrollbarSize={8}
+              className="mt-2"
+              style={{ height: "80vh" }}
+            >
+              <EventFeed eventCount={eventCounter} userFeed={false} />
+            </ScrollArea>
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
-          <Stack className="border h-[84vh] space shadows gap-0">
+          <Stack className="border h-[90vh] space shadows gap-0">
             <h2>🐶 Group Members</h2>
             <Friends groupId={id} listType={"groups"} />
           </Stack>

@@ -21,7 +21,7 @@ import { faBullseye } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "@auth0/nextjs-auth0";
 import ImageDropzone from "./Users/Dropzone";
 
-function AddEvent({ setCount, eventCount }) {
+function AddEvent({ joined, setCount, eventCount }) {
   const { user } = useUser();
   const user_id = user?.sub.split("google-oauth2|")[1];
   const [image, setImage] = useState("");
@@ -138,7 +138,11 @@ function AddEvent({ setCount, eventCount }) {
       </Modal>
 
       <Group position="center">
-        <Button className="bg-slate-800" onClick={() => setOpened(true)}>
+        <Button
+          disabled={!joined}
+          className="bg-slate-800"
+          onClick={() => setOpened(true)}
+        >
           Add an Event!
         </Button>
       </Group>

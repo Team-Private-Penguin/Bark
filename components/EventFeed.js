@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
-import { Stack } from "@mantine/core";
+import { Stack, ScrollArea } from "@mantine/core";
 import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
@@ -11,8 +11,8 @@ function EventFeed({ userFeed, eventCount }) {
   } = useRouter();
   const { user } = useUser();
   const user_id = user?.sub.split("google-oauth2|")[1];
-  const [currentEvents, setCurrentEvents] = useState([{}]);
-  const [userRsvps, setUserRsvps] = useState([{}]);
+  const [currentEvents, setCurrentEvents] = useState([]);
+  const [userRsvps, setUserRsvps] = useState([]);
 
   function getUserRsvps() {
     axios
@@ -45,10 +45,10 @@ function EventFeed({ userFeed, eventCount }) {
       getGroupEvents();
       getUserRsvps();
     }
-  }, [user_id, eventCount]);
+  }, [user_id, eventCount, userFeed]);
 
   return (
-    <Stack className="h-[84vh] overflow-auto">
+    <Stack className="h-[vh] overflow-auto">
       {currentEvents.map((event, index) => {
         return (
           <EventCard
@@ -59,9 +59,10 @@ function EventFeed({ userFeed, eventCount }) {
             }
             getUserRsvps={getUserRsvps}
             key={index}
-            image={true}
             event={event}
             user_id={user_id}
+            getEvents={userFeed ? getUserEvents : getGroupEvents}
+            event_id={event.event_id}
           />
         );
       })}

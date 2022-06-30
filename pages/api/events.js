@@ -1,35 +1,34 @@
 import db from "./db";
-import {
-  postEvent,
-  getEventsGroup,
-  getAdmin,
-  deleteEvent,
-  updateEvent,
-} from "./db/model";
+import { postEvent, getGroupId, updateEvent } from "./db/model";
 
-const getGroupEvents = `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id
+const deleteEvent = `DELETE
+FROM barkschema.events
+WHERE event_id = $1;
+`;
+
+const deleteComments = `DELETE FROM barkschema.comments WHERE event_id = $1`;
+
+const deleteUsersEvents = `DELETE FROM barkschema.users_events WHERE event_id = $1`;
+
+const getGroupEvents = `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id, e.owner_id, e.img_url, e.event_id
 FROM barkschema.events e
 JOIN barkschema.groups g USING (group_id)
 WHERE group_id = $1
+ORDER BY e.date DESC
 `;
 
 export default function handler(req, res) {
   if (req.method === "POST") {
-    let { name, description, address, group_id, date, prospective, owner_id } =
-      req.body;
-    const query = {
-      text: postEvent,
-      values: [
-        name,
-        description,
-        address,
-        group_id,
-        date,
-        prospective,
-        img_url,
-        owner_id,
-      ],
-    };
+    let {
+      name,
+      description,
+      address,
+      group_id,
+      date,
+      prospective,
+      owner_id,
+      img_url,
+    } = req.body;
     let values = [
       name,
       description,
@@ -37,8 +36,8 @@ export default function handler(req, res) {
       group_id,
       date,
       prospective,
-      img_url,
       owner_id,
+      img_url,
     ];
     return db
       .queryAsync(postEvent, values)
@@ -47,11 +46,10 @@ export default function handler(req, res) {
         console.log(err);
         res.status(404).send(err);
       });
-  } else if (req.method === "GET" && req.query.body === "admin") {
-    //for getting admin id.
-
+  } else if (req.method === "GET" && req.query.type === "getGroupId") {
+    console.log("in get group id");
     return db
-      .queryAsync(getAdmin)
+      .queryAsync(getGroupId, [req.query.event_id])
       .then((res) => res.status(200).send(res.data)) //this need to change to send the admin id back.
       .catch((err) => {
         console.log(err);
@@ -71,8 +69,11 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "DELETE") {
+    console.log("TEST999", req.query.body);
     return db
-      .queryAsync(deleteEvent, req.query.body)
+      .queryAsync(deleteComments, [req.body.event_id])
+      .then(() => db.queryAsync(deleteUsersEvents, [req.body.event_id]))
+      .then(() => db.queryAsync(deleteEvent, [req.body.event_id]))
       .then(() => {
         res.status(200).send("Deleted!");
       })
