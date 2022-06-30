@@ -35,7 +35,7 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id, eventId1 }) {
     event_id,
     group_id,
   } = event;
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
   const timeStamp = new Date(date);
   const [groupId, setGroupId] = useState(0);
 
@@ -60,22 +60,23 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id, eventId1 }) {
     }
   }
 
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url:  '/api/admin',
-      params: {
-        type: "getGroupId",
-        event_id: 1
-      }
-    })
-    .then((response) => {
-      setIsAdmin(response.data); //edit this in accordance with the response.
-    })
-    .catch((err) => {
-      console.log('didnt get id correctly');
-    })
-  }, [isAdmin]);  //gets group id, use group id to get admin id, then compare with user id...
+  // useEffect(() => {
+    // axios({
+    //   method: 'get',
+    //   url:  '/api/admin',
+    //   params: {
+    //     type: "getGroupId",
+    //     event_id: 1
+    //   }
+    // })
+    // .then((response) => {
+    //   setIsAdmin(response.data); //edit this in accordance with the response.
+    // })
+    // .catch((err) => {
+    //   console.log('didnt get id correctly');
+    // })
+
+  // }, [isAdmin]);  //gets group id, use group id to get admin id, then compare with user id...
 
   const handleEdit = (event) => {
     event.preventDefault();
@@ -88,7 +89,7 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id, eventId1 }) {
       },
     })
       .then((response) => {
-        console.log(response);
+        console.log('updating!');
       })
       .catch((err) => {
         console.log(err);

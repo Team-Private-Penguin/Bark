@@ -50,7 +50,6 @@ function AddEvent() {
       prospective: values.prospective,
     };
     axios.post("/api/events", submission).then(() => {
-      å;
       setOpened(false);
     });
   };

@@ -5,7 +5,7 @@ export default function handler(req, res) {
 
   console.log('what is this request', req);
 
-  if (req.method === "GET" ) {
+  if (req.method === "GET" && req.query.type === "getGroupId") {
 
     console.log('here?11');
     return db
