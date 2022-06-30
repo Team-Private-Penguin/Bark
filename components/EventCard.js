@@ -11,32 +11,35 @@ import {
   Stack,
   Title,
 } from "@mantine/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faPaw } from "@fortawesome/free-solid-svg-icons";
 const axios = require("axios").default;
 import Link from "next/link";
 
 const defaultPhoto =
   "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg";
-const defaultPhoto1 =
-  "https://images.unsplash.com/photo-1598875706250-21faaf804361?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OXx8fGVufDB8fHx8&w=1000&q=80";
 
-function EventCard({ image, event, rsvp, getUserRsvps, user_id, eventId1 }) {
-  image = image ? defaultPhoto : defaultPhoto1;
+function EventCard({
+  event,
+  rsvp,
+  getUserRsvps,
+  user_id,
+  eventId1,
+  getEvents,
+}) {
   const [opened, setOpened] = useState(false);
   const {
     name,
-    address,
     date,
     prospective,
-    description,
     group_name,
     admin_id,
     event_id,
     group_id,
+    img_url,
+    owner_id,
   } = event;
-  const [isAdmin, setIsAdmin] = useState(true);
+  const canEdit = owner_id === user_id || admin_id === user_id;
   const timeStamp = new Date(date);
+  let image = img_url || defaultPhoto;
   const [groupId, setGroupId] = useState(0);
 
   function handleRsvp() {
@@ -61,20 +64,20 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id, eventId1 }) {
   }
 
   // useEffect(() => {
-    // axios({
-    //   method: 'get',
-    //   url:  '/api/admin',
-    //   params: {
-    //     type: "getGroupId",
-    //     event_id: 1
-    //   }
-    // })
-    // .then((response) => {
-    //   setIsAdmin(response.data); //edit this in accordance with the response.
-    // })
-    // .catch((err) => {
-    //   console.log('didnt get id correctly');
-    // })
+  // axios({
+  //   method: 'get',
+  //   url:  '/api/admin',
+  //   params: {
+  //     type: "getGroupId",
+  //     event_id: 1
+  //   }
+  // })
+  // .then((response) => {
+  //   setIsAdmin(response.data); //edit this in accordance with the response.
+  // })
+  // .catch((err) => {
+  //   console.log('didnt get id correctly');
+  // })
 
   // }, [isAdmin]);  //gets group id, use group id to get admin id, then compare with user id...
 
@@ -85,58 +88,54 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id, eventId1 }) {
       url: "/api/admin",
       params: {
         body: "asdfasdf",
-        event_id: eventId1
+        event_id: eventId1,
       },
     })
       .then((response) => {
-        console.log('updating!');
+        console.log("updating!");
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const handleDelete = (event) => {
-    event.preventDefault();
+  function handleDeleteEvent() {
     axios({
       method: "DELETE",
       url: "/api/events",
-      params: {
-        body: eventId1, //id of the event to delete.
+      data: {
+        event_id,
       },
     })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+      .then(() => getEvents())
+      .catch((err) => console.log(err));
+  }
 
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
         <Card radius="10px" shadow="sm" p="sm">
-          <Card.Section className="p-2" onClick={() => setOpened(true)}>
+          <Card.Section className="p-2">
             <Stack>
               {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
             </Stack>
             <Group position="apart">
-              <Title order={3} className="">
+              <Title order={3} className="" onClick={() => setOpened(true)}>
                 {name}
               </Title>
+
               <Title order={5}>
                 {timeStamp.toLocaleString([], {
                   dateStyle: "short",
                 })}
               </Title>
             </Group>
-            {isAdmin ? (
+            {canEdit ? (
               <Group grow spacing={0}>
                 <Button onClick={handleEdit} variant="default">
                   EDIT
                 </Button>
-                <Button onClick={handleDelete} variant="default">
+                <Button onClick={handleDeleteEvent} variant="default">
                   DELETE
                 </Button>
               </Group>
@@ -179,6 +178,9 @@ function EventCard({ image, event, rsvp, getUserRsvps, user_id, eventId1 }) {
           rsvp={rsvp}
           user_id={user_id}
           handleRsvp={handleRsvp}
+          handleDeleteEvent={handleDeleteEvent}
+          handleEdit={handleEdit}
+          canEdit={canEdit}
         />
       </Modal>
     </div>

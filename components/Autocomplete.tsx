@@ -44,6 +44,20 @@ export default function Input({ userId }) {
         setData(mappedEvents);
       });
     } else if (activeTab === 1) {
+      axios.get("/api/groups").then((res) => {
+        console.log(res.data)
+        const mappedEvents = res.data[0].rows.map((event) => {
+          return {
+            user_id: event.admin_id,
+            value: event.name,
+            gName: event.gname,
+            description: event.description,
+            date: undefined,
+            groupId: event.group_id,
+          };
+        });
+        setData(mappedEvents);
+      });
     } else if (activeTab === 0) {
       axios.get("/api/allusers").then((res) => {
         console.log(res.data);

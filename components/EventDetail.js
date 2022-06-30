@@ -5,18 +5,27 @@ import {
   Card,
   Image,
   Text,
-  Button,
+  Switch,
   Stack,
   Group,
   Avatar,
   Badge,
+  Title,
+  Button,
+  ScrollArea,
 } from "@mantine/core";
 import axios from "axios";
-import { useUser } from "@auth0/nextjs-auth0";
 
-function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
-  const { user } = useUser();
-  let userId = user?.sub.split("google-oauth2|")[1];
+function EventDetail({
+  image,
+  event,
+  rsvp,
+  handleRsvp,
+  user_id,
+  handleDeleteEvent,
+  handleEdit,
+  canEdit,
+}) {
   const {
     name,
     address,
@@ -24,25 +33,29 @@ function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
     prospective,
     description,
     group_name,
-    admin_id,
     event_id,
   } = event;
   const timeStamp = new Date(date);
   const [comments, setComments] = useState([{}]);
   const [attendees, setAttendees] = useState([{}]);
-  useEffect(() => {
+
+  function getComments() {
     axios
       .get(`/api/event/comment?id=${event_id}`)
       .then((data) => setComments(data.data[0].rows))
       .catch((err) => console.log(err));
-  }, [userId]);
+  }
+
+  useEffect(() => {
+    getComments();
+  }, [user_id]);
 
   useEffect(() => {
     axios
       .get(`/api/event/rsvp?event_id=${event_id}`)
       .then((data) => setAttendees(data.data[0].rows))
       .catch((err) => console.log(err));
-  }, [rsvp]);
+  }, [rsvp, user_id]);
 
   const attendeeList = attendees.map((attendee, index) => {
     return (
@@ -62,54 +75,86 @@ function EventDetail({ image, event, rsvp, handleRsvp, user_id }) {
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
       <Card
-        className="sticky top-0 space-y-1 w-[74%]"
+        className="sticky top-0 space-y-2 w-[74%]"
         radius="10px"
         shadow="sm"
       >
         <Card.Section className="bg-main p-2">
-          <h3 className="text-left font-bold">{group_name}</h3>
-        </Card.Section>
-        <Stack>
-          {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
-        </Stack>
-        <Card.Section className="flex items-center justify-center space-x-4">
-          <Stack className="w-[35%] flex-column">
-            <h3 className="text-center font-bold color-accent">{name}</h3>
-            <Text color="var(--light-blue)" align="center" size="sm">
+          <Group position="apart">
+            <Title order={3}>{name}</Title>
+            <Title order={5}>
               {timeStamp.toLocaleString([], {
                 dateStyle: "short",
               })}
-            </Text>
-            <Text color="var(--black)" align="center">
-              {address}
-            </Text>
-          </Stack>
-          <Stack className="">
-            <Button onClick={handleRsvp}>{rsvp ? "Cancel" : "RSVP!"}</Button>
-          </Stack>
-          <Stack className="w-[40%]">
-            <Image radius="10px" fit="contain" src={image} />
+            </Title>
+          </Group>
+        </Card.Section>
+        <Stack>
+          {canEdit ? (
+            <Group grow spacing={0}>
+              <Button onClick={handleEdit} variant="default">
+                EDIT
+              </Button>
+              <Button onClick={handleDeleteEvent} variant="default">
+                DELETE
+              </Button>
+            </Group>
+          ) : null}
+          {prospective ? <Badge color="grape">PLANNING EVENT</Badge> : null}
+        </Stack>
+        <Card.Section className="h-[25vh] flex items-center justify-center space-x-4">
+          <Stack>
+            <img
+              className="rounded-[10px] max-h-[25vh] max-w-[27vw]"
+              src={image}
+            />
           </Stack>
         </Card.Section>
-        <Card.Section p=".5rem">{description}</Card.Section>
+
+        <Card.Section p=".5rem">
+          <Group position="apart">
+            <Badge className="">{group_name}</Badge>
+            <Switch
+              checked={rsvp}
+              onChange={handleRsvp}
+              label={prospective ? "Interested?" : "RSVP"}
+            ></Switch>
+          </Group>
+          <Title order={5} color="var(--black)" size="lg">
+            {address}
+          </Title>
+          <Text color="var(--black)" size="md">
+            {description}
+          </Text>
+        </Card.Section>
         <Card.Section>
           <AddComment
-            user_id={userId}
+            user_id={user_id}
             event={event}
             setComments={setComments}
           />
         </Card.Section>
-        <Card.Section className="p-2 h-[37vh] overflow-auto">
-          <CommentFeed comments={comments} />
+        <Card.Section
+          className={`p-2 ${
+            prospective ? "h-[25vh]" : "h-[29vh]"
+          } overflow-auto`}
+        >
+          <CommentFeed
+            comments={comments}
+            isOwner={canEdit}
+            getComments={getComments}
+          />
         </Card.Section>
       </Card>
-      <Card className="space-y-1 w-[24%] h-[85vh]" radius="10px" shadow="sm">
+      <Card className="space-y-1 w-[24%] h-[90vh]" radius="10px" shadow="sm">
         <Card.Section className="bg-main p-2">
-          <h3 className="text-left font-bold color-accent">Attendees</h3>
+          <Title align="center" order={4}>
+            {prospective ? "Interested" : "RSVPs"}
+          </Title>
         </Card.Section>
-        <Card.Section className="h-[95%] overflow-auto space-y-72">
+        <ScrollArea className="h-[98%] overflow-auto">
           {attendeeList}
-        </Card.Section>
+        </ScrollArea>
       </Card>
     </div>
   );

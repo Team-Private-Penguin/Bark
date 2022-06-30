@@ -51,7 +51,7 @@ function Navbar({ setUpdateFriends }) {
       </Link>
       <Input userId={userId} />
       <section className="add-user-section">
-        <Link href="/map" passHref>
+        <Link href="/map_page" passHref>
           <h2>🐶 Map</h2>
         </Link>
         <Popover
