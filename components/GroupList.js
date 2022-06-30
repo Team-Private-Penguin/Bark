@@ -10,10 +10,9 @@ function GroupList() {
   const [UserGroups, setUserGroups] = useState([]);
   useEffect(() => {
     axios.get(`/api/usergroup?user_id=${user_id}`).then((data) => {
-      console.log("groups list", data.data[0].rows);
       setUserGroups(data.data[0].rows);
     });
-  }, []);
+  }, [user_id]);
 
   return (
     <Stack className="h-[35vh] overflow-auto">

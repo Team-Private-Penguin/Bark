@@ -15,11 +15,11 @@ import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 const Home: NextPage = () => {
   const { user } = useUser();
-  const [updateFriends, setUpdateFriends] = useState(false)
+  const [updateFriends, setUpdateFriends] = useState(false);
   return (
     <>
       <main className="min-h-screen w-screen ">
-        <Navbar setUpdateFriends={setUpdateFriends}/>
+        <Navbar setUpdateFriends={setUpdateFriends} />
         <Group className="group">
           <Stack justify="flex-start" style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
@@ -42,20 +42,22 @@ const Home: NextPage = () => {
           <Stack style={{ flexGrow: 1 }}>
             <div className="border h-[90vh] shadows homeBox">
               <h2 className="sticky top-0 z-50">🐶 Events</h2>
-              <EventFeed userFeed={true} />
+              <ScrollArea
+                offsetScrollbars
+                scrollbarSize={8}
+                className="mt-2"
+                style={{ height: "82vh" }}
+              >
+                <EventFeed userFeed={true} />
+              </ScrollArea>
             </div>
           </Stack>
 
           <Stack style={{ width: "20%" }}>
-            <Stack className="border h-[28vh] space shadows homeBox gap-0">
+            <Stack className="border h-[90vh] space shadows homeBox gap-0">
               <h2>🐶 Friends</h2>
               <Friends updateFriends={updateFriends} listType={"friends"} />
             </Stack>
-            <div className="border h-[60vh] space shadows cursor-pointer homeBox">
-              <Link href="/map" passHref>
-                <h2 className="section-title">🐶 Map</h2>
-              </Link>
-            </div>
           </Stack>
         </Group>
       </main>

@@ -5,9 +5,11 @@ module.exports = {
     address,
     group_id,
     date,
-    prospective
+    prospective,
+    owner_id,
+    img_url
   )
-  VALUES ($1, $2, $3, $4, $5, $6)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
   `,
 
   getEventsGroup: `SELECT * FROM barkschema.events WHERE group_id = $1`,
@@ -17,7 +19,7 @@ module.exports = {
     description,
     admin_id
   )
-  VALUES ($1, $2, $3)
+  VALUES ($1, $2, $3) returning group_id
   `,
 
   getAllGroups: `SELECT * FROM barkschema.groups`,
@@ -37,10 +39,10 @@ module.exports = {
     WHERE user_id = $1
     `,
 
-  getAdmin: `SELECT admin_id FROM barkschema.Groups`,
-
-  deleteEvent: `DELETE FROM barkschema.Events
+  getGroupId: `SELECT (group_id) FROM barkschema.events
   WHERE event_id = $1`,
+
+  getAdminId: ``,
 
   updateEvent: `UPDATE barkschema.Events
   SET group_id = $1,
@@ -57,12 +59,6 @@ module.exports = {
     JOIN barkschema.events USING (event_id)
     WHERE user_id = $1
   `,
-  getUserGroupsEvents: `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id
-  FROM barkschema.users_groups ug
-  JOIN barkschema.groups g USING (group_id)
-  JOIN barkschema.events e USING (group_id)
-  WHERE user_id = $1
-`,
 
   postUser: `INSERT INTO barkschema.users (
     user_id,
@@ -77,11 +73,12 @@ module.exports = {
   `,
   getUser: `SELECT * FROM barkschema.Users WHERE user_id = $1`,
 
-  getUserGroupsEvents: `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id, e.event_id
+  getUserGroupsEvents: `SELECT e.address, e.name, e.date, g.name AS group_name, e.description, e.prospective, g.admin_id, e.event_id, g.group_id, e.owner_id, e.img_url
     FROM barkschema.users_groups ug
     JOIN barkschema.groups g USING (group_id)
     JOIN barkschema.events e USING (group_id)
     WHERE user_id = $1
+    ORDER BY e.date DESC
   `,
 
   postEventComment: `INSERT INTO barkschema.comments (
@@ -98,8 +95,6 @@ module.exports = {
     WHERE event_id = $1
     ORDER BY date DESC
   `,
-
-  deleteComment: `DELETE FROM barkschema.comments WHERE event_id = $1`,
 
   editUser: `UPDATE barkschema.Users
   SET zipcode = $2,

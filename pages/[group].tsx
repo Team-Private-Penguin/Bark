@@ -3,9 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import EventFeed from "../components/EventFeed";
 import AddEvent from "../components/AddEvent";
-import { Button, Group, Stack } from "@mantine/core";
+import { Button, Group, ScrollArea, Stack } from "@mantine/core";
 import UserInfo from "../components/Users/UserInfo";
-import GroupsComp from "../components/AddGroup";
 import Navbar from "../components/Navbar";
 import User from "../components/Users/User";
 import axios from "axios";
@@ -69,14 +68,14 @@ const Groups = () => {
       <Navbar />
       <Group className="group">
         <Stack className="hidden lg:flex" style={{ width: "20%" }}>
-          <div className="border h-[28vh] space shadows ">
+          <div className="border h-[34vh] space shadows ">
             <h2 className="section-title">🐶 User Info</h2>
             {user && <User />}
             {!user && (
               <div className="centered">Please add your pet above!</div>
             )}
           </div>
-          <div className="border h-[54vh] space shadows cursor-pointer homeBox">
+          <div className="border h-[54vh] space shadows homeBox">
             <h2>🐶 Groups</h2>
             <Stack>
               <ExploreGroups />
@@ -86,7 +85,7 @@ const Groups = () => {
           </div>
         </Stack>
         <Stack style={{ flexGrow: 1 }}>
-          <div className="border h-[84vh] shadows">
+          <div className="border h-[90vh] shadows">
             <div className="sticky top-0 z-50">
               <h2>
                 <Group className="justify-between">
@@ -99,11 +98,18 @@ const Groups = () => {
               </h2>
               <AddEvent />
             </div>
-            <EventFeed userFeed={false} />
+            <ScrollArea
+              offsetScrollbars
+              scrollbarSize={8}
+              className="mt-2"
+              style={{ height: "80vh" }}
+            >
+              <EventFeed userFeed={false} />
+            </ScrollArea>
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
-          <Stack className="border h-[84vh] space shadows gap-0">
+          <Stack className="border h-[90vh] space shadows gap-0">
             <h2>🐶 Group Members</h2>
             <Friends groupId={id} listType={"groups"} />
           </Stack>
