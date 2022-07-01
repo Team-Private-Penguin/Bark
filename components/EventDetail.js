@@ -28,6 +28,7 @@ import {
   faUserCircle,
   faPenToSquare,
   faTrashCan,
+  faDog,
 } from "@fortawesome/free-solid-svg-icons";
 
 function EventDetail({
@@ -144,14 +145,19 @@ function EventDetail({
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
       <Card
-        className="sticky top-0 space-y-2 w-[74%]"
+        className="sticky top-0 space-y-2 w-[30vw]"
         radius="10px"
-        shadow="sm"
+        shadow="md"
       >
-        <Card.Section className="bg-main p-2">
-          <Group position="apart">
-            <Title order={3}>{name}</Title>
-            <Title order={5}>
+        <Card.Section className="bg-red text-white p-2">
+          <Group className="Group" position="apart">
+            <Group className="gap-0">
+              <FontAwesomeIcon icon={faDog} className="fa-header-icons" />
+              <Title className="font-semibold m-0" order={4}>
+                {name}
+              </Title>
+            </Group>
+            <Title className="font-normal mr-2" order={4}>
               {timeStamp.toLocaleString([], {
                 dateStyle: "short",
               })}
@@ -203,7 +209,7 @@ function EventDetail({
           </Stack>
         </Card.Section>
 
-        <Card.Section p=".5rem">
+        <Card.Section className="p-2 mr-1 ml-1">
           <Group position="apart">
             <Badge color="cyan">{group_name}</Badge>
             <Switch
@@ -240,8 +246,8 @@ function EventDetail({
         </Card.Section>
       </Card>
       <Card className="space-y-1 w-[24%] h-[90vh]" radius="10px" shadow="sm">
-        <Card.Section className="bg-main p-2">
-          <Title align="center" order={4}>
+        <Card.Section className="bg-red text-white">
+          <Title className="p-2 font-semibold" align="center" order={4}>
             {prospective ? "Interested" : "RSVPs"}
           </Title>
         </Card.Section>

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Textarea, Button, Group, Stack } from "@mantine/core";
 import axios from "axios";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AddComment({ setComments, event, user_id }) {
   const { event_id } = event;
@@ -17,7 +19,7 @@ function AddComment({ setComments, event, user_id }) {
       .catch((err) => console.log(err));
   }
   return (
-    <Group p=".5rem">
+    <Group className="ml-2 mr-2 p-2">
       <Stack style={{ flexGrow: 1 }}>
         <Textarea
           autosize
@@ -29,15 +31,12 @@ function AddComment({ setComments, event, user_id }) {
           onChange={(e) => setComment(e.currentTarget.value)}
         />
       </Stack>
-      <Stack>
-        <Button
-          className="bg-slate-800"
-          size="md"
-          disabled={!comment.length}
+      <Stack className="w-[3vw] p-2 border text-teal hover:text-red hover:border-red border-[lightgrey] rounded-full transition duration-200 ease-in-out">
+        <FontAwesomeIcon
+          className="text-lg  cursor-pointer p-1"
+          icon={faPaperPlane}
           onClick={handleClick}
-        >
-          Post
-        </Button>
+        />
       </Stack>
     </Group>
   );

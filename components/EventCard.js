@@ -122,7 +122,7 @@ function EventCard({
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
-        <Card radius="5px" shadow="sm" p="sm" className="event-card">
+        <Card radius="10px" shadow="lg" p="md">
           <Card.Section className="p-2">
             <Stack>
               {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
@@ -210,7 +210,7 @@ function EventCard({
         transition="fade"
         transitionDuration={300}
         transitionTimingFunction="ease"
-        size="65%"
+        size="50%"
         overflow="outside"
       >
         <EventDetail
