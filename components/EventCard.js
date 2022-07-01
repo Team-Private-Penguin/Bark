@@ -95,10 +95,10 @@ function EventCard({
         body: values,
       },
     })
-    .then(()=> getEvents())
-    .catch((err) => {
-      console.log(err);
-    });
+      .then(() => getEvents())
+      .catch((err) => {
+        console.log(err);
+      });
     setOpenEdit(false);
   };
 
@@ -121,7 +121,6 @@ function EventCard({
           <Card.Section className="p-2">
             <Stack>
               {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
-
             </Stack>
             <Group className="title-date-container gap-0">
               <section className="header-container">
@@ -208,7 +207,7 @@ function EventCard({
         transition="fade"
         transitionDuration={300}
         transitionTimingFunction="ease"
-        size="50%"
+        size={850}
         overflow="outside"
       >
         <EventDetail
