@@ -150,7 +150,7 @@ const Groups = () => {
               offsetScrollbars
               scrollbarSize={8}
               className="mt-2"
-              style={{ height: "80vh" }}
+              style={{ height: "75vh" }}
             >
               <EventFeed
                 group={id}
