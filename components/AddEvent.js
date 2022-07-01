@@ -144,7 +144,7 @@ function AddEvent({ joined, setCount, eventCount }) {
           className="teal-btn"
           onClick={() => setOpened(true)}
         >
-          Add an Event!
+          Add Event
         </Button>
       </Group>
     </div>
