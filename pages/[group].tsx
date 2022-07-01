@@ -27,10 +27,8 @@ const Groups = () => {
   const [joined, setJoined] = useState(false);
   const [groupCount, setGroupCount] = useState(0);
   const [eventCounter, setEventCounter] = useState(0);
-  let userId = user?.sub.split("google-oauth2|")[1];
-  if (!userId) {
-    userId = user?.sub.split("auth0|")[1];
-  }
+  let userId =
+    user?.sub.split("google-oauth2|")[1] || user?.sub.split("auth0|")[1];
 
   const {
     query: { id },
@@ -66,7 +64,6 @@ const Groups = () => {
     getGroupDetails();
     setJoined(false);
     axios.get(`/api/usergroup?user_id=${userId}`).then((data) => {
-      //console.log("join check", data.data[0]);
       if (
         data.data[0].rows.filter((obj: { group_id: string }) => {
           return obj["group_id"] === id;
