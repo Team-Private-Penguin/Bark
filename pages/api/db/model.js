@@ -50,7 +50,6 @@ module.exports = {
   address = $4
   WHERE event_id = $5`,
 
-
   getUserEvents: `SELECT *
     FROM barkschema.users_events
     JOIN barkschema.events USING (event_id)
@@ -75,7 +74,7 @@ module.exports = {
     JOIN barkschema.groups g USING (group_id)
     JOIN barkschema.events e USING (group_id)
     WHERE user_id = $1
-    ORDER BY e.date DESC
+    ORDER BY e.date ASC
   `,
 
   postEventComment: `INSERT INTO barkschema.comments (
