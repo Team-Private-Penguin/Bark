@@ -17,8 +17,9 @@ export default async function handler(req, res) {
       `,
         [user]
       )
-      .then((result) => { console.log(user)
-        res.status(200).send(result.rows)})
+      .then((result) => {
+        res.status(200).send(result.rows);
+      })
       .catch((err) => {
         console.log(err, "requests get err");
         res.status(400).end();

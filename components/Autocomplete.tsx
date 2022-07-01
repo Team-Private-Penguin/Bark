@@ -263,7 +263,6 @@ export default function Input({ userId }) {
                   itemComponent={AutoCompleteItem}
                   data={data}
                   filter={(value, item) => {
-                    console.log(sizeValue, value, item);
                     return (
                       item.value
                         .toLowerCase()
@@ -300,8 +299,12 @@ export default function Input({ userId }) {
               itemComponent={AutoCompleteItem}
               data={data}
               filter={(value, item) =>
-                item.value?.toLowerCase().includes(value.toLowerCase().trim()) ||
-                item.description?.toLowerCase().includes(value.toLowerCase().trim())
+                item.value
+                  ?.toLowerCase()
+                  .includes(value.toLowerCase().trim()) ||
+                item.description
+                  ?.toLowerCase()
+                  .includes(value.toLowerCase().trim())
               }
               className="autocomplete"
               value={form.values.name}
@@ -323,8 +326,13 @@ export default function Input({ userId }) {
               itemComponent={AutoCompleteItem}
               data={data}
               filter={(value, item) =>
-                item.value?.toLowerCase().includes(value.toLowerCase().trim()) ||
-                item.description?.toLowerCase().includes(value.toLowerCase().trim()) || item.gName?.toLowerCase().includes(value.toLowerCase().trim())
+                item.value
+                  ?.toLowerCase()
+                  .includes(value.toLowerCase().trim()) ||
+                item.description
+                  ?.toLowerCase()
+                  .includes(value.toLowerCase().trim()) ||
+                item.gName?.toLowerCase().includes(value.toLowerCase().trim())
               }
               className="autocomplete"
               value={form.values.name}

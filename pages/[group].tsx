@@ -66,7 +66,6 @@ const Groups = () => {
     getGroupDetails();
     setJoined(false);
     axios.get(`/api/usergroup?user_id=${userId}`).then((data) => {
-      //console.log("join check", data.data[0]);
       if (
         data.data[0].rows.filter((obj: { group_id: string }) => {
           return obj["group_id"] === id;

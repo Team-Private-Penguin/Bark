@@ -42,9 +42,7 @@ function EditUser() {
     };
     axios
       .put("/api/users/users", submission)
-      .then(() => {
-        console.log("modified Postgres entry");
-      })
+
       .catch((err) => console.error(err));
   };
   return (
