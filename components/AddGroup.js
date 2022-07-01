@@ -45,7 +45,7 @@ const AddGroup = ({ groupCount, setGroupCount }) => {
   return (
     <div>
       <Group position="center">
-        <Button className="bg-teal" onClick={() => setOpened(true)}>
+        <Button className="teal-btn" onClick={() => setOpened(true)}>
           Create a Group!
         </Button>
       </Group>
@@ -70,7 +70,7 @@ const AddGroup = ({ groupCount, setGroupCount }) => {
           />
 
           <Group position="right" mt="md">
-            <Button className="bg-slate-800" type="submit">
+            <Button className="teal-btn" type="submit">
               Submit
             </Button>
           </Group>
