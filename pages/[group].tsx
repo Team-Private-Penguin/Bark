@@ -56,13 +56,15 @@ const Groups = () => {
           return axios
             .get(`/api/usergroup?user_id=${userId}`)
             .then((data) => setCurrentGroups(data.data[0].rows))
-            .then(() => setJoined(true));
+            .then(() => setJoined(true))
+            .then(() => setGroupCount(groupCount + 1));
         })
         .catch((err) => console.log(err));
     }
   }
   useEffect(() => {
     getGroupDetails();
+    setJoined(false);
     axios.get(`/api/usergroup?user_id=${userId}`).then((data) => {
       //console.log("join check", data.data[0]);
       if (
@@ -106,7 +108,10 @@ const Groups = () => {
                   setGroupCount={setGroupCount}
                 />
               </Group>
-              <GroupList groupCount={groupCount} />
+              <GroupList
+                groupCount={groupCount}
+                currentGroups={currentGroups}
+              />
             </Stack>
           </div>
         </Stack>
@@ -164,7 +169,7 @@ const Groups = () => {
               <FontAwesomeIcon icon={faFishFins} className="fa-header-icons" />{" "}
               Group Members
             </h2>
-            <Friends groupId={id} listType={"groups"} />
+            <Friends groupCount={groupCount} groupId={id} listType={"groups"} />
           </Stack>
         </Stack>
       </Group>

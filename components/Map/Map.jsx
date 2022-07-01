@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, createContext } from 'react';
 import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 import { Drawer, Button, Group, Stack, TextInput, Alert } from '@mantine/core';
 import { MapContainerState } from './MapContainer.jsx';
@@ -10,7 +10,7 @@ import Promise from 'bluebird';
 
 export default function Map() {
 
-  let { opened, setOpened, markers, center, drawerCards, setDrawerCards } = useContext(MapContainerState);
+  let { zoom, mopened, setOpened, markers, center, drawerCards, setDrawerCards } = useContext(MapContainerState);
   let [searchResults, setSearchResults] = useState([]);
 
   let searchEvent = (searchValue) => {
@@ -35,7 +35,7 @@ export default function Map() {
 
         searchResults.map((result) => {
           if (result.img_url === '') {
-            console.log(result);
+            //console.log(result);
             result.img_url = 'https://www.elegantthemes.com/blog/wp-content/uploads/2020/02/000-404.png';
           }
         })
@@ -79,7 +79,7 @@ export default function Map() {
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
         <GoogleMap
         mapContainerStyle={{ height: "97%", width: "100%"}}
-        zoom={11}
+        zoom={zoom}
         center={center}
         >
         <TextInput
