@@ -63,7 +63,7 @@ function Navbar({ setUpdateFriends }) {
           target={
             <ActionIcon
               variant="filled"
-              className="m-1 bell-hover"
+              className="m-1 bell-hover mr-4"
               onClick={() => setOpened((o) => !o)}
             >
               <Indicator

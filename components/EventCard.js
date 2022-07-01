@@ -11,7 +11,16 @@ import {
   Stack,
   Title,
   TextInput,
+  Menu,
 } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserCircle,
+  faPenToSquare,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "@mantine/form";
 import { DatePicker } from "@mantine/dates";
 const axios = require("axios").default;
@@ -44,6 +53,7 @@ function EventCard({
   const timeStamp = new Date(date);
   let image = img_url || defaultPhoto;
   const [groupId, setGroupId] = useState(0);
+  const [dopened, dhandlers] = useDisclosure(false);
 
   function handleRsvp() {
     if (rsvp) {
@@ -112,36 +122,61 @@ function EventCard({
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
-        <Card radius="10px" shadow="sm" p="sm">
+        <Card radius="10px" shadow="lg" p="md">
           <Card.Section className="p-2">
             <Stack>
               {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
             </Stack>
-            <Group position="apart">
-              <Title
-                order={3}
-                className="cursor-pointer"
-                onClick={() => setOpened(true)}
-              >
-                {name}
-              </Title>
+            <Group className="title-date-container gap-0">
+              <section className="header-container">
+                <Title
+                  order={3}
+                  className="cursor-pointer event-title"
+                  onClick={() => setOpened(true)}
+                >
+                  {name}
+                </Title>
 
-              <Title order={5}>
-                {timeStamp.toLocaleString([], {
-                  dateStyle: "short",
-                })}
-              </Title>
+                <Title order={5} className="event-date">
+                  {timeStamp.toLocaleString([], {
+                    dateStyle: "short",
+                  })}
+                </Title>
+              </section>
+              {canEdit ? (
+                <Menu
+                  opened={dopened}
+                  onOpen={dhandlers.open}
+                  onClose={dhandlers.close}
+                  className="menu-icon-event-card"
+                >
+                  <Stack grow spacing={0}>
+                    <Button
+                      onClick={() => setOpenEdit(true)}
+                      variant="outline"
+                      className="event-edit-del-btn"
+                    >
+                      <FontAwesomeIcon
+                        icon={faPenToSquare}
+                        className="edit-del-icons"
+                      />
+                      EDIT
+                    </Button>
+                    <Button
+                      onClick={handleDeleteEvent}
+                      variant="outline"
+                      className="event-edit-del-btn"
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrashCan}
+                        className="edit-del-icons"
+                      />
+                      DELETE
+                    </Button>
+                  </Stack>
+                </Menu>
+              ) : null}
             </Group>
-            {canEdit ? (
-              <Group grow spacing={0}>
-                <Button onClick={()=> setOpenEdit(true)} variant="default">
-                EDIT
-              </Button>
-                <Button onClick={handleDeleteEvent} variant="default">
-                  DELETE
-                </Button>
-              </Group>
-            ) : null}
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
             <img
@@ -175,7 +210,7 @@ function EventCard({
         transition="fade"
         transitionDuration={300}
         transitionTimingFunction="ease"
-        size="65%"
+        size="50%"
         overflow="outside"
       >
         <EventDetail

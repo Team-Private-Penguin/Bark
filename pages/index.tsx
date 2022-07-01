@@ -47,11 +47,13 @@ const Home: NextPage = () => {
                 Groups
               </h2>
               <Stack>
-                <ExploreGroups />
-                <AddGroup
-                  groupCount={groupCount}
-                  setGroupCount={setGroupCount}
-                />
+                <Group position="center" className="mt-2">
+                  <ExploreGroups />
+                  <AddGroup
+                    groupCount={groupCount}
+                    setGroupCount={setGroupCount}
+                  />
+                </Group>
                 <GroupList groupCount={groupCount} />
               </Stack>
             </div>

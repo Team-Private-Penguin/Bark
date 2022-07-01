@@ -37,6 +37,7 @@ const Groups = () => {
   } = useRouter();
   const [currentGroups, setCurrentGroups] = useState([]);
   const [groupDetails, setGroupDetails] = useState([{}]);
+  const [updateFriends, setUpdateFriends] = useState(false);
 
   function getGroupDetails() {
     axios
@@ -75,10 +76,10 @@ const Groups = () => {
   }, [userId, id]);
   return (
     <main className="min-h-screen w-screen">
-      <Navbar />
+      <Navbar setUpdateFriends={setUpdateFriends}/>
       <Group className="group">
-        <Stack className="hidden lg:flex" style={{ width: "20%" }}>
-          <div className="border h-[34vh] space shadows ">
+        <Stack justify="flex-start" className="hidden lg:flex" style={{ width: "20%" }}>
+          <div className="border h-[28vh] space shadows homeBox ">
             <h2 className="section-title">
               <FontAwesomeIcon icon={faDog} className="fa-header-icons" />
               User Info
@@ -88,14 +89,16 @@ const Groups = () => {
               <div className="centered">Please add your pet above!</div>
             )}
           </div>
-          <div className="border h-[54vh] space shadows homeBox">
+          <div className="border h-[60vh] space shadows homeBox">
             <h2>
               <FontAwesomeIcon icon={faCat} className="fa-header-icons" />{" "}
               Groups
             </h2>
             <Stack>
-              <ExploreGroups />
-              <AddGroup groupCount={groupCount} setGroupCount={setGroupCount} />
+              <Group position="center" className="mt-2">
+                <ExploreGroups />
+                <AddGroup groupCount={groupCount} setGroupCount={setGroupCount} />
+              </Group>
               <GroupList groupCount={groupCount} />
             </Stack>
           </div>
@@ -149,7 +152,7 @@ const Groups = () => {
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
-          <Stack className="border h-[90vh] space shadows gap-0">
+          <Stack className="border h-[90vh] space shadows homeBox gap-0">
             <h2>
               <FontAwesomeIcon icon={faFishFins} className="fa-header-icons" />{" "}
               Group Members
