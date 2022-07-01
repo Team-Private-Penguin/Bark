@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useUser } from "@auth0/nextjs-auth0";
+import Link from "next/link";
 
 export default function MapDrawerCard(props) {
   const { user } = useUser();
@@ -19,7 +20,7 @@ export default function MapDrawerCard(props) {
   let [updateRsvp, setUpdateRsvp] = useState(false);
   let [updateRsvpList, setUpdateRsvpList] = useState(false)
   let [userEvents, setUserEvents] = useState([]);
-  let {eventId, setEventId, zoom, setZoom, rsvp, setRSVP, center, setCenter, setMarkers} = useContext(MapContainerState);
+  let {drawerCards, eventId, setEventId, zoom, setZoom, rsvp, setRSVP, center, setCenter, setMarkers} = useContext(MapContainerState);
 
   let userId = user?.sub.split("google-oauth2|")[1];
   if (!userId) {
@@ -27,14 +28,14 @@ export default function MapDrawerCard(props) {
   }
 
   // Setting RSVP based on Diologue Switch
-  useEffect(() => {
-    console.log(`Getting RSVP...`)
-    axios.get(`/api/map/rsvp?id=${userId}`)
-      .then((response) => {
-        setUserEvents(userEvents = [...response.data])
-      })
+  // useEffect(() => {
+  //   console.log(`Getting RSVP...`)
+  //   axios.get(`/api/map/rsvp?id=${userId}`)
+  //     .then((response) => {
+  //       setUserEvents(userEvents = [...response.data])
+  //     })
 
-  }, [updateRsvpList])
+  // }, [updateRsvpList])
 
   let unRsvp = (event, event_id) => {
     console.log(event.currentTarget.checked);
@@ -81,9 +82,11 @@ export default function MapDrawerCard(props) {
       </Card>
       <Dialog position={{left: 360, top: 0}} opened={open} withCloseButton={true} onClose={() => {setOpen(false);}} size="lg">
         <Card id={card.event_id} className="shadow mapDrawerCard" mb="md" key={card.event_id}>
-          <Card.Section size="xl" style={textStyle}>
-            <h1>{card.name}</h1>
-          </Card.Section>
+          <Link key={card.group_id} href={`/group?id=${card.group_id}`} passHref>
+            <Card.Section className="pointer" size="xl" style={textStyle}>
+                <h1 >{card.name}</h1>
+            </Card.Section>
+          </Link>
           <Card.Section >
             <Image className="rounded-[10px]" src={card.img_url} height={150} alt="Test" />
           </Card.Section>

@@ -45,7 +45,7 @@ export default function MapContainer() {
       <Drawer key='MapDrawerLeft' size="lg" withOverlay={false} closeOnEscape="true" closeOnClickOutside={true} padding="xl" opened={opened} onClose={() => { setOpened(false); }} title={title}>
         <ScrollArea
               offsetScrollbars
-              scrollbarSize={8}
+              scrollbarSize={13}
               className="mt-2"
               style={{ height: "95vh" }}
             >
