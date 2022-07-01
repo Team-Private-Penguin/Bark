@@ -141,7 +141,7 @@ const Groups = () => {
                   <Button
                     disabled={joined}
                     onClick={joinGroup}
-                    className="teal-btn"
+                    className="teal-btn m-2"
                   >
                     {" "}
                     Join Group{" "}
