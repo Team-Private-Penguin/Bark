@@ -112,7 +112,7 @@ function EventCard({
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
-        <Card radius="10px" shadow="sm" p="sm">
+        <Card radius="10px" shadow="lg" p="md">
           <Card.Section className="p-2">
             <Stack>
               {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
@@ -134,9 +134,9 @@ function EventCard({
             </Group>
             {canEdit ? (
               <Group grow spacing={0}>
-                <Button onClick={()=> setOpenEdit(true)} variant="default">
-                EDIT
-              </Button>
+                <Button onClick={() => setOpenEdit(true)} variant="default">
+                  EDIT
+                </Button>
                 <Button onClick={handleDeleteEvent} variant="default">
                   DELETE
                 </Button>
@@ -175,7 +175,7 @@ function EventCard({
         transition="fade"
         transitionDuration={300}
         transitionTimingFunction="ease"
-        size="65%"
+        size="50%"
         overflow="outside"
       >
         <EventDetail
