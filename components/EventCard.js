@@ -54,6 +54,7 @@ function EventCard({
   let image = img_url || defaultPhoto;
   const [groupId, setGroupId] = useState(0);
   const [dopened, dhandlers] = useDisclosure(false);
+  const [openEdit, setOpenEdit] = useState(false);
 
   function handleRsvp() {
     if (rsvp) {
@@ -86,8 +87,6 @@ function EventCard({
     },
   });
 
-  const [openEdit, setOpenEdit] = useState(false);
-
   const editEvent = (values) => {
     axios({
       method: "PATCH",
@@ -95,9 +94,12 @@ function EventCard({
       params: {
         body: values,
       },
-    }).catch((err) => {
-      console.log(err);
-    });
+    })
+      .then(() => getEvents())
+      .catch((err) => {
+        console.log(err);
+      });
+    setOpenEdit(false);
   };
 
   function handleDeleteEvent() {
@@ -129,7 +131,6 @@ function EventCard({
                 >
                   {name}
                 </Title>
-
                 <Title order={5} className="event-date">
                   {timeStamp.toLocaleString([], {
                     dateStyle: "short",
@@ -143,30 +144,33 @@ function EventCard({
                   onClose={dhandlers.close}
                   className="menu-icon-event-card"
                 >
-                  <Stack grow spacing={0}>
-                    <Button
-                      onClick={() => setOpenEdit(true)}
-                      variant="outline"
-                      className="event-edit-del-btn"
-                    >
-                      <FontAwesomeIcon
-                        icon={faPenToSquare}
-                        className="edit-del-icons"
-                      />
-                      EDIT
-                    </Button>
-                    <Button
-                      onClick={handleDeleteEvent}
-                      variant="outline"
-                      className="event-edit-del-btn"
-                    >
-                      <FontAwesomeIcon
-                        icon={faTrashCan}
-                        className="edit-del-icons"
-                      />
-                      DELETE
-                    </Button>
-                  </Stack>
+                  <Menu.Item>
+                    <Stack grow spacing={0}>
+                      <Button
+                        closeOnItemClick
+                        onClick={() => setOpenEdit(true)}
+                        variant="outline"
+                        className="event-edit-del-btn"
+                      >
+                        <FontAwesomeIcon
+                          icon={faPenToSquare}
+                          className="edit-del-icons"
+                        />
+                        EDIT
+                      </Button>
+                      <Button
+                        onClick={handleDeleteEvent}
+                        variant="outline"
+                        className="event-edit-del-btn"
+                      >
+                        <FontAwesomeIcon
+                          icon={faTrashCan}
+                          className="edit-del-icons"
+                        />
+                        DELETE
+                      </Button>
+                    </Stack>
+                  </Menu.Item>
                 </Menu>
               ) : null}
             </Group>
@@ -203,7 +207,7 @@ function EventCard({
         transition="fade"
         transitionDuration={300}
         transitionTimingFunction="ease"
-        size="50%"
+        size={850}
         overflow="outside"
       >
         <EventDetail
@@ -215,6 +219,7 @@ function EventCard({
           handleDeleteEvent={handleDeleteEvent}
           canEdit={canEdit}
           event_id={event_id}
+          getEvents={getEvents}
         />
       </Modal>
       <Modal

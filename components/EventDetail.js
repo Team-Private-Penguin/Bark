@@ -40,6 +40,7 @@ function EventDetail({
   handleDeleteEvent,
   handleEdit,
   canEdit,
+  getEvents,
 }) {
   const {
     name,
@@ -124,9 +125,12 @@ function EventDetail({
       params: {
         body: values,
       },
-    }).catch((err) => {
-      console.log(err);
-    });
+    })
+      .then(() => getEvents())
+      .catch((err) => {
+        console.log(err);
+      });
+    setOpenEdit(false);
   };
 
   const editForm = useForm({
@@ -142,7 +146,7 @@ function EventDetail({
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
       <Card
-        className="sticky top-0 space-y-2 w-[30vw]"
+        className="sticky top-0 space-y-2 w-[30vw] min-w-[550px]"
         radius="10px"
         shadow="md"
       >
@@ -164,35 +168,38 @@ function EventDetail({
         <Stack>
           {canEdit ? (
             <Menu
+              closeOnItemClick
               opened={opened}
               onOpen={handlers.open}
               onClose={handlers.close}
               className="menu-icon"
             >
-              <Stack grow spacing={0}>
-                <Button
-                  onClick={() => setOpenEdit(true)}
-                  variant="outline"
-                  className="event-edit-del-btn"
-                >
-                  <FontAwesomeIcon
-                    icon={faPenToSquare}
-                    className="edit-del-icons"
-                  />
-                  EDIT
-                </Button>
-                <Button
-                  onClick={handleDeleteEvent}
-                  variant="outline"
-                  className="event-edit-del-btn"
-                >
-                  <FontAwesomeIcon
-                    icon={faTrashCan}
-                    className="edit-del-icons"
-                  />
-                  DELETE
-                </Button>
-              </Stack>
+              <Menu.Item>
+                <Stack grow spacing={0}>
+                  <Button
+                    onClick={() => setOpenEdit(true)}
+                    variant="outline"
+                    className="event-edit-del-btn"
+                  >
+                    <FontAwesomeIcon
+                      icon={faPenToSquare}
+                      className="edit-del-icons"
+                    />
+                    EDIT
+                  </Button>
+                  <Button
+                    onClick={handleDeleteEvent}
+                    variant="outline"
+                    className="event-edit-del-btn"
+                  >
+                    <FontAwesomeIcon
+                      icon={faTrashCan}
+                      className="edit-del-icons"
+                    />
+                    DELETE
+                  </Button>
+                </Stack>
+              </Menu.Item>
             </Menu>
           ) : null}
           {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
@@ -200,7 +207,7 @@ function EventDetail({
         <Card.Section className="h-[25vh] flex items-center justify-center space-x-4">
           <Stack>
             <img
-              className="rounded-[10px] max-h-[25vh] max-w-[27vw]"
+              className="rounded-[10px] max-h-[25vh] max-w-[250px]"
               src={image}
             />
           </Stack>
@@ -242,8 +249,12 @@ function EventDetail({
           />
         </Card.Section>
       </Card>
-      <Card className="space-y-1 w-[24%] h-[90vh]" radius="10px" shadow="sm">
-        <Card.Section className="bg-red text-white">
+      <Card
+        className="hidden md:inline space-y-1 min-w-[240px] h-[90vh]"
+        radius="10px"
+        shadow="sm"
+      >
+        <Card.Section className="bg-red text-white ">
           <Title className="p-2 font-semibold" align="center" order={4}>
             {prospective ? "Interested" : "RSVPs"}
           </Title>
