@@ -52,18 +52,6 @@ function EventDetail({
   } = event;
   const timeStamp = new Date(date);
 
-  const editForm = useForm({
-    initialValues: {
-      name: "",
-      date: "",
-      description: "",
-      lat: "",
-      lng: "",
-      address: "",
-      prospective: "",
-    },
-  });
-
   const [comments, setComments] = useState([{}]);
   const [attendees, setAttendees] = useState([{}]);
   const [modal, setModal] = useState(false);
@@ -130,17 +118,32 @@ function EventDetail({
   });
 
   const editEvent = (values) => {
-    values["admin_id"] = user_id;
-    axios
-      .patch("/api/event", values)
-      .then((res) => {
-        console.log(res);
+
+    axios({
+      method: "PATCH",
+      url: "/api/events",
+      params: {
+        body: values,
+      },
+    })
+      .then((response) => {
+        console.log("updating!");
       })
       .catch((err) => {
         console.log(err);
       });
-    setOpenEdit(false);
   };
+
+  const editForm = useForm({
+    initialValues: {
+      name: "",
+      date: "",
+      description: "",
+      address_1: "",
+      //event_id: eventId1, //EVENT ID is undefined?
+    },
+  });
+
 
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
@@ -285,18 +288,6 @@ function EventDetail({
             label="Event date"
             required
             {...editForm.getInputProps("date")}
-          />
-          <TextInput
-            placeholder="event id"
-            label="Event id"
-            required
-            {...editForm.getInputProps("event_id")}
-          />
-          <TextInput
-            placeholder="group id"
-            label="group id"
-            required
-            {...editForm.getInputProps("group_id")}
           />
 
           <Group position="right" mt="md">

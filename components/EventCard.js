@@ -37,6 +37,7 @@ function EventCard({
   eventId1,
   getEvents,
 }) {
+
   const [opened, setOpened] = useState(false);
   const {
     name,
@@ -75,28 +76,26 @@ function EventCard({
         .catch((err) => console.log(err));
     }
   }
+
   const editForm = useForm({
     initialValues: {
       name: "",
       date: "",
       description: "",
-      lat: "",
-      lng: "",
-      address: "",
-      prospective: "",
+      address_1: "",
+      //event_id: eventId1, //EVENT ID is undefined?
     },
   });
 
   const [openEdit, setOpenEdit] = useState(false);
 
-  const handleEdit = (event) => {
-    event.preventDefault();
+  const editEvent = (values) => {
+
     axios({
-      method: "PUT",
-      url: "/api/admin",
+      method: "PATCH",
+      url: "/api/events",
       params: {
-        body: "asdfasdf",
-        event_id: eventId1,
+        body: values,
       },
     })
       .then((response) => {
@@ -220,7 +219,6 @@ function EventCard({
           user_id={user_id}
           handleRsvp={handleRsvp}
           handleDeleteEvent={handleDeleteEvent}
-          handleEdit={handleEdit}
           canEdit={canEdit}
         />
       </Modal>
@@ -254,18 +252,7 @@ function EventCard({
             required
             {...editForm.getInputProps("date")}
           />
-          <TextInput
-            placeholder="event id"
-            label="Event id"
-            required
-            {...editForm.getInputProps("event_id")}
-          />
-          <TextInput
-            placeholder="group id"
-            label="group id"
-            required
-            {...editForm.getInputProps("group_id")}
-          />
+
 
           <Group position="right" mt="md">
             <Button className="bg-slate-800" type="submit">

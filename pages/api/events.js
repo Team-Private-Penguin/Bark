@@ -81,16 +81,15 @@ export default function handler(req, res) {
         console.log(err);
         res.status(400).send(err);
       });
-  } else if (req.method === "PUT") {
+  } else if (req.method === "PATCH") {
     //consider patch
-
+    console.log('TEST', req.body);
     return db
       .queryAsync(updateEvent, req.body)
       .then(() => {
         res.status(200).send("Updated!");
       })
       .catch((err) => {
-        console.log(err);
         res.status(400).send(err);
       });
   } else {
