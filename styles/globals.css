@@ -13,16 +13,14 @@
   --black: #0a0f0d;
   --light-blue: #95d9f1;
   --blue: #92b4ec;
-  --yellow: #faf2a1;
   --off-white: #e3e1e1;
   --green-bud: #79b473;
-  --queen-blue: #41658a;
-  --dark-blue: #41658a;
   --english-violet: #41658a;
   /* casey's colors; */
   --dark-green: #283d3b;
   --teal: #197278;
   --red: rgb(193, 37, 76);
+  --cyan: #15aabf;
   --lilac: hsl(243, 80%, 76%);
 }
 
@@ -151,7 +149,7 @@ h2 {
   width: 75px;
   height: 75px;
   align-self: center;
-  border: 2.5px solid var(--green-bud);
+  border: 2.5px solid var(--teal);
   margin-bottom: 10px;
 }
 
@@ -327,8 +325,7 @@ h2 {
 
 .globe:hover {
   font-size: 200px;
-  opacity: 0.8;
-  color: var(--light-blue);
+  color: var(--red);
   height: 30px;
   width: 30px;
   animation-name: GlobeSpin;
@@ -346,10 +343,11 @@ h2 {
   }
   50% {
     transform: rotate(1turn) scale(1);
-    color: var(--light-blue);
+    color: var(--red);
   }
   100% {
     transform: rotate(0turn) scale(1);
+    color: var(--off-white);
   }
 }
 
@@ -370,8 +368,6 @@ h2 {
 
 .bell:hover {
   font-size: 200px;
-  opacity: 0.8;
-  color: var(--light-blue);
   height: 25px;
   width: 25px;
   animation-name: RevSpin;
@@ -382,17 +378,19 @@ h2 {
 @keyframes RevSpin {
   0% {
     transform: rotate(0turn) scale(1);
+    color: var(--off-white);
   }
   25% {
     transform: rotate(0.1turn) scale(1);
-    color: var(--light-blue);
+    color: var(--red);
   }
   75% {
     transform: rotate(-0.1turn) scale(1);
-    color: var(--light-blue);
+    color: var(--red);
   }
   100% {
     transform: rotate(0turn) scale(1);
+    color: var(--off-white);
   }
 }
 
@@ -426,10 +424,13 @@ h2 {
 .event-date {
   /* border: solid 5px red; */
   font-size: 11px;
+  align-self: flex-start;
 }
 
 .title-date-container {
   margin: 5px 0px;
+  /* border: solid 5px red; */
+  align-items: flex-start;
 }
 
 .header-container {
