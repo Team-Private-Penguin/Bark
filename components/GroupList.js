@@ -3,6 +3,7 @@ import { Group, ScrollArea, Stack, Text } from "@mantine/core";
 import Link from "next/link";
 import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function GroupList({ groupCount }) {
   const { user } = useUser();

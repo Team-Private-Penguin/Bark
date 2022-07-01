@@ -54,7 +54,7 @@ const ExploreGroups = () => {
             >
               <Group>
                 <FontAwesomeIcon className="paw-groups" icon={faPaw} />
-                <div>
+                <div className>
                   <Title order={3}> {group.name}</Title>
                   <Text className="text-xs font-normal">
                     {group.description}
