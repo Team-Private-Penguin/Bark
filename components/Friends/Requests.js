@@ -7,12 +7,11 @@ import { Check, LetterX } from "tabler-icons-react";
 
 function Requests({ requests, setUpdateList, userId, setUpdateFriends }) {
   const handleDecline = (id) => {
-    axios.delete(`/api/friend/${id}/${userId}`)
-    .then((res) => {
+    axios.delete(`/api/friend/${id}/${userId}`).then((res) => {
       setUpdateList((o) => !o);
-    })
+    });
   };
-console.log(requests)
+
   const handleAccept = (id) => {
     axios.post(`/api/friend/send`, { user: userId, friend: id }).then((res) => {
       setUpdateList((o) => !o);

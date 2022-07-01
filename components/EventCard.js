@@ -95,13 +95,9 @@ function EventCard({
       params: {
         body: values,
       },
-    })
-      .then((response) => {
-        console.log("updating!");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   function handleDeleteEvent() {

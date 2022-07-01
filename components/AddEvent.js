@@ -23,7 +23,8 @@ import ImageDropzone from "./Users/Dropzone";
 
 function AddEvent({ joined, setCount, eventCount }) {
   const { user } = useUser();
-  const user_id = user?.sub.split("google-oauth2|")[1];
+  const user_id =
+    user?.sub.split("google-oauth2|")[1] || user?.sub.split("auth0|")[1];
   const [image, setImage] = useState("");
 
   const [opened, setOpened] = useState(false);

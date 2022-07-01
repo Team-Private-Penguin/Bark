@@ -2,7 +2,6 @@ import db from "../db";
 
 export default async function handler(req, res) {
   const [user, friend] = req.query.messages;
-  console.log(user, friend);
   if (req.method === "GET") {
     await db
       .query(
@@ -16,7 +15,8 @@ export default async function handler(req, res) {
       FROM barkschema.messages m
       WHERE (user_id = $2 AND friend_id = $1) OR (user_id = $1 AND friend_id = $2)
       ORDER BY m.time;
-      `, [user, friend]
+      `,
+        [user, friend]
       )
       .then((result) => res.status(200).send(result.rows))
       .catch((err) => {
@@ -29,7 +29,8 @@ export default async function handler(req, res) {
       .query(
         `INSERT INTO barkschema.messages(user_id, friend_id, text, time)
       VALUES ($1, $2, $3, (SELECT now()))
-      `, [user, friend, req.body.message]
+      `,
+        [user, friend, req.body.message]
       )
       .then(() => res.status(200).end())
       .catch((err) => {

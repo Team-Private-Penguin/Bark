@@ -68,8 +68,6 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "DELETE") {
-
-    console.log("TEST999", req.query.body);
     return db
       .queryAsync(deleteComments, [req.body.event_id])
       .then(() => db.queryAsync(deleteUsersEvents, [req.body.event_id]))
@@ -81,9 +79,7 @@ export default function handler(req, res) {
         console.log(err);
         res.status(400).send(err);
       });
-
   } else if (req.method === "PATCH") {
-
     const obj = JSON.parse(req.query.body);
 
     const date9 = obj.date.substring(0, 10);

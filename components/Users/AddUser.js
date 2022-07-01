@@ -40,7 +40,6 @@ function AddUser() {
     axios
       .post("/api/users/users", submission)
       .then(() => {
-        console.log("saved to Postgres");
         setOpened(false);
       })
       .catch((err) => console.error(err));

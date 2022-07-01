@@ -1,10 +1,21 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { MapContainerState } from './MapContainer.jsx';
-import { Modal, Card, Text, Image, Space, Collapse, Button, CardSection, Dialog, Switch } from "@mantine/core";
-import { createDecipheriv } from 'crypto';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import React, { useState, useContext, useEffect } from "react";
+import { MapContainerState } from "./MapContainer.jsx";
+import {
+  Modal,
+  Card,
+  Text,
+  Image,
+  Space,
+  Collapse,
+  Button,
+  CardSection,
+  Dialog,
+  Switch,
+} from "@mantine/core";
+import { createDecipheriv } from "crypto";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 
@@ -12,83 +23,103 @@ export default function MapDrawerCard(props) {
   const { user } = useUser();
   let card = props.card;
   let [textStyle, setTextStyle] = useState({
-    marginTop: '2%',
-    marginLeft: '5%',
-    marginBottom: '2%'
+    marginTop: "2%",
+    marginLeft: "5%",
+    marginBottom: "2%",
   });
   let [open, setOpen] = useState(false);
   let [updateRsvp, setUpdateRsvp] = useState(false);
-  let [updateRsvpList, setUpdateRsvpList] = useState(false)
+  let [updateRsvpList, setUpdateRsvpList] = useState(false);
   let [userEvents, setUserEvents] = useState([]);
-  let {drawerCards, eventId, setEventId, zoom, setZoom, rsvp, setRSVP, center, setCenter, setMarkers} = useContext(MapContainerState);
+  let {
+    drawerCards,
+    eventId,
+    setEventId,
+    zoom,
+    setZoom,
+    rsvp,
+    setRSVP,
+    center,
+    setCenter,
+    setMarkers,
+  } = useContext(MapContainerState);
 
   let userId = user?.sub.split("google-oauth2|")[1];
   if (!userId) {
     userId = user?.sub.split("auth0|")[1];
   }
 
-  // Setting RSVP based on Diologue Switch
-  // useEffect(() => {
-  //   console.log(`Getting RSVP...`)
-  //   axios.get(`/api/map/rsvp?id=${userId}`)
-  //     .then((response) => {
-  //       setUserEvents(userEvents = [...response.data])
-  //     })
-
-  // }, [updateRsvpList])
-
-  let unRsvp = (event, event_id) => {
-    console.log(event.currentTarget.checked);
-
-    // if (event.currentTarget.checked === false) {
-    //   console.log(`Removing User: ${userId} from Event: ${event_id}`)
-    //   setRSVP(false);
-    //   axios.put(`/api/rsvp?id=${userId}&event=${card.event_id}`, {remove: true})
-    //     .then((response) => {
-    //       console.log(response.data)
-    //     })
-    // }
-  }
-
   let moreInfo = () => {
-    setOpen((open === false) ? true : false);
+    setOpen(open === false ? true : false);
     setCenter({ lat: card.lat, lng: card.lng });
-    setMarkers([{lat: card.lat, lng: card.lng}]);
-    setZoom(zoom = 16);
-  }
-
-  let openCard = (event, event_id) => {
-    console.log(event, event_id)
-    unRsvp(event, event_id);
-  }
+    setMarkers([{ lat: card.lat, lng: card.lng }]);
+    setZoom((zoom = 16));
+  };
 
   return (
     <>
-      <Card id={card.event_id} className="shadow mapDrawerCard" mb="md" key={card.event_id}>
-        <Card.Section >
-          <Image className="rounded-[10px]" src={card.img_url} height={150} alt="Test" />
+      <Card
+        id={card.event_id}
+        className="shadow mapDrawerCard"
+        mb="md"
+        key={card.event_id}
+      >
+        <Card.Section>
+          <Image
+            className="rounded-[10px]"
+            src={card.img_url}
+            height={150}
+            alt="Test"
+          />
         </Card.Section>
         <Card.Section>
-          <Text size="md" style={textStyle} >
+          <Text size="md" style={textStyle}>
             {card.name}
           </Text>
           <Text size="sm" style={textStyle}>
             {card.date}
           </Text>
         </Card.Section>
-        <div className="mapCardButtonDiv" onClick={() => {moreInfo()}}>
+        <div
+          className="mapCardButtonDiv"
+          onClick={() => {
+            moreInfo();
+          }}
+        >
           <FontAwesomeIcon className="mapCardButton" icon={faBars} />
         </div>
       </Card>
-      <Dialog position={{left: 360, top: 0}} opened={open} withCloseButton={true} onClose={() => {setOpen(false);}} size="lg">
-        <Card id={card.event_id} className="shadow mapDrawerCard" mb="md" key={card.event_id}>
-          <Link key={card.group_id} href={`/group?id=${card.group_id}`} passHref>
+      <Dialog
+        position={{ left: 360, top: 0 }}
+        opened={open}
+        withCloseButton={true}
+        onClose={() => {
+          setOpen(false);
+        }}
+        size="lg"
+      >
+        <Card
+          id={card.event_id}
+          className="shadow mapDrawerCard"
+          mb="md"
+          key={card.event_id}
+        >
+          <Link
+            key={card.group_id}
+            href={`/group?id=${card.group_id}`}
+            passHref
+          >
             <Card.Section className="pointer" size="xl" style={textStyle}>
-                <h1 >{card.name}</h1>
+              <h1>{card.name}</h1>
             </Card.Section>
           </Link>
-          <Card.Section >
-            <Image className="rounded-[10px]" src={card.img_url} height={150} alt="Test" />
+          <Card.Section>
+            <Image
+              className="rounded-[10px]"
+              src={card.img_url}
+              height={150}
+              alt="Test"
+            />
           </Card.Section>
           <Card.Section>
             <Text size="sm" style={textStyle}>
@@ -99,16 +130,10 @@ export default function MapDrawerCard(props) {
             </Card.Section>
           </Card.Section>
           <Card.Section size="sm" style={textStyle}>
-          Address: {card.address}
+            Address: {card.address}
           </Card.Section>
-          {/* <Card.Section size="sm" style={textStyle}>
-            <Switch label="RSVP" checked={rsvp} onChange={(event)=> {
-              //openCard(event, card.event_id);
-              console.log(userEvents);
-            }}/>
-          </Card.Section> */}
         </Card>
       </Dialog>
     </>
-  )
+  );
 }
