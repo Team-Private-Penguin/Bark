@@ -46,26 +46,34 @@ function AddEvent({ joined, setCount, eventCount }) {
     },
   });
   const submitEvent = (values) => {
-    const submission = {
-      group_id: id,
-      name: values.eventName,
-      address: `${values.address_1}${
-        values.address_2 ? values.address_2 : ""
-      }, ${values.city}, ${values.state} ${values.zipcode}`,
-      date: values.date,
-      description: values.description,
-      prospective: values.prospective,
-      img_url: image,
-      owner_id: user_id,
-    };
-    axios
-      .post("/api/events", submission)
-      .then(() => {
-        setOpened(false);
-      })
-      .then(() => {
-        setCount(eventCount + 1);
-      });
+    let geoAddress = `${values.address_1}${
+      values.address_2 ? values.address_2 : ""
+    }, ${values.city}, ${values.state}`;
+    axios.get(`/api/map/geocode?address=${geoAddress}`).then((data) => {
+      const submission = {
+        group_id: id,
+        name: values.eventName,
+        address: `${values.address_1}${
+          values.address_2 ? values.address_2 : ""
+        }, ${values.city}, ${values.state} ${values.zipcode}`,
+        date: values.date,
+        description: values.description,
+        prospective: values.prospective,
+        img_url: image,
+        lat: data.data.lat,
+        lng: data.data.lng,
+        owner_id: user_id,
+      };
+      console.log(submission);
+      axios
+        .post("/api/events", submission)
+        .then(() => {
+          setOpened(false);
+        })
+        .then(() => {
+          setCount(eventCount + 1);
+        });
+    });
   };
   return (
     <div>
