@@ -14,8 +14,8 @@ import { useUser } from "@auth0/nextjs-auth0";
 
 const AddGroup = ({ groupCount, setGroupCount }) => {
   const { user } = useUser();
-  const user_id = user?.sub.split("google-oauth2|")[1];
-
+  const user_id =
+    user?.sub.split("google-oauth2|")[1] || user?.sub.split("auth0|")[1];
   const [opened, setOpened] = useState(false);
   const form = useForm({
     initialValues: {

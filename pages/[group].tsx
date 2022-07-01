@@ -27,10 +27,8 @@ const Groups = () => {
   const [joined, setJoined] = useState(false);
   const [groupCount, setGroupCount] = useState(0);
   const [eventCounter, setEventCounter] = useState(0);
-  let userId = user?.sub.split("google-oauth2|")[1];
-  if (!userId) {
-    userId = user?.sub.split("auth0|")[1];
-  }
+  let userId =
+    user?.sub.split("google-oauth2|")[1] || user?.sub.split("auth0|")[1];
 
   const {
     query: { id },

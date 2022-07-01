@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function GroupList({ groupCount, currentGroups }) {
   const { user } = useUser();
-  const user_id = user?.sub.split("google-oauth2|")[1];
+  const user_id =
+    user?.sub.split("google-oauth2|")[1] || user?.sub.split("auth0|")[1];
+
   const [UserGroups, setUserGroups] = useState([]);
   useEffect(() => {
     axios.get(`/api/usergroup?user_id=${user_id}`).then((data) => {
