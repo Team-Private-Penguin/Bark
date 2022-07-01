@@ -83,7 +83,7 @@ function EventCard({
       date: "",
       description: "",
       address_1: "",
-      //event_id: eventId1, //EVENT ID is undefined?
+      event_id: event_id,
     },
   });
 
@@ -220,6 +220,7 @@ function EventCard({
           handleRsvp={handleRsvp}
           handleDeleteEvent={handleDeleteEvent}
           canEdit={canEdit}
+          event_id={event_id}
         />
       </Modal>
       <Modal

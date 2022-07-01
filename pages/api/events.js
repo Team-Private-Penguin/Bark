@@ -47,7 +47,6 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "GET" && req.query.type === "getGroupId") {
-    console.log("in get group id");
     return db
       .queryAsync(getGroupId, [req.query.event_id])
       .then((res) => res.status(200).send(res.data)) //this need to change to send the admin id back.
@@ -69,6 +68,7 @@ export default function handler(req, res) {
         res.status(404).send(err);
       });
   } else if (req.method === "DELETE") {
+
     console.log("TEST999", req.query.body);
     return db
       .queryAsync(deleteComments, [req.body.event_id])
@@ -81,11 +81,23 @@ export default function handler(req, res) {
         console.log(err);
         res.status(400).send(err);
       });
+
   } else if (req.method === "PATCH") {
-    //consider patch
-    console.log('TEST', req.body);
+
+    const obj = JSON.parse(req.query.body);
+
+    const date9 = obj.date.substring(0, 10);
+
+    let values = [
+      obj.name,
+      date9,
+      obj.description,
+      obj.address_1,
+      parseInt(obj.event_id),
+    ];
+
     return db
-      .queryAsync(updateEvent, req.body)
+      .queryAsync(updateEvent, values)
       .then(() => {
         res.status(200).send("Updated!");
       })
