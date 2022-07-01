@@ -17,6 +17,7 @@ export default function MapDrawerCard(props) {
   });
   let [open, setOpen] = useState(false);
   let [updateRsvp, setUpdateRsvp] = useState(false);
+  let [updateRsvpList, setUpdateRsvpList] = useState(false)
   let [userEvents, setUserEvents] = useState([]);
   let {eventId, setEventId, zoom, setZoom, rsvp, setRSVP, center, setCenter, setMarkers} = useContext(MapContainerState);
 
@@ -32,7 +33,8 @@ export default function MapDrawerCard(props) {
       .then((response) => {
         setUserEvents(userEvents = [...response.data])
       })
-  }, [updateRsvp])
+
+  }, [updateRsvpList])
 
   let unRsvp = (event, event_id) => {
     console.log(event.currentTarget.checked);
@@ -96,12 +98,12 @@ export default function MapDrawerCard(props) {
           <Card.Section size="sm" style={textStyle}>
           Address: {card.address}
           </Card.Section>
-          <Card.Section size="sm" style={textStyle}>
+          {/* <Card.Section size="sm" style={textStyle}>
             <Switch label="RSVP" checked={rsvp} onChange={(event)=> {
               //openCard(event, card.event_id);
               console.log(userEvents);
             }}/>
-          </Card.Section>
+          </Card.Section> */}
         </Card>
       </Dialog>
     </>
