@@ -204,8 +204,8 @@ function EventCard({
         opened={opened}
         onClose={() => setOpened(false)}
         withCloseButton={false}
-        transition="fade"
-        transitionDuration={300}
+        transition="scale"
+        transitionDuration={600}
         transitionTimingFunction="ease"
         size={850}
         overflow="outside"
