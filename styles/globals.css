@@ -406,4 +406,54 @@ h2 {
 .paw-groups {
   filter: invert(0);
   color: var(--red);
+  height: 30px;
+  width: 30px;
+}
+
+.event-card {
+  border: solid 1px lightgray;
+  padding: 10px 30px;
+  /* box-shadow: 0 0 10px lightgray; */
+  background-color: var(--white);
+}
+
+.event-title {
+  /* border: solid 5px green; */
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.event-date {
+  /* border: solid 5px red; */
+  font-size: 11px;
+}
+
+.title-date-container {
+  margin: 5px 0px;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-edit-del-btn {
+  border-radius: 20px;
+  margin: 10px;
+  border: 0;
+}
+
+.menu-icon {
+  position: absolute;
+}
+
+.edit-del-icons {
+  height: 20px;
+  width: 20px;
+  margin: 0px 10px;
+}
+
+.menu-icon-event-card {
+  display: inline;
+  margin-left: auto;
 }
