@@ -77,7 +77,7 @@ const Groups = () => {
     });
   }, [userId, id]);
   return (
-    <main className="min-h-screen w-screen">
+    <main className="min-h-screen w-screen overflow-hidden">
       <Navbar setUpdateFriends={setUpdateFriends} />
       <Group className="group">
         <Stack
