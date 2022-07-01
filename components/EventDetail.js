@@ -164,35 +164,38 @@ function EventDetail({
         <Stack>
           {canEdit ? (
             <Menu
+              closeOnItemClick
               opened={opened}
               onOpen={handlers.open}
               onClose={handlers.close}
               className="menu-icon"
             >
-              <Stack grow spacing={0}>
-                <Button
-                  onClick={() => setOpenEdit(true)}
-                  variant="outline"
-                  className="event-edit-del-btn"
-                >
-                  <FontAwesomeIcon
-                    icon={faPenToSquare}
-                    className="edit-del-icons"
-                  />
-                  EDIT
-                </Button>
-                <Button
-                  onClick={handleDeleteEvent}
-                  variant="outline"
-                  className="event-edit-del-btn"
-                >
-                  <FontAwesomeIcon
-                    icon={faTrashCan}
-                    className="edit-del-icons"
-                  />
-                  DELETE
-                </Button>
-              </Stack>
+              <Menu.Item>
+                <Stack grow spacing={0}>
+                  <Button
+                    onClick={() => setOpenEdit(true)}
+                    variant="outline"
+                    className="event-edit-del-btn"
+                  >
+                    <FontAwesomeIcon
+                      icon={faPenToSquare}
+                      className="edit-del-icons"
+                    />
+                    EDIT
+                  </Button>
+                  <Button
+                    onClick={handleDeleteEvent}
+                    variant="outline"
+                    className="event-edit-del-btn"
+                  >
+                    <FontAwesomeIcon
+                      icon={faTrashCan}
+                      className="edit-del-icons"
+                    />
+                    DELETE
+                  </Button>
+                </Stack>
+              </Menu.Item>
             </Menu>
           ) : null}
           {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
