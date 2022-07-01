@@ -124,7 +124,11 @@ function User() {
             </Button>
           )}
 
-          <Collapse in={opened}>
+          <Collapse
+            in={opened}
+            transitionDuration={700}
+            transitionTimingFunction="linear"
+          >
             <ul className="prop-list" style={text}>
               <li className="dog-prop">
                 <FontAwesomeIcon

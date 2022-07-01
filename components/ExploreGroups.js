@@ -34,7 +34,7 @@ const ExploreGroups = () => {
     <div>
       <Group position="center">
         <Button onClick={() => setOpened(true)} className="teal-btn">
-          Find new groups!
+          Find Groups
         </Button>
       </Group>
       <Modal
