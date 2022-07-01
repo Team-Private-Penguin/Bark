@@ -130,17 +130,17 @@ function AddEvent({ joined, setCount, eventCount }) {
             {...form.getInputProps("prospective")}
           />
           <Group position="right" mt="md">
-            <Button className="bg-slate-800" type="submit">
+            <Button className="teal-btn" type="submit">
               Submit
             </Button>
           </Group>
         </form>
       </Modal>
 
-      <Group position="center">
+      <Group position="right" className="btn-contain">
         <Button
           disabled={!joined}
-          className="bg-slate-800"
+          className="teal-btn"
           onClick={() => setOpened(true)}
         >
           Add an Event!

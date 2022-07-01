@@ -33,7 +33,7 @@ const ExploreGroups = () => {
   return (
     <div>
       <Group position="center">
-        <Button onClick={() => setOpened(true)} className="bg-teal">
+        <Button onClick={() => setOpened(true)} className="teal-btn">
           Find new groups!
         </Button>
       </Group>

@@ -37,7 +37,6 @@ function EventCard({
   eventId1,
   getEvents,
 }) {
-
   const [opened, setOpened] = useState(false);
   const {
     name,
@@ -83,14 +82,13 @@ function EventCard({
       date: "",
       description: "",
       address_1: "",
-      //event_id: eventId1, //EVENT ID is undefined?
+      event_id: event_id,
     },
   });
 
   const [openEdit, setOpenEdit] = useState(false);
 
   const editEvent = (values) => {
-
     axios({
       method: "PATCH",
       url: "/api/events",
@@ -220,6 +218,7 @@ function EventCard({
           handleRsvp={handleRsvp}
           handleDeleteEvent={handleDeleteEvent}
           canEdit={canEdit}
+          event_id={event_id}
         />
       </Modal>
       <Modal
@@ -253,9 +252,8 @@ function EventCard({
             {...editForm.getInputProps("date")}
           />
 
-
           <Group position="right" mt="md">
-            <Button className="bg-slate-800" type="submit">
+            <Button className="teal-btn" type="submit">
               Update
             </Button>
           </Group>

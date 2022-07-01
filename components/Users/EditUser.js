@@ -118,8 +118,8 @@ function EditUser() {
           <Group position="center" mt="md">
             <Button
               color="dark"
-              variant="outline"
               type="submit"
+              className="teal-btn"
               onClick={() => setOpened(false)}
             >
               Resubmit Information

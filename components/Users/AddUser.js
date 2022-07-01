@@ -115,8 +115,7 @@ function AddUser() {
 
           <Group position="center" mt="md">
             <Button
-              color="dark"
-              variant="outline"
+              className="teal-btn"
               type="submit"
               onClick={() => setOpened(false)}
             >
@@ -127,7 +126,7 @@ function AddUser() {
       </Modal>
 
       <Group position="center">
-        <Button className="bg-slate-800" onClick={() => setOpened(true)}>
+        <Button className="teal-btn my-20 " onClick={() => setOpened(true)}>
           ADD YOUR PET
         </Button>
       </Group>

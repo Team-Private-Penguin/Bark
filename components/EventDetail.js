@@ -118,7 +118,6 @@ function EventDetail({
   });
 
   const editEvent = (values) => {
-
     axios({
       method: "PATCH",
       url: "/api/events",
@@ -140,10 +139,9 @@ function EventDetail({
       date: "",
       description: "",
       address_1: "",
-      //event_id: eventId1, //EVENT ID is undefined?
+      event_id: event_id,
     },
   });
-
 
   return (
     <div className="flex w-full h-full items-top justify-center space-x-2">
@@ -291,7 +289,7 @@ function EventDetail({
           />
 
           <Group position="right" mt="md">
-            <Button className="bg-slate-800" type="submit">
+            <Button className="teal-btn" type="submit">
               Update
             </Button>
           </Group>
