@@ -7,9 +7,11 @@ module.exports = {
     date,
     prospective,
     owner_id,
-    img_url
+    img_url,
+    lat,
+    lng
   )
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
   `,
 
   getEventsGroup: `SELECT * FROM barkschema.events WHERE group_id = $1`,
