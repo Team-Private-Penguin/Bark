@@ -10,7 +10,7 @@ import Promise from 'bluebird';
 
 export default function Map() {
 
-  let { opened, setOpened, markers, center, drawerCards, setDrawerCards } = useContext(MapContainerState);
+  let { zoom, mopened, setOpened, markers, center, drawerCards, setDrawerCards } = useContext(MapContainerState);
   let [searchResults, setSearchResults] = useState([]);
 
   let searchEvent = (searchValue) => {
@@ -79,7 +79,7 @@ export default function Map() {
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
         <GoogleMap
         mapContainerStyle={{ height: "97%", width: "100%"}}
-        zoom={11}
+        zoom={zoom}
         center={center}
         >
         <TextInput

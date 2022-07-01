@@ -18,8 +18,9 @@ export default function MapContainer() {
   let [markers, setMarkers] = useState([]);
   let [drawerCards, setDrawerCards] = useState([]);
   let [center, setCenter] = useState({});
-  let [rsvp, setRSVP] = useState(true);
-  let [checkUserZip, setCheckUserZip] = useState(false)
+  let [rsvp, setRSVP] = useState(false);
+  let [zoom, setZoom] = useState(11);
+  let [eventId, setEventId] = useState();
 
   let userId = user?.sub.split("google-oauth2|")[1];
   if (!userId) {
@@ -40,7 +41,7 @@ export default function MapContainer() {
 
 
   return (
-    <MapContainerState.Provider value={{ opened, setOpened, rsvp, setRSVP, center, setCenter, searchValue, markers, setMarkers, drawerCards, setDrawerCards }}>
+    <MapContainerState.Provider value={{ eventId, setEventId, zoom, setZoom, opened, setOpened, rsvp, setRSVP, center, setCenter, searchValue, markers, setMarkers, drawerCards, setDrawerCards }}>
       <Drawer key='MapDrawerLeft' size="lg" withOverlay={false} closeOnEscape="true" closeOnClickOutside={true} padding="xl" opened={opened} onClose={() => { setOpened(false); }} title={title}>
         <ScrollArea
               offsetScrollbars
