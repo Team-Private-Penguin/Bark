@@ -40,6 +40,7 @@ function EventDetail({
   handleDeleteEvent,
   handleEdit,
   canEdit,
+  getEvents,
 }) {
   const {
     name,
@@ -124,9 +125,12 @@ function EventDetail({
       params: {
         body: values,
       },
-    }).catch((err) => {
+    })
+    .then(()=> getEvents())
+    .catch((err) => {
       console.log(err);
     });
+    setOpenEdit(false);
   };
 
   const editForm = useForm({
