@@ -530,3 +530,14 @@ h2 {
   text-align: left;
   font-size: 12px;
 }
+
+
+.mantine-Tabs-tabControl {
+  color: black;
+  border-bottom-color: black;
+}
+
+.mantine-nzzs4k.__mantine-ref-tabActive {
+  color: white;
+  border-bottom-color: white;
+}
