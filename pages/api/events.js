@@ -28,6 +28,8 @@ export default function handler(req, res) {
       prospective,
       owner_id,
       img_url,
+      lat,
+      lng,
     } = req.body;
     let values = [
       name,
@@ -38,6 +40,8 @@ export default function handler(req, res) {
       prospective,
       owner_id,
       img_url,
+      lat,
+      lng,
     ];
     return db
       .queryAsync(postEvent, values)
