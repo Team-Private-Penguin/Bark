@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Stack } from "@mantine/core";
+import { Button, Stack, Text } from "@mantine/core";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { Paw } from "tabler-icons-react";
 
 function UserModal({ clicked, userId }) {
   const [currStatus, setCurrStatus] = useState("notFriends");
@@ -99,12 +100,12 @@ function UserModal({ clicked, userId }) {
           )}
         </section>
         {currStatus === "notFriends" && (
-          <Button className="bg-slate-800 text-white" onClick={handleClick}>
+          <Button className="bg-teal text-white" onClick={handleClick}>
             Add friend
           </Button>
         )}
-        {currStatus === "friends" && <span>Friends</span>}
-        {currStatus === "sent" && <span>Request Sent</span>}
+        {currStatus === "friends" && <Text align="center">Friends 🐾</Text>}
+        {currStatus === "sent" && <Text align="center">Request Sent 🐾</Text>}
         {currStatus === "self" && <span></span>}
         {currStatus === "accept" && (
           <Button className="bg-slate-800 text-white" onClick={handleClick}>
