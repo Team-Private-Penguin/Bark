@@ -76,9 +76,13 @@ const Groups = () => {
   }, [userId, id]);
   return (
     <main className="min-h-screen w-screen">
-      <Navbar setUpdateFriends={setUpdateFriends}/>
+      <Navbar setUpdateFriends={setUpdateFriends} />
       <Group className="group">
-        <Stack justify="flex-start" className="hidden lg:flex" style={{ width: "20%" }}>
+        <Stack
+          justify="flex-start"
+          className="hidden lg:flex"
+          style={{ width: "20%" }}
+        >
           <div className="border h-[28vh] space shadows homeBox ">
             <h2 className="section-title">
               <FontAwesomeIcon icon={faDog} className="fa-header-icons" />
@@ -97,7 +101,10 @@ const Groups = () => {
             <Stack>
               <Group position="center" className="mt-2">
                 <ExploreGroups />
-                <AddGroup groupCount={groupCount} setGroupCount={setGroupCount} />
+                <AddGroup
+                  groupCount={groupCount}
+                  setGroupCount={setGroupCount}
+                />
               </Group>
               <GroupList groupCount={groupCount} />
             </Stack>
@@ -129,7 +136,7 @@ const Groups = () => {
                   <Button
                     disabled={joined}
                     onClick={joinGroup}
-                    className="bg-slate-800"
+                    className="teal-btn m-2"
                   >
                     {" "}
                     Join Group{" "}

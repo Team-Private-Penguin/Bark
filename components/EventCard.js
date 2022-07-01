@@ -119,7 +119,7 @@ function EventCard({
   return (
     <div className="w-full flex justify-center items-center p-2">
       <div className="w-[550px]">
-        <Card radius="10px" shadow="lg" p="md">
+        <Card radius="5px" shadow="lg" p="md" className="card">
           <Card.Section className="p-2">
             <Stack>
               {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
@@ -177,7 +177,7 @@ function EventCard({
           </Card.Section>
           <Card.Section className="flex justify-center items-center">
             <img
-              className="rounded-[10px] max-h-[400px] cursor-pointer"
+              className="max-h-[400px] cursor-pointer"
               src={image}
               onClick={() => setOpened(true)}
             />
