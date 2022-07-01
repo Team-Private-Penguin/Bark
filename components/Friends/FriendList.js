@@ -31,7 +31,7 @@ function FriendList({ friendList, setClicked, handleChat, setModal, userId }) {
               }}
               radius="xl"
               size={25}
-              className="cursor-pointer shadow"
+              className="cursor-pointer shadow red-hover"
             >
               <FontAwesomeIcon icon={faMessage} className="w-[55%] " />
             </Avatar>
@@ -39,7 +39,7 @@ function FriendList({ friendList, setClicked, handleChat, setModal, userId }) {
           <Avatar
             radius="xl"
             size={25}
-            className="cursor-pointer shadow"
+            className="cursor-pointer shadow red-hover"
             onClick={() => {
               setClicked(friend);
               setModal(true);

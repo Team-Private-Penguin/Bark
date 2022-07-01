@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
+import Link from "next/link";
 
 export default function MapDrawerCard(props) {
   const { user } = useUser();
@@ -31,6 +32,7 @@ export default function MapDrawerCard(props) {
   let [updateRsvpList, setUpdateRsvpList] = useState(false);
   let [userEvents, setUserEvents] = useState([]);
   let {
+    drawerCards,
     eventId,
     setEventId,
     zoom,
@@ -46,13 +48,6 @@ export default function MapDrawerCard(props) {
   if (!userId) {
     userId = user?.sub.split("auth0|")[1];
   }
-
-  // Setting RSVP based on Diologue Switch
-  useEffect(() => {
-    axios.get(`/api/map/rsvp?id=${userId}`).then((response) => {
-      setUserEvents((userEvents = [...response.data]));
-    });
-  }, [updateRsvpList]);
 
   let moreInfo = () => {
     setOpen(open === false ? true : false);
@@ -109,9 +104,15 @@ export default function MapDrawerCard(props) {
           mb="md"
           key={card.event_id}
         >
-          <Card.Section size="xl" style={textStyle}>
-            <h1>{card.name}</h1>
-          </Card.Section>
+          <Link
+            key={card.group_id}
+            href={`/group?id=${card.group_id}`}
+            passHref
+          >
+            <Card.Section className="pointer" size="xl" style={textStyle}>
+              <h1>{card.name}</h1>
+            </Card.Section>
+          </Link>
           <Card.Section>
             <Image
               className="rounded-[10px]"

@@ -449,6 +449,7 @@ h2 {
   border-radius: 20px;
   margin: 10px;
   border: 0;
+  color: var(--teal);
 }
 
 .menu-icon {
@@ -496,7 +497,7 @@ h2 {
 
 .teal-btn {
   background-color: var(--teal);
-  transition: 300ms all ease-in-out;
+  transition: 150ms all ease-in-out;
   color: var(--off-white);
 }
 
@@ -508,10 +509,9 @@ h2 {
 .group-box {
   border-radius: 5px;
   transition: 200ms all ease-in-out;
-  border: solid 0px green;
   border-left: solid 10px var(--teal);
   padding: 10px;
-  height: 60px;
+  height: 55px;
   overflow: hidden;
 }
 
@@ -529,4 +529,27 @@ h2 {
 .group-desc-text {
   text-align: left;
   font-size: 12px;
+}
+
+
+.mantine-Tabs-tabControl {
+  color: black;
+  border-bottom-color: black;
+}
+
+.mantine-nzzs4k.__mantine-ref-tabActive {
+  color: white;
+  border-bottom-color: white;
+}
+.red-hover {
+  transition: all 200ms ease-in-out;
+}
+
+.red-hover:hover {
+  height: 28px;
+  width: 28px;
+}
+
+.card {
+  border: solid 1px lightgray;
 }

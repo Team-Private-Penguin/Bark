@@ -1,6 +1,8 @@
 import React from "react";
 import { Group, Text, Card, Avatar, Badge, Button } from "@mantine/core";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 function Comment({ commentObj, isOwner, getComments }) {
   const { comment, date, name, photo, comment_id } = commentObj;
@@ -34,9 +36,11 @@ function Comment({ commentObj, isOwner, getComments }) {
             })}
           </Text>
           {isOwner ? (
-            <Button color="red" onClick={handleDeleteComment}>
-              Delete
-            </Button>
+            <FontAwesomeIcon
+              icon={faTrashCan}
+              className="edit-del-icons text-white hover:text-teal hover:text-xl"
+              onClick={handleDeleteComment}
+            />
           ) : null}
         </Group>
       </Card.Section>
