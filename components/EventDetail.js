@@ -140,7 +140,7 @@ function EventDetail({
       date: "",
       description: "",
       address_1: "",
-      //event_id: eventId1, //EVENT ID is undefined?
+      event_id: event_id,
     },
   });
 
