@@ -79,7 +79,7 @@ export default function Map() {
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
         <GoogleMap
         mapContainerStyle={{ height: "97%", width: "100%"}}
-        zoom={14}
+        zoom={11}
         center={center}
         >
         <TextInput
