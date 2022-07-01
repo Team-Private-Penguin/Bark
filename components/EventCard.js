@@ -54,6 +54,7 @@ function EventCard({
   let image = img_url || defaultPhoto;
   const [groupId, setGroupId] = useState(0);
   const [dopened, dhandlers] = useDisclosure(false);
+  const [openEdit, setOpenEdit] = useState(false);
 
   function handleRsvp() {
     if (rsvp) {
@@ -86,8 +87,6 @@ function EventCard({
     },
   });
 
-  const [openEdit, setOpenEdit] = useState(false);
-
   const editEvent = (values) => {
     axios({
       method: "PATCH",
@@ -95,9 +94,12 @@ function EventCard({
       params: {
         body: values,
       },
-    }).catch((err) => {
+    })
+    .then(()=> getEvents())
+    .catch((err) => {
       console.log(err);
     });
+    setOpenEdit(false);
   };
 
   function handleDeleteEvent() {
@@ -119,6 +121,7 @@ function EventCard({
           <Card.Section className="p-2">
             <Stack>
               {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
+
             </Stack>
             <Group className="title-date-container gap-0">
               <section className="header-container">
@@ -129,7 +132,6 @@ function EventCard({
                 >
                   {name}
                 </Title>
-
                 <Title order={5} className="event-date">
                   {timeStamp.toLocaleString([], {
                     dateStyle: "short",
@@ -218,6 +220,7 @@ function EventCard({
           handleDeleteEvent={handleDeleteEvent}
           canEdit={canEdit}
           event_id={event_id}
+          getEvents={getEvents}
         />
       </Modal>
       <Modal
