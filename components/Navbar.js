@@ -5,7 +5,7 @@ import Link from "next/link";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddUser from "./Users/AddUser";
-import { ActionIcon, Indicator, Popover } from "@mantine/core";
+import { ActionIcon, Indicator, Popover, Button } from "@mantine/core";
 import { faPaw, faBell, faEarthAsia } from "@fortawesome/free-solid-svg-icons";
 import Requests from "./Friends/Requests";
 import Input from "./Autocomplete";
@@ -113,9 +113,7 @@ function Navbar({ setUpdateFriends }) {
           title="Sign Out"
         >
           <a href="/api/auth/logout">
-            <button className="bg-transparent hover:bg-accent text-accent font-semibold hover:text-white py-2 px-4 border border-accent hover:border-transparent rounded">
-              Logout
-            </button>
+            <Button className="teal-btn">Logout</Button>
           </a>
         </Popover>
       </section>

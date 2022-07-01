@@ -1,6 +1,7 @@
 import { useUser } from "@auth0/nextjs-auth0";
 import { Stack } from "@mantine/core";
 import React from "react";
+import { Button } from "@mantine/core";
 
 function UserInfo() {
   const { user, error, isLoading } = useUser();
@@ -21,9 +22,7 @@ function UserInfo() {
           <span className="username">{user.name}</span>
         </div>
         <a href="/api/auth/logout">
-          <button className="bg-transparent hover:bg-accent text-accent font-semibold hover:text-white py-2 px-4 border border-accent hover:border-transparent rounded">
-            Logout
-          </button>
+          <Button className="teal-btn">Logout</Button>
         </a>
       </Stack>
     );
@@ -32,9 +31,7 @@ function UserInfo() {
   return (
     <div className="user-header">
       <a href="/api/auth/login">
-        <button className="bg-transparent hover:bg-accent text-accent font-semibold hover:text-white py-2 px-4 border border-accent hover:border-transparent rounded">
-          Login
-        </button>
+        <Button className="teal-btn">Login</Button>
       </a>
     </div>
   );

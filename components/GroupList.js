@@ -20,9 +20,13 @@ function GroupList({ groupCount }) {
         {UserGroups.map(({ group_id, name, description }, index) => {
           return (
             <Link key={index} href={`/group?id=${group_id}`} passHref>
-              <Stack className="border cursor-pointer mb-2 gap-2">
-                <Text weight={700}>{name}</Text>
-                <Text className="italic" size='xs'>{description.slice(0, 100)}</Text>
+              <Stack className="cursor-pointer mb-2 gap-2 group-box">
+                <Text weight={700} className="group-title-text">
+                  {name}
+                </Text>
+                <Text className="italic group-desc-text" size="xs">
+                  {description.slice(0, 100)}
+                </Text>
               </Stack>
             </Link>
           );

@@ -37,7 +37,6 @@ function EventCard({
   eventId1,
   getEvents,
 }) {
-
   const [opened, setOpened] = useState(false);
   const {
     name,
@@ -90,7 +89,6 @@ function EventCard({
   const [openEdit, setOpenEdit] = useState(false);
 
   const editEvent = (values) => {
-
     axios({
       method: "PATCH",
       url: "/api/events",
@@ -254,9 +252,8 @@ function EventCard({
             {...editForm.getInputProps("date")}
           />
 
-
           <Group position="right" mt="md">
-            <Button className="bg-slate-800" type="submit">
+            <Button className="teal-btn" type="submit">
               Update
             </Button>
           </Group>
