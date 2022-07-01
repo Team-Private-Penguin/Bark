@@ -6,7 +6,6 @@ require('dotenv').config();
 // this end point will respond with the lat and lng in the following format at response.data ==> {lat: NUMBER, lng: NUMBER}
 export default async function handler(req, res) {
   let addressQueryString = req.query.address.split(' ').join('+');
-  let queryString =
 
   await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${addressQueryString}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`)
     .then((response) => {
