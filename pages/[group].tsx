@@ -56,13 +56,15 @@ const Groups = () => {
           return axios
             .get(`/api/usergroup?user_id=${userId}`)
             .then((data) => setCurrentGroups(data.data[0].rows))
-            .then(() => setJoined(true));
+            .then(() => setJoined(true))
+            .then(() => setGroupCount(groupCount + 1));
         })
         .catch((err) => console.log(err));
     }
   }
   useEffect(() => {
     getGroupDetails();
+    setJoined(false);
     axios.get(`/api/usergroup?user_id=${userId}`).then((data) => {
       //console.log("join check", data.data[0]);
       if (
@@ -76,9 +78,13 @@ const Groups = () => {
   }, [userId, id]);
   return (
     <main className="min-h-screen w-screen">
-      <Navbar setUpdateFriends={setUpdateFriends}/>
+      <Navbar setUpdateFriends={setUpdateFriends} />
       <Group className="group">
-        <Stack justify="flex-start" className="hidden lg:flex" style={{ width: "20%" }}>
+        <Stack
+          justify="flex-start"
+          className="hidden lg:flex"
+          style={{ width: "20%" }}
+        >
           <div className="border h-[28vh] space shadows homeBox ">
             <h2 className="section-title">
               <FontAwesomeIcon icon={faDog} className="fa-header-icons" />
@@ -97,9 +103,15 @@ const Groups = () => {
             <Stack>
               <Group position="center" className="mt-2">
                 <ExploreGroups />
-                <AddGroup groupCount={groupCount} setGroupCount={setGroupCount} />
+                <AddGroup
+                  groupCount={groupCount}
+                  setGroupCount={setGroupCount}
+                />
               </Group>
-              <GroupList groupCount={groupCount} />
+              <GroupList
+                groupCount={groupCount}
+                currentGroups={currentGroups}
+              />
             </Stack>
           </div>
         </Stack>
@@ -129,7 +141,7 @@ const Groups = () => {
                   <Button
                     disabled={joined}
                     onClick={joinGroup}
-                    className="bg-slate-800"
+                    className="teal-btn"
                   >
                     {" "}
                     Join Group{" "}
@@ -157,7 +169,7 @@ const Groups = () => {
               <FontAwesomeIcon icon={faFishFins} className="fa-header-icons" />{" "}
               Group Members
             </h2>
-            <Friends groupId={id} listType={"groups"} />
+            <Friends groupCount={groupCount} groupId={id} listType={"groups"} />
           </Stack>
         </Stack>
       </Group>

@@ -5,7 +5,7 @@ import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function GroupList({ groupCount }) {
+function GroupList({ groupCount, currentGroups }) {
   const { user } = useUser();
   const user_id = user?.sub.split("google-oauth2|")[1];
   const [UserGroups, setUserGroups] = useState([]);
