@@ -182,13 +182,14 @@ export default function Input({ userId }) {
   return (
     <div className="ml-[31%]">
       <Tabs
-        color="dark"
+        color="gray"
         position="center"
         active={activeTab}
         onTabChange={setActiveTab}
         classNames={{
-          tabControl: "uppercase font-bold text-white",
+          tabControl: "uppercase font-bold",
         }}
+
         onClick={() => setDrawer(true)}
       >
         <Tabs.Tab label="SEARCH USERS"></Tabs.Tab>

@@ -531,6 +531,18 @@ h2 {
   font-size: 12px;
 }
 
+<<<<<<< HEAD
+
+.mantine-Tabs-tabControl {
+  color: black;
+  border-bottom-color: black;
+}
+
+.mantine-nzzs4k.__mantine-ref-tabActive {
+  color: white;
+  border-bottom-color: white;
+}
+=======
 .red-hover {
   transition: all 200ms ease-in-out;
 }
@@ -543,3 +555,4 @@ h2 {
 .card {
   border: solid 1px lightgray;
 }
+>>>>>>> c3137f7419a0528e1fd05b5db5c07e7b380eda70
