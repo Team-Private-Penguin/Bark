@@ -31,7 +31,7 @@ function AddComment({ setComments, event, user_id }) {
           onChange={(e) => setComment(e.currentTarget.value)}
         />
       </Stack>
-      <Stack className="w-[3vw] p-2 border text-teal hover:text-red hover:border-red border-[lightgrey] rounded-full">
+      <Stack className="w-[3vw] p-2 border text-teal hover:text-red hover:border-red border-[lightgrey] rounded-full transition duration-200 ease-in-out">
         <FontAwesomeIcon
           className="text-lg  cursor-pointer p-1"
           icon={faPaperPlane}

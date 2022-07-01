@@ -20,8 +20,16 @@ import {
   TextInput,
 } from "@mantine/core";
 import axios from "axios";
+import { useDisclosure } from "@mantine/hooks";
+import { Menu } from "@mantine/core";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDog, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUserCircle,
+  faPenToSquare,
+  faTrashCan,
+  faDog,
+} from "@fortawesome/free-solid-svg-icons";
 
 function EventDetail({
   image,
@@ -60,6 +68,7 @@ function EventDetail({
   const [attendees, setAttendees] = useState([{}]);
   const [modal, setModal] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [opened, handlers] = useDisclosure(false);
 
   function getComments() {
     axios
@@ -157,14 +166,37 @@ function EventDetail({
         </Card.Section>
         <Stack>
           {canEdit ? (
-            <Group grow spacing={0}>
-              <Button onClick={() => setOpenEdit(true)} variant="default">
-                EDIT
-              </Button>
-              <Button onClick={handleDeleteEvent} variant="default">
-                DELETE
-              </Button>
-            </Group>
+            <Menu
+              opened={opened}
+              onOpen={handlers.open}
+              onClose={handlers.close}
+              className="menu-icon"
+            >
+              <Stack grow spacing={0}>
+                <Button
+                  onClick={() => setOpenEdit(true)}
+                  variant="outline"
+                  className="event-edit-del-btn"
+                >
+                  <FontAwesomeIcon
+                    icon={faPenToSquare}
+                    className="edit-del-icons"
+                  />
+                  EDIT
+                </Button>
+                <Button
+                  onClick={handleDeleteEvent}
+                  variant="outline"
+                  className="event-edit-del-btn"
+                >
+                  <FontAwesomeIcon
+                    icon={faTrashCan}
+                    className="edit-del-icons"
+                  />
+                  DELETE
+                </Button>
+              </Stack>
+            </Menu>
           ) : null}
           {prospective ? <Badge color="red">PLANNING EVENT</Badge> : null}
         </Stack>
