@@ -2,7 +2,7 @@
 
 ## Overview
 
-<img src="./public/bark.gif" alt="Project Overview GIF" width=80% height=auto>
+<img src="" alt="Project Overview GIF" width=80% height=auto>
 
 ## Table of Contents
 - [Description](#description)
