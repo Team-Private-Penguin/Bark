@@ -13,6 +13,14 @@ import { useUser } from "@auth0/nextjs-auth0";
 import GroupList from "../components/GroupList";
 import AddGroup from "../components/AddGroup";
 import ExploreGroups from "../components/ExploreGroups";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDog,
+  faCat,
+  faOtter,
+  faFishFins,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Groups = () => {
   const { user } = useUser();
@@ -29,6 +37,7 @@ const Groups = () => {
   } = useRouter();
   const [currentGroups, setCurrentGroups] = useState([]);
   const [groupDetails, setGroupDetails] = useState([{}]);
+  const [updateFriends, setUpdateFriends] = useState(false);
 
   function getGroupDetails() {
     axios
@@ -55,7 +64,7 @@ const Groups = () => {
   useEffect(() => {
     getGroupDetails();
     axios.get(`/api/usergroup?user_id=${userId}`).then((data) => {
-      console.log("join check", data.data[0]);
+      //console.log("join check", data.data[0]);
       if (
         data.data[0].rows.filter((obj: { group_id: string }) => {
           return obj["group_id"] === id;
@@ -64,24 +73,32 @@ const Groups = () => {
         setJoined(true);
       }
     });
-  }, [userId]);
+  }, [userId, id]);
   return (
     <main className="min-h-screen w-screen">
-      <Navbar />
+      <Navbar setUpdateFriends={setUpdateFriends}/>
       <Group className="group">
-        <Stack className="hidden lg:flex" style={{ width: "20%" }}>
-          <div className="border h-[34vh] space shadows ">
-            <h2 className="section-title">🐶 User Info</h2>
+        <Stack justify="flex-start" className="hidden lg:flex" style={{ width: "20%" }}>
+          <div className="border h-[28vh] space shadows homeBox ">
+            <h2 className="section-title">
+              <FontAwesomeIcon icon={faDog} className="fa-header-icons" />
+              User Info
+            </h2>
             {user && <User />}
             {!user && (
               <div className="centered">Please add your pet above!</div>
             )}
           </div>
-          <div className="border h-[54vh] space shadows homeBox">
-            <h2>🐶 Groups</h2>
+          <div className="border h-[60vh] space shadows homeBox">
+            <h2>
+              <FontAwesomeIcon icon={faCat} className="fa-header-icons" />{" "}
+              Groups
+            </h2>
             <Stack>
-              <ExploreGroups />
-              <AddGroup groupCount={groupCount} setGroupCount={setGroupCount} />
+              <Group position="center" className="mt-2">
+                <ExploreGroups />
+                <AddGroup groupCount={groupCount} setGroupCount={setGroupCount} />
+              </Group>
               <GroupList groupCount={groupCount} />
             </Stack>
           </div>
@@ -93,18 +110,32 @@ const Groups = () => {
                 <Group>
                   {" "}
                   <span className="center-feed">
-                    🐶 {groupDetails.name}
+                    <FontAwesomeIcon
+                      icon={faOtter}
+                      className="fa-header-icons"
+                    />{" "}
+                    {groupDetails.name}
                   </span>{" "}
-                  {joined ? null : (
-                    <Button onClick={joinGroup}> Join Group </Button>
-                  )}
                 </Group>
               </h2>
-              <AddEvent
-                joined={joined}
-                eventCount={eventCounter}
-                setCount={setEventCounter}
-              />
+              <Group position="center">
+                {joined ? (
+                  <AddEvent
+                    joined={joined}
+                    eventCount={eventCounter}
+                    setCount={setEventCounter}
+                  />
+                ) : (
+                  <Button
+                    disabled={joined}
+                    onClick={joinGroup}
+                    className="bg-slate-800"
+                  >
+                    {" "}
+                    Join Group{" "}
+                  </Button>
+                )}
+              </Group>
             </div>
             <ScrollArea
               offsetScrollbars
@@ -121,8 +152,11 @@ const Groups = () => {
           </div>
         </Stack>
         <Stack className="hidden xl:flex" style={{ width: "20%" }}>
-          <Stack className="border h-[90vh] space shadows gap-0">
-            <h2>🐶 Group Members</h2>
+          <Stack className="border h-[90vh] space shadows homeBox gap-0">
+            <h2>
+              <FontAwesomeIcon icon={faFishFins} className="fa-header-icons" />{" "}
+              Group Members
+            </h2>
             <Friends groupId={id} listType={"groups"} />
           </Stack>
         </Stack>

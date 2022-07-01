@@ -5,7 +5,8 @@
     "build": "next build",
     "start": "next start",
     "test": "jest",
-    "dbbuild": "node ./dbbuild"
+    "dbbuild": "node ./dbbuild",
+    "dbpop": "node ./dbbuild/popDb.js"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.9.1",

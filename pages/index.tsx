@@ -12,6 +12,14 @@ import ExploreGroups from "../components/ExploreGroups";
 import EventFeed from "../components/EventFeed";
 import User from "../components/Users/User";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDog,
+  faCat,
+  faDove,
+  faOtter,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Home: NextPage = () => {
   const [groupCount, setGroupCount] = useState(0);
@@ -26,17 +34,26 @@ const Home: NextPage = () => {
         <Group className="group">
           <Stack justify="flex-start" style={{ width: "20%" }}>
             <div className="border h-[28vh] space shadows homeBox">
-              <h2 className="section-title">🐶 User Info</h2>
+              <h2 className="section-title">
+                <FontAwesomeIcon icon={faDog} className="fa-header-icons" />
+                User Info
+              </h2>
+
               {user && <User />}
             </div>
             <div className="border h-[60vh] space shadows homeBox">
-              <h2>🐶 Groups</h2>
+              <h2>
+                <FontAwesomeIcon icon={faCat} className="fa-header-icons" />{" "}
+                Groups
+              </h2>
               <Stack>
-                <ExploreGroups />
-                <AddGroup
-                  groupCount={groupCount}
-                  setGroupCount={setGroupCount}
-                />
+                <Group position="center" className="mt-2">
+                  <ExploreGroups />
+                  <AddGroup
+                    groupCount={groupCount}
+                    setGroupCount={setGroupCount}
+                  />
+                </Group>
                 <GroupList groupCount={groupCount} />
               </Stack>
             </div>
@@ -44,7 +61,10 @@ const Home: NextPage = () => {
 
           <Stack style={{ flexGrow: 1 }}>
             <div className="border h-[90vh] shadows homeBox">
-              <h2 className="sticky top-0 z-50">🐶 Events</h2>
+              <h2 className="sticky top-0 z-50">
+                <FontAwesomeIcon icon={faOtter} className="fa-header-icons" />{" "}
+                Events
+              </h2>
               <ScrollArea
                 offsetScrollbars
                 scrollbarSize={8}
@@ -58,7 +78,10 @@ const Home: NextPage = () => {
 
           <Stack style={{ width: "20%" }}>
             <Stack className="border h-[90vh] space shadows homeBox gap-0">
-              <h2>🐶 Friends</h2>
+              <h2>
+                <FontAwesomeIcon icon={faDove} className="fa-header-icons" />{" "}
+                Friends
+              </h2>
               <Friends updateFriends={updateFriends} listType={"friends"} />
             </Stack>
           </Stack>

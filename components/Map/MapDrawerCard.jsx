@@ -27,7 +27,7 @@ export default function MapDrawerCard(props) {
     <>
       <Card id={card.event_id} className="shadow mapDrawerCard" mb="md" key={card.event_id}>
         <Card.Section >
-          <Image className="rounded-[10px]" src={card.image_url} height={150} alt="Test" />
+          <Image className="rounded-[10px]" src={card.img_url} height={150} alt="Test" />
         </Card.Section>
         <Card.Section>
           <Text size="md" style={textStyle} >
@@ -47,7 +47,7 @@ export default function MapDrawerCard(props) {
             <h1>{card.name}</h1>
           </Card.Section>
           <Card.Section >
-            <Image className="rounded-[10px]" src={card.image_url} height={150} alt="Test" />
+            <Image className="rounded-[10px]" src={card.img_url} height={150} alt="Test" />
           </Card.Section>
           <Card.Section>
             <Text size="sm" style={textStyle}>

@@ -45,8 +45,8 @@ const AddGroup = ({ groupCount, setGroupCount }) => {
   return (
     <div>
       <Group position="center">
-        <Button className="bg-slate-800" onClick={() => setOpened(true)}>
-          Create a New Group!
+        <Button className="bg-teal" onClick={() => setOpened(true)}>
+          Create a Group!
         </Button>
       </Group>
       <Modal

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Group, Stack } from "@mantine/core";
+import { Group, ScrollArea, Stack, Text } from "@mantine/core";
 import Link from "next/link";
 import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function GroupList({ groupCount }) {
   const { user } = useUser();
@@ -13,19 +14,20 @@ function GroupList({ groupCount }) {
       setUserGroups(data.data[0].rows);
     });
   }, [user_id, groupCount]);
-
   return (
-    <Stack className="h-[35vh] overflow-auto">
-      {UserGroups.map(({ group_id, name, description }, index) => {
-        return (
-          <Link key={index} href={`/group?id=${group_id}`} passHref>
-            <Stack className="border cursor-pointer">
-              <div>{name}</div>
-              <div>{description.slice(0, 100)}</div>
-            </Stack>
-          </Link>
-        );
-      })}
+    <Stack className="h-[49vh]">
+      <ScrollArea offsetScrollbars scrollbarSize={8} className="mt-2">
+        {UserGroups.map(({ group_id, name, description }, index) => {
+          return (
+            <Link key={index} href={`/group?id=${group_id}`} passHref>
+              <Stack className="border cursor-pointer mb-2 gap-2">
+                <Text weight={700}>{name}</Text>
+                <Text className="italic" size='xs'>{description.slice(0, 100)}</Text>
+              </Stack>
+            </Link>
+          );
+        })}
+      </ScrollArea>
     </Stack>
   );
 }

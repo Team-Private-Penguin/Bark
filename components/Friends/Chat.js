@@ -100,7 +100,7 @@ function Chat({ opened, setOpened, clicked, userId }) {
                   {...form.getInputProps("message")}
                 />
                 <Button
-                  className="bg-slate-800 ml-[77%] mt-1 mb-1 text-white"
+                  className="bg-teal ml-[70%] mt-1 mb-1 text-white w-[23%]"
                   type="submit"
                   radius="xl"
                   size="xs"

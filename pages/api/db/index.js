@@ -1,13 +1,15 @@
 const Promise = require("bluebird");
 const { Pool } = require("pg");
 const { FileWatcherEventKind } = require("typescript");
+require('dotenv').config();
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
+
+  user: process.env.PGUSERNAME,
+  host: process.env.PGHOST,
   database: "bark",
-  password: "password",
-  port: 5151,
+  password: process.env.PGPASS,
+  port: process.env.PGPORT,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
 });
