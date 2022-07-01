@@ -23,17 +23,23 @@
 ```
 npm install
 ```
+3. Follow instructions in example.env file to create a .env.local file to allow access for Auth0, GoogleMapsAPI, and PostgreSQL DB
 
-3. To run dev-build:
+4. Run database build file to create schema for your Postgres database
+```
+npm run dbbuild
+```
+
+5. To run dev-build:
 ```
 npm run dev
 ```
 
-4. To run production-build:
+6. To run production-build:
 ```
 npm run build
 ```
-5. Open http://localhost:3000 in your browser
+7. Open http://localhost:3000 in your browser
 
 ---
 
