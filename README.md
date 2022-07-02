@@ -8,11 +8,10 @@
 - [Description](#description)
 - [Installation](#installation-and-setup)
 - [Technologies](#technologies)
-- [Components](#components)
 - [Team Members](#contributors)
 
 ## Description
-
+This website was created as a social media platform for users to connect their dogs with others! They are able to join groups and host/attend events that best fit their personalities. Users are able to befriend others and share thoughts through a chat functionality. Users, groups, and events are able to be searched sitewide in the navbar. Clicking on the map icon up top allows users to see markers where hosted events will be located at!
 
 ---
 
@@ -50,9 +49,6 @@ npm run build
 - [MantineUI](https://mantine.dev/)
 ---
 
-## Components
-
----
 
 ### Contributors
 - [Robert Campbell](https://github.com/recampbelljr)
