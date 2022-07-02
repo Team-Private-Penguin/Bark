@@ -44,7 +44,10 @@ npm run build
 ---
 
 ## Technologies
-
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [MantineUI](https://mantine.dev/)
 ---
 
 ## Components
@@ -52,4 +55,9 @@ npm run build
 ---
 
 ### Contributors
-
+- [Robert Campbell](https://github.com/recampbelljr)
+- [Isaac Chung](https://github.com/imizik)
+- [Jason Matta](https://github.com/jmatta9)
+- [Kenny Tran](https://github.com/kennytran95)
+- [Mike Zaki](https://github.com/Mikezaki94)
+- [Fengji Zhang](https://github.com/fengjizhang)
